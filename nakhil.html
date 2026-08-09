@@ -21,29 +21,36 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            /* تفاعل ضوئي مع الماوس */
             background-image: 
-                linear-gradient(rgba(7, 9, 14, 0.82), rgba(7, 9, 14, 0.92)), 
-                radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 60%);
+                radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(212, 175, 55, 0.22) 0%, transparent 50%),
+                linear-gradient(rgba(7, 9, 14, 0.85), rgba(7, 9, 14, 0.95));
             min-height: 100vh;
         }
 
-        /* أنيميشن الدخول العام للصفحة */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .animated-element {
-            animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes floatEffect {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
         }
 
         header {
-            background: rgba(7, 9, 14, 0.95);
+            background: rgba(7, 9, 14, 0.9);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            animation: fadeInDown 0.6s ease;
         }
 
         .nav-container {
@@ -65,11 +72,12 @@
             align-items: center;
             gap: 8px;
             letter-spacing: 0.5px;
-            transition: transform 0.3s ease;
+            animation: floatEffect 4s ease-in-out infinite;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .logo:hover {
-            transform: scale(1.03);
+            transform: scale(1.08) rotate(-2deg);
         }
 
         .logo span {
@@ -83,25 +91,28 @@
             background: rgba(17, 24, 39, 0.9);
             border: 1px solid var(--border-color);
             color: var(--gold);
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 20px;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
         }
 
         .menu-btn-icon:hover {
             background: var(--gold);
             color: var(--bg-dark);
-            transform: rotate(90deg) scale(1.05);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            transform: rotate(180deg) scale(1.1);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.6);
+            border-color: #fff;
         }
 
-        /* قائمة التنقل بحركة انسيابية */
+        /* قائمة التنقل */
         nav {
             display: none;
             flex-direction: column;
@@ -114,15 +125,9 @@
             padding: 20px 0;
             align-items: center;
             gap: 15px;
-            backdrop-filter: blur(15px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.6);
-            transform-origin: top;
-            animation: menuOpen 0.3s ease forwards;
-        }
-
-        @keyframes menuOpen {
-            from { opacity: 0; transform: scaleY(0.95); }
-            to { opacity: 1; transform: scaleY(1); }
+            backdrop-filter: blur(20px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            animation: fadeInDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
 
         nav.active {
@@ -136,28 +141,14 @@
             font-size: 15px;
             transition: all 0.3s ease;
             position: relative;
-            padding: 5px 10px;
-        }
-
-        nav a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: 0;
-            left: 50%;
-            background-color: var(--gold);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-
-        nav a:hover::after, nav a.active::after {
-            width: 80%;
+            padding: 6px 15px;
+            border-radius: 8px;
         }
 
         nav a:hover, nav a.active {
             color: var(--gold);
-            transform: translateY(-2px);
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateX(5px) scale(1.05);
         }
 
         .hero-section {
@@ -174,20 +165,21 @@
             background: rgba(17, 24, 39, 0.7);
             border: 1px solid var(--border-color);
             color: var(--gold-light);
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 30px;
             font-size: 12px;
             font-weight: 600;
             margin-bottom: 25px;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            animation: fadeIn 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-            transition: transform 0.3s;
+            animation: fadeInUp 0.8s 0.2s cubic-bezier(0.16, 1, 0.3, 1) both, floatEffect 3s ease-in-out infinite;
+            transition: all 0.3s ease;
         }
 
         .badge-top:hover {
-            transform: scale(1.05);
+            transform: scale(1.08) translateY(-2px);
             border-color: var(--gold);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
         h1 {
@@ -196,8 +188,13 @@
             font-weight: 800;
             line-height: 1.35;
             margin-bottom: 18px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            animation: fadeIn 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.6);
+            animation: fadeInUp 0.8s 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover {
+            transform: scale(1.02);
         }
 
         p.hero-desc {
@@ -205,7 +202,7 @@
             font-size: 14px;
             line-height: 1.6;
             margin-bottom: 35px;
-            animation: fadeIn 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: fadeInUp 0.8s 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
         .cta-buttons {
@@ -213,9 +210,10 @@
             flex-direction: column;
             gap: 14px;
             margin-bottom: 35px;
-            animation: fadeIn 0.8s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+            animation: fadeInUp 0.8s 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
         }
 
+        /* تصميم الأزرار مع التموج (Ripple Effect) */
         .btn {
             display: block;
             width: 100%;
@@ -226,9 +224,10 @@
             text-decoration: none;
             text-align: center;
             box-sizing: border-box;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .btn-primary {
@@ -239,35 +238,52 @@
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(212, 175, 55, 0.5);
-            opacity: 0.95;
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(212, 175, 55, 0.6);
+            filter: brightness(1.1);
         }
 
         .btn-primary:active {
-            transform: translateY(-1px) scale(0.98);
+            transform: translateY(-2px) scale(0.97);
         }
 
         .btn-outline {
             background: rgba(17, 24, 39, 0.6);
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
         }
 
         .btn-outline:hover {
             border-color: var(--gold);
             color: var(--gold);
-            background: rgba(17, 24, 39, 0.9);
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            background: rgba(17, 24, 39, 0.95);
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5);
         }
 
         .btn-outline:active {
-            transform: translateY(-1px) scale(0.98);
+            transform: translateY(-2px) scale(0.97);
         }
 
-        /* كارت التحت مع أنيميشن التفاعل والرفع */
+        /* تأثير التموج عند الضغط */
+        .ripple {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: rippleEffect 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes rippleEffect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* الكارت التحتاني التفاعلي */
         .info-card {
             background: rgba(17, 24, 39, 0.85);
             border: 1px solid var(--border-color);
@@ -277,21 +293,26 @@
             margin: 0 auto 40px auto;
             text-align: center;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(12px);
-            animation: fadeIn 0.8s 1s cubic-bezier(0.16, 1, 0.3, 1) both;
-            transition: all 0.4s ease;
+            backdrop-filter: blur(15px);
+            animation: fadeInUp 0.8s 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), border-color 0.3s, box-shadow 0.3s;
         }
 
         .info-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
+            box-shadow: 0 25px 50px rgba(212, 175, 55, 0.25);
         }
 
         .info-card h3 {
             color: var(--gold);
             font-size: 18px;
             margin: 12px 0 8px 0;
+            transition: transform 0.3s;
+        }
+
+        .info-card:hover h3 {
+            transform: scale(1.05);
         }
 
         .info-card p {
@@ -342,8 +363,8 @@
         <p class="hero-desc">Vivez une expérience gastronomique unique alliant design moderne, plats d'exception et boissons préparées avec art pour immortaliser vos plus beaux moments.</p>
 
         <div class="cta-buttons">
-            <a href="menu.html" class="btn btn-primary">Découvrir le Menu 🍽️</a>
-            <a href="reservation.html" class="btn btn-outline">Réserver une Table 🪑</a>
+            <a href="menu.html" class="btn btn-primary" onclick="createRipple(event)">Découvrir le Menu 🍽️</a>
+            <a href="reservation.html" class="btn btn-outline" onclick="createRipple(event)">Réserver une Table 🪑</a>
         </div>
     </div>
 
@@ -358,9 +379,38 @@
     </footer>
 
     <script>
+        // تفاعل القائمة
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
+        }
+
+        // تفاعل تحريك الماوس في الخلفية (Spotlight effect)
+        document.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth) * 100;
+            const y = (e.clientY / window.innerHeight) * 100;
+            document.body.style.setProperty('--mouse-x', `${x}%`);
+            document.body.style.setProperty('--mouse-y', `${y}%`);
+        });
+
+        // تأثير التموج الضوئي عند الضغط على الأزرار (Ripple Effect)
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement('span');
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+            circle.classList.add('ripple');
+
+            const ripple = button.getElementsByClassName('ripple')[0];
+            if (ripple) {
+                ripple.remove();
+            }
+
+            button.appendChild(circle);
         }
     </script>
 
