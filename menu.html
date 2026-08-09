@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notre Menu Gastronomique | Complexe Nakhil</title>
+    <title>Menu Gastronomique | Complexe Nakhil</title>
     <style>
         :root {
+            --bg-color: #2c3542;
+            --card-bg: rgba(35, 43, 54, 0.85);
             --gold: #d4af37;
             --gold-light: #f3e5ab;
-            --bg-dark: #0b0e14;
-            --bg-card: rgba(17, 24, 39, 0.75);
-            --text-dark: #111827;
-            --text-muted: #9ca3af;
-            --border-gold: rgba(212, 175, 55, 0.3);
+            --text-main: #ffffff;
+            --text-muted: #a0aec0;
+            --border-color: rgba(212, 175, 55, 0.25);
         }
 
         * {
@@ -23,41 +23,35 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Background Watermark Star Animation */
+        /* Watermark Star Background */
         body::before {
             content: '';
             position: fixed;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+            right: 5%;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
-            animation: pulseGlow 8s ease-in-out infinite alternate;
-        }
-
-        @keyframes pulseGlow {
-            0% { transform: translate(-50%, -50%) scale(0.9); opacity: 0.6; }
-            100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(11, 14, 20, 0.95);
-            border-bottom: 1px solid var(--border-gold);
+            background: rgba(44, 53, 66, 0.95);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -70,69 +64,59 @@
         }
 
         .logo {
-            color: var(--gold);
+            color: #ffffff;
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            letter-spacing: 1px;
-            transition: transform 0.3s;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
+            letter-spacing: 0.5px;
         }
 
         .logo span {
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-muted);
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 22px;
             align-items: center;
         }
 
         .nav-links a {
-            color: #d1d5db;
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
-            padding-bottom: 4px;
+            padding-bottom: 3px;
         }
 
-        .nav-links a::after {
+        .nav-links a:hover, .nav-links a.active {
+            color: #ffffff;
+        }
+
+        .nav-links a.active::after {
             content: '';
             position: absolute;
-            width: 0;
+            width: 100%;
             height: 1px;
             bottom: 0;
             left: 0;
             background-color: var(--gold);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
-        }
-
-        .nav-links a:hover::after, .nav-links a.active::after {
-            width: 100%;
         }
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 10px 22px;
-            font-size: 12px;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            padding: 8px 20px;
+            font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
@@ -142,22 +126,21 @@
 
         .btn-reserve-top:hover {
             background: var(--gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            border-color: var(--gold);
+            color: var(--bg-color);
         }
 
         .mobile-menu-btn {
             background: none;
-            border: 1px solid var(--border-gold);
+            border: 1px solid var(--border-color);
             color: var(--gold);
-            font-size: 22px;
-            width: 40px;
-            height: 40px;
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
         }
 
         @media (max-width: 992px) {
@@ -165,12 +148,12 @@
             .mobile-menu-btn { display: flex; }
             .nav-links {
                 position: absolute;
-                top: 73px; left: 0; width: 100%;
-                background: rgba(11, 14, 20, 0.98);
+                top: 71px; left: 0; width: 100%;
+                background: rgba(44, 53, 66, 0.98);
                 flex-direction: column;
                 align-items: center;
-                padding: 30px 0; gap: 20px;
-                border-bottom: 1px solid var(--border-gold);
+                padding: 25px 0; gap: 18px;
+                border-bottom: 1px solid var(--border-color);
                 transform: translateY(-150%); opacity: 0;
                 transition: all 0.4s ease-in-out; pointer-events: none;
             }
@@ -181,174 +164,120 @@
         /* --- MENU HERO --- */
         .menu-hero {
             text-align: center;
-            padding: 70px 20px 40px 20px;
+            padding: 60px 20px 30px 20px;
             position: relative;
             z-index: 1;
         }
 
         .menu-hero span {
             color: var(--gold);
-            font-size: 11px;
-            letter-spacing: 4px;
+            font-size: 10px;
+            letter-spacing: 3px;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
         .menu-hero h1 {
-            font-size: 42px;
+            font-size: 36px;
             font-family: serif;
             font-weight: 400;
             color: #ffffff;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
         }
 
         .menu-hero p {
             color: var(--text-muted);
-            font-size: 14px;
-            max-width: 650px;
+            font-size: 13px;
+            max-width: 600px;
             margin: 0 auto;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
-        /* --- CATEGORY TABS FILTER --- */
-        .menu-categories {
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin: 30px 20px 50px 20px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cat-btn {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
-            color: #d1d5db;
-            padding: 10px 22px;
-            font-size: 12px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .cat-btn:hover, .cat-btn.active {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border-color: var(--gold);
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
-            transform: translateY(-2px);
-        }
-
-        /* --- MENU CONTAINER & SECTIONS --- */
+        /* --- CONTAINER & SECTIONS --- */
         .menu-container {
-            max-width: 1300px;
+            max-width: 1250px;
             margin: 0 auto;
-            padding: 0 30px 100px 30px;
+            padding: 20px 30px 80px 30px;
             position: relative;
             z-index: 1;
         }
 
         .menu-section {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .section-heading {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 22px;
+            gap: 10px;
+            font-size: 16px;
             font-family: serif;
             color: var(--gold);
-            margin-bottom: 30px;
-            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
         }
 
-        /* --- MENU ITEM CARD WITH STUNNING ANIMATION --- */
+        /* --- MENU ITEM CARD --- */
         .menu-item {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
-            padding: 25px;
-            backdrop-filter: blur(12px);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 22px;
             position: relative;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s, box-shadow 0.4s;
-        }
-
-        /* Gold glowing sweep effect on hover */
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
-            transition: 0.6s;
-        }
-
-        .menu-item:hover::before {
-            left: 100%;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
         .menu-item:hover {
-            transform: translateY(-8px) scale(1.01);
+            transform: translateY(-5px);
             border-color: var(--gold);
-            box-shadow: 0 20px 40px rgba(212, 175, 55, 0.2);
         }
 
         .item-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             gap: 15px;
         }
 
         .item-title {
-            font-size: 18px;
+            font-size: 16px;
             font-family: serif;
             color: #ffffff;
             font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .menu-item:hover .item-title {
-            color: var(--gold);
         }
 
         .item-price {
-            background: rgba(212, 175, 55, 0.15);
+            background: rgba(212, 175, 55, 0.12);
             color: var(--gold);
-            border: 1px solid rgba(212, 175, 55, 0.4);
-            padding: 5px 12px;
-            font-size: 13px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            padding: 4px 10px;
+            font-size: 12px;
             font-weight: 700;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             white-space: nowrap;
             border-radius: 2px;
         }
 
         .item-desc {
             color: var(--text-muted);
-            font-size: 13px;
-            line-height: 1.6;
+            font-size: 12px;
+            line-height: 1.5;
         }
 
-        /* --- SCROLL REVEAL ANIMATION CLASSES --- */
+        /* --- ANIMATIONS (Smooth Reveal) --- */
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(30px);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -358,8 +287,8 @@
 
         @media (max-width: 768px) {
             .menu-grid { grid-template-columns: 1fr; }
-            .menu-container { padding: 0 15px 80px 15px; }
-            .menu-hero h1 { font-size: 30px; }
+            .menu-container { padding: 15px 15px 60px 15px; }
+            .menu-hero h1 { font-size: 28px; }
         }
     </style>
 </head>
@@ -370,20 +299,21 @@
         <div class="nav-container">
             <a href="nakhil.html" class="logo">
                 Complexe Nakhil
-                <span>Restaurant & Complexe</span>
+                <span>RESTAURANT & COMPLEXE</span>
             </a>
             
             <div class="nav-links" id="navLinks">
                 <a href="nakhil.html">Accueil</a>
+                <a href="nakhil.html#histoire">L'Histoire</a>
                 <a href="menu.html" class="active">Menu</a>
                 <a href="reservation.html">Réservation</a>
-                <a href="repartition.html">Service & Équipe</a>
+                <a href="repartition.html">Service</a>
                 <a href="nakhil.html#contact">Contact</a>
                 <a href="admin.html">Admin</a>
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
-            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
@@ -391,24 +321,16 @@
     <section class="menu-hero reveal">
         <span>La Carte</span>
         <h1>Notre Menu Gastronomique</h1>
-        <p>Découvrez notre sélection raffinée de Tacos, Pizzas Artisanales, Burgers et Spécialités exclusives du Complexe Nakhil.</p>
+        <p>Découvrez notre sélection raffinée de Tacos, Pizzas Artisanales, Burgers et Spécialités du Complexe Nakhil.</p>
     </section>
 
-    <!-- Categories Buttons -->
-    <div class="menu-categories reveal">
-        <button class="cat-btn active" onclick="filterMenu('all')">Tous les Plats</button>
-        <button class="cat-btn" onclick="filterMenu('tacos')">Tacos & Fast-Food</button>
-        <button class="cat-btn" onclick="filterMenu('pizzas')">Pizzas Artisanales</button>
-        <button class="cat-btn" onclick="filterMenu('burgers')">Burgers & Grillades</button>
-    </div>
-
-    <!-- Main Menu Content -->
+    <!-- Menu Content -->
     <div class="menu-container">
 
-        <!-- Category: Tacos & Fast-Food -->
-        <div class="menu-section reveal" data-category="tacos">
+        <!-- Tacos & Fast-Food -->
+        <div class="menu-section reveal">
             <div class="section-heading">
-                <span>🌮</span> Tacos & Fast-Food
+                <span>🍽️</span> Tacos & Fast-Food
             </div>
             <div class="menu-grid">
                 <div class="menu-item">
@@ -424,7 +346,15 @@
                         <span class="item-title">Tacos Mixte (Dinde & Viande)</span>
                         <span class="item-price">55 DH</span>
                     </div>
-                    <div class="item-desc">Le meilleur des deux mondes : dinde marinée et viande hachée, sauce algérienne et cheddar fondant.</div>
+                    <div class="item-desc">Le meilleur des deux mondes : dinde marinée et viande hachée, sauce algérienne et cheddar.</div>
+                </div>
+
+                <div class="menu-item">
+                    <div class="item-header">
+                        <span class="item-title">Burger Gourmet Nakhil</span>
+                        <span class="item-price">60 DH</span>
+                    </div>
+                    <div class="item-desc">Steak pur bœuf juteux, pain brioché artisanal, oignons caramélisés et double cheddar.</div>
                 </div>
 
                 <div class="menu-item">
@@ -432,13 +362,13 @@
                         <span class="item-title">Panini Poulet Fromage</span>
                         <span class="item-price">35 DH</span>
                     </div>
-                    <div class="item-desc">Pain panini croustillant, poulet aux épices douces, mozzarella fondante et sauce spéciale Nakhil.</div>
+                    <div class="item-desc">Pain panini croustillant, poulet aux épices douces, mozzarella fondante et sauce spéciale.</div>
                 </div>
             </div>
         </div>
 
-        <!-- Category: Pizzas Artisanales -->
-        <div class="menu-section reveal" data-category="pizzas">
+        <!-- Pizzas Artisanales -->
+        <div class="menu-section reveal">
             <div class="section-heading">
                 <span>🍕</span> Pizzas Artisanales
             </div>
@@ -448,7 +378,7 @@
                         <span class="item-title">Pizza Dinde Fumée</span>
                         <span class="item-price">65 DH</span>
                     </div>
-                    <div class="item-desc">Base sauce tomate italienne, mozzarella fraîche, morceaux de dinde fumée et origan parfumé.</div>
+                    <div class="item-desc">Base sauce tomate italienne, mozzarella fraîche, morceaux de dinde fumée et origan.</div>
                 </div>
 
                 <div class="menu-item">
@@ -456,7 +386,7 @@
                         <span class="item-title">Pizza 4 Saisons</span>
                         <span class="item-price">70 DH</span>
                     </div>
-                    <div class="item-desc">Divisée en quatre saveurs : champignons fondants, artichauts, olives, dinde et poivrons grillés.</div>
+                    <div class="item-desc">Divisée en quatre saveurs : champignons, artichauts, olives, dinde et poivrons grillés.</div>
                 </div>
 
                 <div class="menu-item">
@@ -469,55 +399,27 @@
             </div>
         </div>
 
-        <!-- Category: Burgers & Spécialités -->
-        <div class="menu-section reveal" data-category="burgers">
-            <div class="section-heading">
-                <span>🍔</span> Burgers & Spécialités du Complexe
-            </div>
-            <div class="menu-grid">
-                <div class="menu-item">
-                    <div class="item-header">
-                        <span class="item-title">Burger Gourmet Nakhil</span>
-                        <span class="item-price">60 DH</span>
-                    </div>
-                    <div class="item-desc">Steak pur bœuf juteux, pain brioché artisanal, oignons caramélisés lentement et double cheddar.</div>
-                </div>
-
-                <div class="menu-item">
-                    <div class="item-header">
-                        <span class="item-title">Burger Chicken Supreme</span>
-                        <span class="item-price">55 DH</span>
-                    </div>
-                    <div class="item-desc">Filet de poulet croustillant, salade croquante, cornichons et sauce cheddar onctueuse.</div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
-    <!-- Scripting -->
+    <!-- Script -->
     <script>
-        // Toggle mobile menu drawer
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('open');
         }
 
-        // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
 
-        // Scroll reveal animation on load and scroll
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 80) {
                     reveals[i].classList.add('active');
                 }
             }
@@ -525,22 +427,6 @@
 
         window.addEventListener('scroll', revealOnScroll);
         window.addEventListener('load', revealOnScroll);
-
-        // Simple Category Filter Effect
-        function filterMenu(category) {
-            const buttons = document.querySelectorAll('.cat-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            const sections = document.querySelectorAll('.menu-section');
-            sections.forEach(section => {
-                if (category === 'all' || section.getAttribute('data-category') === category) {
-                    section.style.display = 'block';
-                } else {
-                    section.style.display = 'none';
-                }
-            });
-        }
     </script>
 </body>
 </html>
