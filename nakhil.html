@@ -46,14 +46,23 @@
             position: relative;
         }
 
+        /* تعديل الشعار باش يبان Complexe Nakhil بستايل فخم */
         .logo {
             color: var(--gold);
             font-weight: 800;
-            font-size: 18px;
+            font-size: 16px;
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            font-family: serif;
+            font-style: italic;
+            font-weight: 600;
+            color: var(--gold-light);
         }
 
         .menu-btn-icon {
@@ -76,7 +85,6 @@
             color: var(--bg-dark);
         }
 
-        /* قائمة التنقل اللي كتفتح وتتسد */
         nav {
             display: none;
             flex-direction: column;
@@ -236,12 +244,13 @@
 
     <header>
         <div class="nav-container">
-            <a href="nakhil.html" class="logo">🌿 Nakhil</a>
+            <!-- الشعار الجديد مضاف هنا -->
+            <a href="nakhil.html" class="logo">
+                🌿 Complexe <span>Nakhil</span>
+            </a>
             
-            <!-- زر النقاط الثلاثة اللي كايحل القائمة -->
             <div class="menu-btn-icon" onclick="toggleMenu()">⋮</div>
 
-            <!-- روابط القائمة -->
             <nav id="navMenu">
                 <a href="nakhil.html" class="active">Accueil</a>
                 <a href="menu.html">Menu</a>
