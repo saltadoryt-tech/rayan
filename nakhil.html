@@ -6,14 +6,14 @@
     <title>Complexe Nakhil | Restaurant & Complexe</title>
     <style>
         :root {
-            /* Palette modernisée avec des tons émeraude / vert nature et accents dorés */
-            --gold: #c5a059;
-            --gold-light: #e6c58c;
-            --bg-dark: #0f1c18;
-            --bg-light: #f2f7f5;
-            --text-dark: #10221c;
-            --text-muted: #839b92;
-            --border-gold: rgba(197, 160, 89, 0.3);
+            /* Palette modernisée inspirée du design intérieur et du bois chaleureux */
+            --cream-bg: #F9F6F0;
+            --wood-tone: #C8A97E;
+            --gold-accent: #B5945A;
+            --bg-light: #F2EFE9;
+            --text-dark: #3A2E2B;
+            --text-muted: #7E7068;
+            --border-gold: rgba(181, 148, 90, 0.3);
         }
 
         * {
@@ -24,15 +24,15 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--cream-bg);
+            color: var(--text-dark);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(15, 28, 24, 0.95);
+            background: rgba(249, 246, 240, 0.95);
             border-bottom: 1px solid var(--border-gold);
             position: sticky;
             top: 0;
@@ -50,7 +50,7 @@
         }
 
         .logo {
-            color: var(--gold);
+            color: var(--wood-tone);
             font-weight: 700;
             font-size: 18px;
             text-decoration: none;
@@ -78,7 +78,7 @@
         }
 
         .nav-links a {
-            color: #d1d5db;
+            color: var(--text-muted);
             text-decoration: none;
             font-size: 13px;
             letter-spacing: 1.5px;
@@ -95,12 +95,12 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--gold);
+            background-color: var(--wood-tone);
             transition: width 0.3s;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
+            color: var(--wood-tone);
         }
 
         .nav-links a:hover::after, .nav-links a.active::after {
@@ -109,8 +109,8 @@
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
+            border: 1px solid var(--wood-tone);
+            color: var(--wood-tone);
             padding: 10px 22px;
             font-size: 12px;
             letter-spacing: 1.5px;
@@ -121,15 +121,15 @@
         }
 
         .btn-reserve-top:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(197, 160, 89, 0.4);
+            background: var(--wood-tone);
+            color: var(--cream-bg);
+            box-shadow: 0 0 15px rgba(200, 169, 126, 0.4);
         }
 
         .mobile-menu-btn {
             background: none;
             border: 1px solid var(--border-gold);
-            color: var(--gold);
+            color: var(--wood-tone);
             font-size: 22px;
             width: 40px;
             height: 40px;
@@ -152,7 +152,7 @@
                 top: 73px;
                 left: 0;
                 width: 100%;
-                background: rgba(15, 28, 24, 0.98);
+                background: rgba(249, 246, 240, 0.98);
                 flex-direction: column;
                 align-items: center;
                 padding: 30px 0;
@@ -192,7 +192,7 @@
             transform: translateY(-50%);
             width: 550px;
             height: 550px;
-            opacity: 0.12;
+            opacity: 0.08;
             pointer-events: none;
             animation: rotateStar 40s linear infinite;
         }
@@ -208,7 +208,7 @@
         }
 
         .arabic-subtitle {
-            color: var(--gold);
+            color: var(--wood-tone);
             font-size: 14px;
             letter-spacing: 2px;
             margin-bottom: 15px;
@@ -223,7 +223,7 @@
         }
 
         .hero h1 em {
-            color: var(--gold);
+            color: var(--wood-tone);
             font-style: italic;
         }
 
@@ -241,8 +241,8 @@
         }
 
         .btn-primary {
-            background: var(--gold);
-            color: var(--bg-dark);
+            background: var(--wood-tone);
+            color: var(--cream-bg);
             padding: 14px 28px;
             font-weight: 600;
             font-size: 13px;
@@ -255,13 +255,13 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(197, 160, 89, 0.3);
+            box-shadow: 0 10px 25px rgba(200, 169, 126, 0.4);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: #ffffff;
+            border: 1px solid var(--wood-tone);
+            color: var(--text-dark);
             padding: 14px 28px;
             font-weight: 600;
             font-size: 13px;
@@ -273,8 +273,9 @@
         }
 
         .btn-outline:hover {
-            border-color: var(--gold);
-            color: var(--gold);
+            border-color: var(--gold-accent);
+            color: var(--wood-tone);
+            background: rgba(200, 169, 126, 0.05);
         }
 
         .hero-card-box {
@@ -282,18 +283,18 @@
             right: 40px;
             bottom: 60px;
             width: 360px;
-            background: rgba(16, 34, 28, 0.85);
+            background: rgba(242, 239, 233, 0.9);
             border: 1px solid var(--border-gold);
             padding: 30px;
             backdrop-filter: blur(15px);
             z-index: 3;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px rgba(58, 46, 43, 0.1);
             transition: transform 0.4s;
         }
 
         .hero-card-box:hover {
             transform: translateY(-5px);
-            border-color: var(--gold);
+            border-color: var(--wood-tone);
         }
 
         .hero-card-box h3 {
@@ -313,12 +314,12 @@
         .hero-stats {
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid rgba(181, 148, 90, 0.2);
             padding-top: 20px;
         }
 
         .stat-item h4 {
-            color: var(--gold);
+            color: var(--wood-tone);
             font-size: 20px;
             font-family: serif;
             margin-bottom: 4px;
@@ -351,25 +352,25 @@
         }
 
         .history-image-box {
-            background: #091410;
+            background: #EAE5DC;
             height: 450px;
             border: 1px solid var(--border-gold);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 20px 40px rgba(58, 46, 43, 0.08);
         }
 
         .history-image-box::before {
             content: '';
             position: absolute;
             inset: 15px;
-            border: 1px solid rgba(197, 160, 89, 0.2);
+            border: 1px solid rgba(200, 169, 126, 0.3);
         }
 
         .history-content span {
-            color: #8c6d33;
+            color: var(--wood-tone);
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -386,7 +387,7 @@
         }
 
         .history-content p {
-            color: #4b5563;
+            color: var(--text-muted);
             font-size: 14px;
             line-height: 1.7;
             margin-bottom: 20px;
@@ -395,18 +396,18 @@
         .history-signature {
             font-family: serif;
             font-style: italic;
-            color: #8c6d33;
+            color: var(--wood-tone);
             margin-top: 30px;
             font-size: 15px;
         }
 
         /* --- SECTION: AVIS --- */
         .reviews-section {
-            background-color: var(--bg-light);
+            background-color: var(--cream-bg);
             color: var(--text-dark);
             padding: 80px 40px 120px 40px;
             text-align: center;
-            border-top: 1px solid #d4deda;
+            border-top: 1px solid var(--border-gold);
         }
 
         .reviews-container {
@@ -415,7 +416,7 @@
         }
 
         .reviews-container > span {
-            color: #8c6d33;
+            color: var(--wood-tone);
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -440,21 +441,21 @@
         .review-card {
             background: #ffffff;
             padding: 40px 30px;
-            border: 1px solid #d4deda;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 30px rgba(58, 46, 43, 0.04);
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
         }
 
         .review-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.08);
-            border-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(58, 46, 43, 0.08);
+            border-color: var(--wood-tone);
         }
 
         .review-card p {
             font-style: italic;
-            color: #374151;
+            color: var(--text-muted);
             font-size: 14px;
             line-height: 1.7;
             margin-bottom: 25px;
@@ -464,14 +465,14 @@
             font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: #8c6d33;
+            color: var(--wood-tone);
             font-weight: 600;
         }
 
         /* --- SECTION: CONTACT --- */
         .contact-section {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
             padding: 100px 40px;
             border-top: 1px solid var(--border-gold);
         }
@@ -486,7 +487,7 @@
         }
 
         .contact-info span {
-            color: var(--gold);
+            color: var(--wood-tone);
             font-size: 11px;
             letter-spacing: 2px;
             text-transform: uppercase;
@@ -522,7 +523,7 @@
         }
 
         .contact-row strong {
-            color: var(--gold);
+            color: var(--wood-tone);
             min-width: 100px;
         }
 
@@ -545,7 +546,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--gold);
+            color: var(--wood-tone);
             text-decoration: none;
             font-size: 12px;
             font-weight: bold;
@@ -553,12 +554,12 @@
         }
 
         .social-btn:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
+            background: var(--wood-tone);
+            color: var(--cream-bg);
         }
 
         .contact-map-box {
-            background: #10221c;
+            background: #EAE5DC;
             height: 420px;
             border: 1px solid var(--border-gold);
             display: flex;
@@ -626,7 +627,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <svg class="hero-bg-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#c5a059"/>
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#C8A97E"/>
         </svg>
 
         <div class="hero-content reveal">
@@ -664,7 +665,7 @@
     <section id="histoire" class="history-section">
         <div class="history-container">
             <div class="history-image-box reveal">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="1.5">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="1.5">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
             </div>
@@ -736,7 +737,7 @@
             </div>
 
             <div class="contact-map-box reveal">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#c5a059" stroke-width="1.5" style="margin-bottom: 15px;">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="1.5" style="margin-bottom: 15px;">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
                 <span style="font-size: 13px; color: var(--text-muted); letter-spacing: 1px;">Carte interactive disponible sur demande</span>
