@@ -6,14 +6,14 @@
     <title>Complexe Nakhil | Restaurant & Complexe</title>
     <style>
         :root {
-            /* Palette modernisée inspirée du design intérieur et du bois chaleureux */
-            --cream-bg: #F9F6F0;
-            --wood-tone: #C8A97E;
-            --gold-accent: #B5945A;
-            --bg-light: #F2EFE9;
-            --text-dark: #3A2E2B;
-            --text-muted: #7E7068;
-            --border-gold: rgba(181, 148, 90, 0.3);
+            /* Palette sombre et reposante pour les yeux (Dark Mode فخم) */
+            --bg-dark: #121413;
+            --bg-card: #1A1D1C;
+            --wood-tone: #D4B28C;
+            --gold-accent: #C5A059;
+            --text-light: #EAE5DE;
+            --text-muted: #9C948B;
+            --border-gold: rgba(197, 160, 89, 0.25);
         }
 
         * {
@@ -24,15 +24,15 @@
         }
 
         body {
-            background-color: var(--cream-bg);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(249, 246, 240, 0.95);
+            background: rgba(18, 20, 19, 0.95);
             border-bottom: 1px solid var(--border-gold);
             position: sticky;
             top: 0;
@@ -122,8 +122,8 @@
 
         .btn-reserve-top:hover {
             background: var(--wood-tone);
-            color: var(--cream-bg);
-            box-shadow: 0 0 15px rgba(200, 169, 126, 0.4);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 178, 140, 0.3);
         }
 
         .mobile-menu-btn {
@@ -152,7 +152,7 @@
                 top: 73px;
                 left: 0;
                 width: 100%;
-                background: rgba(249, 246, 240, 0.98);
+                background: rgba(18, 20, 19, 0.98);
                 flex-direction: column;
                 align-items: center;
                 padding: 30px 0;
@@ -192,7 +192,7 @@
             transform: translateY(-50%);
             width: 550px;
             height: 550px;
-            opacity: 0.08;
+            opacity: 0.05;
             pointer-events: none;
             animation: rotateStar 40s linear infinite;
         }
@@ -242,7 +242,7 @@
 
         .btn-primary {
             background: var(--wood-tone);
-            color: var(--cream-bg);
+            color: var(--bg-dark);
             padding: 14px 28px;
             font-weight: 600;
             font-size: 13px;
@@ -255,13 +255,13 @@
 
         .btn-primary:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(200, 169, 126, 0.4);
+            box-shadow: 0 10px 25px rgba(212, 178, 140, 0.3);
         }
 
         .btn-outline {
             background: transparent;
-            border: 1px solid var(--wood-tone);
-            color: var(--text-dark);
+            border: 1px solid rgba(212, 178, 140, 0.4);
+            color: var(--text-light);
             padding: 14px 28px;
             font-weight: 600;
             font-size: 13px;
@@ -273,9 +273,9 @@
         }
 
         .btn-outline:hover {
-            border-color: var(--gold-accent);
+            border-color: var(--wood-tone);
             color: var(--wood-tone);
-            background: rgba(200, 169, 126, 0.05);
+            background: rgba(212, 178, 140, 0.05);
         }
 
         .hero-card-box {
@@ -283,12 +283,12 @@
             right: 40px;
             bottom: 60px;
             width: 360px;
-            background: rgba(242, 239, 233, 0.9);
+            background: var(--bg-card);
             border: 1px solid var(--border-gold);
             padding: 30px;
             backdrop-filter: blur(15px);
             z-index: 3;
-            box-shadow: 0 20px 40px rgba(58, 46, 43, 0.1);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
             transition: transform 0.4s;
         }
 
@@ -314,7 +314,7 @@
         .hero-stats {
             display: flex;
             justify-content: space-between;
-            border-top: 1px solid rgba(181, 148, 90, 0.2);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 20px;
         }
 
@@ -334,12 +334,13 @@
 
         /* --- SECTION: NOTRE HISTOIRE --- */
         .history-section {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: #171A19;
+            color: var(--text-light);
             padding: 100px 40px;
             display: flex;
             justify-content: center;
             align-items: center;
+            border-top: 1px solid var(--border-gold);
         }
 
         .history-container {
@@ -352,21 +353,21 @@
         }
 
         .history-image-box {
-            background: #EAE5DC;
+            background: var(--bg-card);
             height: 450px;
             border: 1px solid var(--border-gold);
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            box-shadow: 0 20px 40px rgba(58, 46, 43, 0.08);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
         }
 
         .history-image-box::before {
             content: '';
             position: absolute;
             inset: 15px;
-            border: 1px solid rgba(200, 169, 126, 0.3);
+            border: 1px solid rgba(212, 178, 140, 0.15);
         }
 
         .history-content span {
@@ -403,8 +404,8 @@
 
         /* --- SECTION: AVIS --- */
         .reviews-section {
-            background-color: var(--cream-bg);
-            color: var(--text-dark);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             padding: 80px 40px 120px 40px;
             text-align: center;
             border-top: 1px solid var(--border-gold);
@@ -439,17 +440,17 @@
         }
 
         .review-card {
-            background: #ffffff;
+            background: var(--bg-card);
             padding: 40px 30px;
             border: 1px solid var(--border-gold);
-            box-shadow: 0 10px 30px rgba(58, 46, 43, 0.04);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
         }
 
         .review-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 35px rgba(58, 46, 43, 0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
             border-color: var(--wood-tone);
         }
 
@@ -471,8 +472,8 @@
 
         /* --- SECTION: CONTACT --- */
         .contact-section {
-            background-color: var(--bg-light);
-            color: var(--text-dark);
+            background-color: #171A19;
+            color: var(--text-light);
             padding: 100px 40px;
             border-top: 1px solid var(--border-gold);
         }
@@ -555,11 +556,11 @@
 
         .social-btn:hover {
             background: var(--wood-tone);
-            color: var(--cream-bg);
+            color: var(--bg-dark);
         }
 
         .contact-map-box {
-            background: #EAE5DC;
+            background: var(--bg-card);
             height: 420px;
             border: 1px solid var(--border-gold);
             display: flex;
@@ -627,7 +628,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <svg class="hero-bg-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
-            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#C8A97E"/>
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4B28C"/>
         </svg>
 
         <div class="hero-content reveal">
@@ -665,7 +666,7 @@
     <section id="histoire" class="history-section">
         <div class="history-container">
             <div class="history-image-box reveal">
-                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="1.5">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D4B28C" stroke-width="1.5">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
             </div>
@@ -737,7 +738,7 @@
             </div>
 
             <div class="contact-map-box reveal">
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#C8A97E" stroke-width="1.5" style="margin-bottom: 15px;">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#D4B28C" stroke-width="1.5" style="margin-bottom: 15px;">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
                 <span style="font-size: 13px; color: var(--text-muted); letter-spacing: 1px;">Carte interactive disponible sur demande</span>
