@@ -37,8 +37,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 600px;
-            height: 600px;
+            width: 700px;
+            height: 700px;
             background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
@@ -87,7 +87,7 @@
 
         .nav-links {
             display: flex;
-            gap: 30px;
+            gap: 25px;
             align-items: center;
         }
 
@@ -155,7 +155,7 @@
         }
 
         /* Responsive Mobile Menu Drawer */
-        @media (max-width: 900px) {
+        @media (max-width: 992px) {
             .nav-container {
                 padding: 15px 20px;
             }
@@ -191,7 +191,7 @@
         /* --- MAIN MENU CONTENT --- */
         .menu-hero {
             text-align: center;
-            padding: 70px 20px 40px 20px;
+            padding: 60px 20px 30px 20px;
             position: relative;
             z-index: 1;
         }
@@ -206,57 +206,58 @@
         }
 
         .menu-hero h1 {
-            font-size: 42px;
+            font-size: 38px;
             font-family: serif;
             font-weight: 400;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
+            color: #ffffff;
         }
 
         .menu-hero p {
             color: var(--text-muted);
-            font-size: 15px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Menu Container */
         .menu-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px 40px 100px 40px;
+            padding: 20px 30px 100px 30px;
             position: relative;
             z-index: 1;
         }
 
         .menu-category {
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .category-title {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-size: 22px;
+            font-size: 20px;
             font-family: serif;
             color: var(--gold);
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             border-bottom: 1px solid var(--border-gold);
-            padding-bottom: 12px;
+            padding-bottom: 10px;
         }
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
         }
 
         .menu-item-card {
             background: var(--bg-card);
             border: 1px solid var(--border-gold);
             padding: 25px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            position: relative;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -265,7 +266,7 @@
         .menu-item-card:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
         }
 
         .item-header {
@@ -277,7 +278,7 @@
         }
 
         .item-header h3 {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 500;
             font-family: serif;
             color: #ffffff;
@@ -288,10 +289,11 @@
             color: var(--gold);
             border: 1px solid var(--border-gold);
             padding: 6px 12px;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             letter-spacing: 1px;
             white-space: nowrap;
+            border-radius: 2px;
         }
 
         .item-desc {
@@ -314,10 +316,7 @@
 
         @media (max-width: 768px) {
             .menu-container {
-                padding: 20px 20px 80px 20px;
-            }
-            .menu-hero h1 {
-                font-size: 32px;
+                padding: 15px 15px 80px 15px;
             }
             .menu-grid {
                 grid-template-columns: 1fr;
@@ -337,11 +336,11 @@
             
             <div class="nav-links" id="navLinks">
                 <a href="nakhil.html">Accueil</a>
-                <a href="nakhil.html#histoire">L'Histoire</a>
                 <a href="menu.html" class="active">Menu</a>
                 <a href="reservation.html">Réservation</a>
-                <a href="repartition.html">Service</a>
+                <a href="repartition.html">Service & Équipe</a>
                 <a href="nakhil.html#contact">Contact</a>
+                <a href="admin.html">Admin</a>
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
