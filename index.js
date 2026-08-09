@@ -3,16 +3,15 @@ const cors = require('cors');
 const path = require('path');
 const app = express();
 
-// استخدام Port ديال Railway أو 3000 افتراضياً
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(cors());
 
-// باش السيرفر يقرا الملفات الثابتة والصافحات
+// قراءة الملفات الثابتة والصافحات
 app.use(express.static(path.join(__dirname)));
 
-// === مسارات صفحات الموقع (HTML) ===
+// مسارات صفحات الموقع (HTML)
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'nakhil.html'));
 });
@@ -37,7 +36,7 @@ app.get('/analytics', (req, res) => {
     res.sendFile(path.join(__dirname, 'analytics.html'));
 });
 
-// === الـ APIs ديال الحجوزات والإحصائيات ===
+// الـ APIs ديال الحجوزات والإحصائيات
 let reservations = [];
 let reviews = [ 
     { name: "أمير", rating: 5, comment: "!خدمة ممتازة وكلشي نقي", date: "2026-08-08" } 
