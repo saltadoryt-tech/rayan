@@ -6,164 +6,302 @@
     <title>Administration | Complexe Nakhil</title>
     <style>
         :root {
-            --bg-dark: #121413;
-            --bg-card: #1A1D1C;
-            --wood-tone: #D4B28C;
-            --text-light: #EAE5DE;
-            --text-muted: #9C948B;
-            --border-gold: rgba(197, 160, 89, 0.25);
-            --success: #5cb85c;
-            --danger: #d9534f;
-            --warning: #f0ad4e;
+            /* Color Palette */
+            --bg-color: #2b2b2b;
+            --card-bg: rgba(50, 50, 50, 0.85);
+            --form-bg: rgba(40, 40, 40, 0.95);
+            --subcard-bg: rgba(35, 35, 35, 0.9);
+            --beige: #c8a888;
+            --cream: #f4dcc3;
+            --soft-gray: #b8b3b6;
+            --text-main: #ffffff;
+            --text-muted: #d1d1d1;
+            --border-color: rgba(200, 168, 136, 0.3);
+            --badge-active: #c8a888;
+            --badge-occupied: #8c5a5a;
+            --badge-free: #5a8c6a;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-light);
-            display: flex;
-            min-height: 100vh;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* Sidebar */
-        aside {
-            width: 260px;
-            background: var(--bg-card);
-            border-right: 1px solid var(--border-gold);
-            display: flex;
-            flex-direction: column;
-            padding: 25px 20px;
-            position: sticky;
+        /* Watermark Background Glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            right: 5%;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(200, 168, 136, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- LOGIN OVERLAY (PROTECTION) --- */
+        #loginOverlay {
+            position: fixed;
             top: 0;
-            height: 100vh;
-            flex-shrink: 0;
-        }
-
-        .admin-logo {
-            color: var(--wood-tone);
-            font-size: 18px;
-            font-weight: 700;
-            text-decoration: none;
-            margin-bottom: 30px;
-            letter-spacing: 1px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 30, 30, 0.98);
             display: flex;
-            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
         }
 
-        .admin-logo span {
-            font-size: 10px;
-            color: var(--text-muted);
+        .login-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        .login-card h2 {
+            font-size: 24px;
+            font-family: serif;
+            color: var(--cream);
+            margin-bottom: 8px;
+        }
+
+        .login-card p {
+            color: var(--soft-gray);
+            font-size: 12px;
+            margin-bottom: 25px;
+        }
+
+        .login-card input {
+            width: 100%;
+            background: var(--form-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 15px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            border-radius: 2px;
+            outline: none;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        .login-card input:focus {
+            border-color: var(--beige);
+        }
+
+        .login-card button {
+            background: var(--beige);
+            color: var(--bg-color);
+            border: none;
+            width: 100%;
+            padding: 14px;
+            font-size: 12px;
+            font-weight: 700;
             letter-spacing: 2px;
             text-transform: uppercase;
-            margin-top: 4px;
-        }
-
-        .admin-menu {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .admin-menu a {
-            color: var(--text-muted);
-            text-decoration: none;
-            padding: 12px 15px;
+            cursor: pointer;
             border-radius: 2px;
-            font-size: 13px;
-            letter-spacing: 1px;
-            transition: all 0.3s;
+            transition: opacity 0.3s;
         }
 
-        .admin-menu a:hover, .admin-menu a.active {
-            background: rgba(212, 178, 140, 0.08);
-            color: var(--wood-tone);
-            border-left: 2px solid var(--wood-tone);
+        .login-card button:hover {
+            opacity: 0.9;
         }
 
-        /* Main Content */
-        main {
-            flex: 1;
-            padding: 30px;
-            overflow-y: auto;
-            max-width: 100%;
+        .error-msg {
+            color: #e88d8d;
+            font-size: 11px;
+            margin-top: 12px;
+            display: none;
+        }
+
+        /* --- ADMIN DASHBOARD LAYOUT --- */
+        #adminDashboard {
+            display: none; /* مخفي حتى يتم إدخال كلمة المرور الصحيحة */
         }
 
         header {
+            background: rgba(35, 35, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
-            border-bottom: 1px solid var(--border-gold);
-            padding-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
+            padding: 18px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        header h1 {
-            font-size: 24px;
+        .logo {
+            color: var(--cream);
+            font-weight: 700;
+            font-size: 16px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            letter-spacing: 0.5px;
+        }
+
+        .logo span {
+            font-size: 9px;
+            color: var(--soft-gray);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 22px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--soft-gray);
+            text-decoration: none;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 3px;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--cream);
+        }
+
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--beige);
+        }
+
+        .btn-logout {
+            background: transparent;
+            border: 1px solid #8c5a5a;
+            color: #e88d8d;
+            padding: 6px 15px;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .btn-logout:hover {
+            background: #8c5a5a;
+            color: #ffffff;
+        }
+
+        /* Dashboard Main */
+        .admin-container {
+            max-width: 1300px;
+            margin: 40px auto 80px auto;
+            padding: 0 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .admin-hero {
+            margin-bottom: 35px;
+        }
+
+        .admin-hero span {
+            color: var(--beige);
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .admin-hero h1 {
+            font-size: 30px;
             font-family: serif;
             font-weight: 400;
+            color: var(--cream);
         }
 
+        /* Stats Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
         }
 
         .stat-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
-            padding: 20px;
-            border-radius: 2px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 25px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .stat-card h3 {
+        .stat-num {
             font-size: 28px;
-            color: var(--wood-tone);
-            margin-bottom: 6px;
             font-family: serif;
+            color: var(--cream);
+            margin-bottom: 5px;
+            font-weight: 600;
         }
 
-        .stat-card p {
+        .stat-label {
             font-size: 11px;
-            color: var(--text-muted);
-            text-transform: uppercase;
             letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--soft-gray);
         }
 
-        /* Tables Container */
-        section.table-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
-            border-radius: 2px;
-            padding: 20px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        /* Tables Card / Section */
+        .admin-section-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            padding: 30px;
+            margin-bottom: 35px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
-        section.table-section h2 {
-            font-size: 18px;
+        .section-title {
+            font-size: 16px;
             font-family: serif;
+            color: var(--cream);
             margin-bottom: 20px;
-            color: var(--wood-tone);
-            font-weight: 400;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
+        /* Data Tables Style */
         .table-responsive {
             width: 100%;
             overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
         }
 
         table {
@@ -171,271 +309,235 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 13px;
-            min-width: 650px;
-        }
-
-        th, td {
-            padding: 14px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            white-space: nowrap;
         }
 
         th {
-            color: var(--text-muted);
+            color: var(--cream);
             font-weight: 600;
-            text-transform: uppercase;
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
             font-size: 11px;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         td {
-            color: var(--text-light);
+            padding: 14px 15px;
+            border-bottom: 1px solid rgba(200, 168, 136, 0.1);
+            color: var(--text-main);
         }
 
-        /* Badge Styling & Animation */
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
+        tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .badge-status {
+            padding: 4px 10px;
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
             border-radius: 2px;
+            letter-spacing: 0.5px;
+        }
+
+        .badge-confirmed { background: rgba(200, 168, 136, 0.2); color: var(--badge-active); border: 1px solid var(--badge-active); }
+        .badge-pending { background: rgba(184, 179, 182, 0.15); color: var(--soft-gray); border: 1px solid var(--soft-gray); }
+
+        .action-btns {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            padding: 5px 10px;
             font-size: 10px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 600;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .badge.confirmed { 
-            background: rgba(92, 184, 92, 0.15); 
-            color: var(--success); 
-            border: 1px solid rgba(92, 184, 92, 0.4); 
-        }
-
-        .badge.rejected { 
-            background: rgba(217, 83, 79, 0.15); 
-            color: var(--danger); 
-            border: 1px solid rgba(217, 83, 79, 0.4); 
-        }
-
-        .badge.pending { 
-            background: rgba(240, 173, 78, 0.15); 
-            color: var(--warning); 
-            border: 1px solid rgba(240, 173, 78, 0.4); 
-        }
-
-        /* Keyframes Animation when status changes */
-        @keyframes pulseGlow {
-            0% { transform: scale(0.95); opacity: 0.6; }
-            50% { transform: scale(1.08); opacity: 1; filter: brightness(1.3); }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .animate-status {
-            animation: pulseGlow 0.5s ease-in-out;
-        }
-
-        /* Buttons Styling */
-        .btn-action {
-            padding: 6px 10px;
-            cursor: pointer;
             border-radius: 2px;
-            font-size: 11px;
+            cursor: pointer;
+            border: 1px solid transparent;
             font-weight: 600;
-            transition: all 0.2s ease;
+            transition: opacity 0.2s;
         }
 
-        .btn-action:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.2);
-        }
+        .btn-accept { background: #5a8c6a; color: #ffffff; }
+        .btn-refuse { background: #8c5a5a; color: #ffffff; }
+        .btn-action:hover { opacity: 0.85; }
 
-        .btn-accept {
-            background: rgba(92, 184, 92, 0.2);
-            color: var(--success);
-            border: 1px solid var(--success);
-            margin-right: 4px;
-        }
-
-        .btn-reject {
-            background: rgba(217, 83, 79, 0.2);
-            color: var(--danger);
-            border: 1px solid var(--danger);
-            margin-right: 4px;
-        }
-
-        .btn-pending {
-            background: rgba(240, 173, 78, 0.2);
-            color: var(--warning);
-            border: 1px solid var(--warning);
-        }
-
-        /* Mobile Responsive */
         @media (max-width: 768px) {
-            body {
-                flex-direction: column;
-            }
-            aside {
-                width: 100%;
-                height: auto;
-                position: relative;
-                padding: 15px 20px;
-                border-right: none;
-                border-bottom: 1px solid var(--border-gold);
-            }
-            .admin-logo {
-                margin-bottom: 15px;
-            }
-            .admin-menu {
-                flex-direction: row;
-                flex-wrap: wrap;
-                gap: 8px;
-            }
-            .admin-menu a {
-                padding: 8px 12px;
-                font-size: 12px;
-                background: rgba(255, 255, 255, 0.02);
-            }
-            main {
-                padding: 15px;
-            }
-            header h1 {
-                font-size: 20px;
-            }
+            .admin-container { padding: 10px 15px; }
+            .admin-section-card { padding: 15px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Sidebar Admin -->
-    <aside>
-        <a href="nakhil.html" class="admin-logo">
-            Complexe Nakhil
-            <span>Admin Dashboard</span>
-        </a>
-        <div class="admin-menu">
-            <a href="#" class="active">Tableau</a>
-            <a href="#reservations">Réservations</a>
-            <a href="#reviews">Avis</a>
-            <a href="nakhil.html">Site web</a>
+    <!-- PASSWORD LOGIN OVERLAY -->
+    <div id="loginOverlay">
+        <div class="login-card">
+            <h2>Espace Administrateur</h2>
+            <p>Veuillez entrer le mot de passe pour accéder au tableau de bord.</p>
+            <form onsubmit="checkPassword(event)">
+                <input type="password" id="adminPassword" placeholder="••••••••" required>
+                <button type="submit">Se Connecter</button>
+                <div id="errorMsg" class="error-msg">Mot de passe incorrect. Réessayez.</div>
+            </form>
         </div>
-    </aside>
+    </div>
 
-    <!-- Main Dashboard Area -->
-    <main>
+    <!-- MAIN ADMIN DASHBOARD (Protected) -->
+    <div id="adminDashboard">
+        
         <header>
-            <h1>Aperçu Général</h1>
-            <span style="font-size: 11px; color: var(--text-muted); letter-spacing: 1px;">Admin Connecté</span>
+            <div class="nav-container">
+                <a href="nakhil.html" class="logo">
+                    Complexe Nakhil
+                    <span>ADMIN DASHBOARD</span>
+                </a>
+                
+                <div class="nav-links">
+                    <a href="nakhil.html">Accueil</a>
+                    <a href="menu.html">Menu</a>
+                    <a href="reservation.html">Réservation</a>
+                    <a href="repartition.html">Service</a>
+                </div>
+
+                <button class="btn-logout" onclick="logoutAdmin()">Déconnexion</button>
+            </div>
         </header>
 
-        <!-- Stats Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <h3>24</h3>
-                <p>Réservations du jour</p>
+        <div class="admin-container">
+            
+            <div class="admin-hero">
+                <span>Vue d'ensemble</span>
+                <h1>Tableau de Bord</h1>
             </div>
-            <div class="stat-card">
-                <h3>4.8</h3>
-                <p>Note globale</p>
+
+            <!-- Stats -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-num">24</div>
+                    <div class="stat-label">Réservations du Jour</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">4.8</div>
+                    <div class="stat-label">Note Globale</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-num">142</div>
+                    <div class="stat-label">Total Avis</div>
+                </div>
             </div>
-            <div class="stat-card">
-                <h3>142</h3>
-                <p>Total Avis</p>
+
+            <!-- Reservations Management Table -->
+            <div class="admin-section-card">
+                <div class="section-title">Gestion des Réservations</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Téléphone</th>
+                                <th>Date & Heure</th>
+                                <th>Personnes</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mehdi Alami</td>
+                                <td>+212 6 00 00 00 00</td>
+                                <td>10/08/2026 — 20:30</td>
+                                <td>4 Personnes</td>
+                                <td><span class="badge-status badge-confirmed">Confirmé</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-action btn-accept">Accepter</button>
+                                        <button class="btn-action btn-refuse">Refuser</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Sara Benani</td>
+                                <td>+212 6 11 22 33 44</td>
+                                <td>11/08/2026 — 13:00</td>
+                                <td>2 Personnes</td>
+                                <td><span class="badge-status badge-pending">En Attente</span></td>
+                                <td>
+                                    <div class="action-btns">
+                                        <button class="btn-action btn-accept">Accepter</button>
+                                        <button class="btn-action btn-refuse">Refuser</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
+
+            <!-- Client Reviews Table -->
+            <div class="admin-section-card">
+                <div class="section-title">Derniers Avis Reçus</div>
+                <div class="table-responsive">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Client</th>
+                                <th>Commentaire</th>
+                                <th>Ville</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Nadia</td>
+                                <td>"La pastilla à elle seule vaut le détour..."</td>
+                                <td>Casablanca</td>
+                            </tr>
+                            <tr>
+                                <td>Karim</td>
+                                <td>"On sent le soin apporté à chaque plat..."</td>
+                                <td>Rabat</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
+    </div>
 
-        <!-- Reservations Table -->
-        <section class="table-section" id="reservations">
-            <h2>Gestion des Réservations</h2>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Client</th>
-                            <th>Téléphone</th>
-                            <th>Date & Heure</th>
-                            <th>Personnes</th>
-                            <th>Statut</th>
-                            <th>Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Mehdi Alami</td>
-                            <td>+212 6 00 00 00 00</td>
-                            <td>10/08/2026 — 20:30</td>
-                            <td>4 Personnes</td>
-                            <td><span class="badge confirmed" id="status-1">Confirmé</span></td>
-                            <td>
-                                <button class="btn-action btn-accept" onclick="updateStatus(1, 'confirmed')">Accepter</button>
-                                <button class="btn-action btn-reject" onclick="updateStatus(1, 'rejected')">Refuser</button>
-                                <button class="btn-action btn-pending" onclick="updateStatus(1, 'pending')">Attente</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Sara Benani</td>
-                            <td>+212 6 11 22 33 44</td>
-                            <td>11/08/2026 — 13:00</td>
-                            <td>2 Personnes</td>
-                            <td><span class="badge pending" id="status-2">En attente</span></td>
-                            <td>
-                                <button class="btn-action btn-accept" onclick="updateStatus(2, 'confirmed')">Accepter</button>
-                                <button class="btn-action btn-reject" onclick="updateStatus(2, 'rejected')">Refuser</button>
-                                <button class="btn-action btn-pending" onclick="updateStatus(2, 'pending')">Attente</button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-
-        <!-- Reviews Table -->
-        <section class="table-section" id="reviews">
-            <h2>Derniers Avis Reçus</h2>
-            <div class="table-responsive">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Client</th>
-                            <th>Commentaire</th>
-                            <th>Ville</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Nadia</td>
-                            <td>"La pastilla à elle seule vaut le détour..."</td>
-                            <td>Casablanca</td>
-                        </tr>
-                        <tr>
-                            <td>Karim</td>
-                            <td>"On sent le soin apporté à chaque plat..."</td>
-                            <td>Rabat</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </section>
-    </main>
-
-    <!-- Scripting for Animation & Actions -->
+    <!-- Script for Password & Session -->
     <script>
-        function updateStatus(id, action) {
-            const badge = document.getElementById('status-' + id);
-            
-            // Remove animation class to reset it if clicked again
-            badge.classList.remove('animate-status');
-            void badge.offsetWidth; // Trigger reflow
-            
-            if (action === 'confirmed') {
-                badge.className = 'badge confirmed animate-status';
-                badge.textContent = 'Confirmé';
-            } else if (action === 'rejected') {
-                badge.className = 'badge rejected animate-status';
-                badge.textContent = 'Refusé';
-            } else if (action === 'pending') {
-                badge.className = 'badge pending animate-status';
-                badge.textContent = 'En attente';
+        // كلمة المرور الخاصة بالصفحة (يمكنك تغييرها هنا لما تريد)
+        const ADMIN_PASSWORD = "nakhil2026";
+
+        function checkPassword(e) {
+            e.preventDefault();
+            const inputVal = document.getElementById('adminPassword').value;
+            const errorMsg = document.getElementById('errorMsg');
+
+            if (inputVal === ADMIN_PASSWORD) {
+                // إخفاء نافذة الدخول وإظهار الداشبورد وتخزين الحالة
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+                sessionStorage.setItem('nakhil_admin_logged', 'true');
+            } else {
+                errorMsg.style.display = 'block';
             }
         }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('nakhil_admin_logged');
+            location.reload();
+        }
+
+        // التحقق واش الادمن مسجل الدخول مسبقاً في نفس الجلسة
+        window.addEventListener('DOMContentLoaded', () => {
+            if (sessionStorage.getItem('nakhil_admin_logged') === 'true') {
+                document.getElementById('loginOverlay').style.display = 'none';
+                document.getElementById('adminDashboard').style.display = 'block';
+            }
+        });
     </script>
 </body>
 </html>
