@@ -2,6 +2,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 const app = express();
+
+// استخدام Port ديال Railway أو 3000 افتراضياً
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
@@ -35,7 +37,7 @@ app.get('/analytics', (req, res) => {
     res.sendFile(path.join(__dirname, 'analytics.html'));
 });
 
-// === الـ APIs ديال الحجوزات والإحصائيات اللي كانت عندك ===
+// === الـ APIs ديال الحجوزات والإحصائيات ===
 let reservations = [];
 let reviews = [ 
     { name: "أمير", rating: 5, comment: "!خدمة ممتازة وكلشي نقي", date: "2026-08-08" } 
