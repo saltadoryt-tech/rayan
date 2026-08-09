@@ -6,7 +6,6 @@
     <title>Réservation | Complexe Nakhil</title>
     <style>
         :root {
-            /* Color Palette */
             --bg-color: #2b2b2b;
             --card-bg: rgba(50, 50, 50, 0.85);
             --form-bg: rgba(40, 40, 40, 0.95);
@@ -33,7 +32,6 @@
             position: relative;
         }
 
-        /* Watermark Background Glow */
         body::before {
             content: '';
             position: fixed;
@@ -47,7 +45,6 @@
             z-index: 0;
         }
 
-        /* --- HEADER & NAVIGATION --- */
         header {
             background: rgba(35, 35, 35, 0.95);
             border-bottom: 1px solid var(--border-color);
@@ -164,7 +161,6 @@
             .btn-reserve-top { display: none; }
         }
 
-        /* --- RESERVATION HERO & FORM --- */
         .reservation-section {
             max-width: 900px;
             margin: 40px auto 80px auto;
@@ -203,7 +199,6 @@
             line-height: 1.5;
         }
 
-        /* Form Wrapper Card */
         .res-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -287,7 +282,6 @@
             transform: translateY(-2px);
         }
 
-        /* --- ANIMATION --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -309,7 +303,6 @@
 </head>
 <body>
 
-    <!-- Header -->
     <header>
         <div class="nav-container">
             <a href="nakhil.html" class="logo">
@@ -331,7 +324,6 @@
         </div>
     </header>
 
-    <!-- Reservation Section -->
     <section class="reservation-section reveal">
         <div class="res-hero">
             <span>Table & Espace</span>
@@ -378,9 +370,9 @@
                         <label for="space">Espace Souhaité :</label>
                         <select id="space" required>
                             <option value="" disabled selected>Choisissez un espace...</option>
-                            <option value="principale">Salle Principale</option>
-                            <option value="terrasse">Terrasse Ombragée</option>
-                            <option value="evenementiel">Espace Événementiel</option>
+                            <option value="Salle Principale">Salle Principale</option>
+                            <option value="Terrasse Ombragée">Terrasse Ombragée</option>
+                            <option value="Espace Événementiel">Espace Événementiel</option>
                         </select>
                     </div>
 
@@ -396,7 +388,6 @@
         </div>
     </section>
 
-    <!-- Script -->
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -409,10 +400,40 @@
             });
         });
 
-        function handleReservation(e) {
+        async function handleReservation(e) {
             e.preventDefault();
-            alert('Votre demande de réservation a bien été envoyée avec succès !');
-            document.getElementById('reservationForm').reset();
+
+            const formData = {
+                name: document.getElementById('fullName').value,
+                phone: document.getElementById('phone').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                persons: document.getElementById('guests').value,
+                espace: document.getElementById('space').value,
+                notes: document.getElementById('notes').value
+            };
+
+            try {
+                const response = await fetch('/api/reservations', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const result = await response.json();
+
+                if (result.success) {
+                    alert('Votre demande de réservation a bien été envoyée avec succès !');
+                    document.getElementById('reservationForm').reset();
+                } else {
+                    alert('Une erreur est survenue, veuillez réessayer.');
+                }
+            } catch (err) {
+                console.error("Erreur:", err);
+                alert('Erreur de connexion au serveur.');
+            }
         }
 
         function revealOnScroll() {
