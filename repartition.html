@@ -6,13 +6,20 @@
     <title>Répartition du Service | Complexe Nakhil</title>
     <style>
         :root {
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --bg-dark: #0b0e14;
-            --bg-card: rgba(17, 24, 39, 0.75);
-            --text-dark: #111827;
-            --text-muted: #9ca3af;
-            --border-gold: rgba(212, 175, 55, 0.3);
+            /* Color Palette */
+            --bg-color: #2b2b2b;
+            --card-bg: rgba(50, 50, 50, 0.85);
+            --form-bg: rgba(40, 40, 40, 0.95);
+            --subcard-bg: rgba(35, 35, 35, 0.9);
+            --beige: #c8a888;
+            --cream: #f4dcc3;
+            --soft-gray: #b8b3b6;
+            --text-main: #ffffff;
+            --text-muted: #d1d1d1;
+            --border-color: rgba(200, 168, 136, 0.3);
+            --badge-active: #c8a888;
+            --badge-occupied: #8c5a5a;
+            --badge-free: #5a8c6a;
         }
 
         * {
@@ -23,35 +30,35 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Background Watermark Star */
+        /* Watermark Background Glow */
         body::before {
             content: '';
             position: fixed;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            right: 5%;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(200, 168, 136, 0.05) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(11, 14, 20, 0.95);
-            border-bottom: 1px solid var(--border-gold);
+            background: rgba(35, 35, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -64,69 +71,59 @@
         }
 
         .logo {
-            color: var(--gold);
+            color: var(--cream);
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            letter-spacing: 1px;
-            transition: transform 0.3s;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
+            letter-spacing: 0.5px;
         }
 
         .logo span {
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 2px;
+            font-size: 9px;
+            color: var(--soft-gray);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 22px;
             align-items: center;
         }
 
         .nav-links a {
-            color: #d1d5db;
+            color: var(--soft-gray);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
-            padding-bottom: 4px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--gold);
-            transition: width 0.3s;
+            padding-bottom: 3px;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
+            color: var(--cream);
         }
 
-        .nav-links a:hover::after, .nav-links a.active::after {
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
             width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--beige);
         }
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 10px 22px;
-            font-size: 12px;
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 8px 20px;
+            font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
@@ -135,277 +132,263 @@
         }
 
         .btn-reserve-top:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: var(--beige);
+            border-color: var(--beige);
+            color: var(--bg-color);
         }
 
         .mobile-menu-btn {
             background: none;
-            border: 1px solid var(--border-gold);
-            color: var(--gold);
-            font-size: 22px;
-            width: 40px;
-            height: 40px;
+            border: 1px solid var(--border-color);
+            color: var(--cream);
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
         }
 
-        /* Responsive Mobile Menu Drawer */
         @media (max-width: 992px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-            .mobile-menu-btn {
-                display: flex;
-            }
+            .nav-container { padding: 15px 20px; }
+            .mobile-menu-btn { display: flex; }
             .nav-links {
                 position: absolute;
-                top: 73px;
-                left: 0;
-                width: 100%;
-                background: rgba(11, 14, 20, 0.98);
+                top: 71px; left: 0; width: 100%;
+                background: rgba(35, 35, 35, 0.98);
                 flex-direction: column;
                 align-items: center;
-                padding: 30px 0;
-                gap: 20px;
-                border-bottom: 1px solid var(--border-gold);
-                transform: translateY(-150%);
-                opacity: 0;
-                transition: all 0.4s ease-in-out;
-                pointer-events: none;
+                padding: 25px 0; gap: 18px;
+                border-bottom: 1px solid var(--border-color);
+                transform: translateY(-150%); opacity: 0;
+                transition: all 0.4s ease-in-out; pointer-events: none;
             }
-            .nav-links.open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
-            }
-            .btn-reserve-top {
-                display: none;
-            }
+            .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            .btn-reserve-top { display: none; }
         }
 
-        /* --- MAIN PAGE CONTENT --- */
-        .page-hero {
-            text-align: center;
-            padding: 60px 20px 30px 20px;
+        /* --- REPARTITION MAIN CONTENT --- */
+        .repartition-container {
+            max-width: 1300px;
+            margin: 40px auto 80px auto;
+            padding: 0 20px;
             position: relative;
             z-index: 1;
         }
 
-        .page-hero span {
-            color: var(--gold);
-            font-size: 12px;
+        .rep-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .rep-hero span {
+            color: var(--beige);
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .page-hero h1 {
-            font-size: 38px;
+        .rep-hero h1 {
+            font-size: 34px;
             font-family: serif;
             font-weight: 400;
+            color: var(--cream);
             margin-bottom: 10px;
-            color: #ffffff;
         }
 
-        .page-hero p {
-            color: var(--text-muted);
-            font-size: 14px;
-            letter-spacing: 0.5px;
+        .rep-hero p {
+            color: var(--soft-gray);
+            font-size: 13px;
             max-width: 600px;
             margin: 0 auto;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px 30px 100px 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Section Title */
-        .section-title {
+        .section-title-sub {
+            font-size: 16px;
+            font-family: serif;
+            color: var(--cream);
+            margin-bottom: 25px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 18px;
-            font-family: serif;
-            color: var(--gold);
-            margin-bottom: 25px;
+            gap: 10px;
         }
 
-        /* Servers Grid */
-        .servers-grid {
+        /* Team Cards Grid */
+        .teams-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
             gap: 25px;
             margin-bottom: 60px;
         }
 
-        .server-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
+        .team-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             padding: 25px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.3s;
         }
 
-        .server-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--gold);
-            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
+        .team-card.featured {
+            border-color: var(--beige);
         }
 
-        .server-header {
+        .team-header {
+            font-size: 14px;
+            font-family: serif;
+            color: var(--cream);
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 16px;
-            font-weight: 500;
-            font-family: serif;
-            color: var(--gold);
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 12px;
+            gap: 8px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
         }
 
-        .table-row {
+        .table-row-item {
+            background: var(--subcard-bg);
+            border: 1px solid var(--border-color);
+            padding: 12px 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(11, 14, 20, 0.8);
-            border: 1px solid var(--border-gold);
-            padding: 12px 15px;
-            margin-bottom: 10px;
-            font-size: 13px;
-        }
-
-        .table-name {
-            color: #e5e7eb;
-        }
-
-        .status-badge {
-            padding: 4px 10px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+            margin-bottom: 12px;
             border-radius: 2px;
         }
 
-        .status-active {
-            background: rgba(234, 179, 8, 0.15);
-            color: #facc15;
-            border: 1px solid rgba(234, 179, 8, 0.3);
+        .table-name {
+            font-size: 13px;
+            color: var(--text-main);
+            font-weight: 500;
         }
 
-        .status-occupied {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+        .status-badge {
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 2px;
+            font-weight: 700;
         }
 
-        .status-free {
-            background: rgba(34, 197, 94, 0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34, 197, 94, 0.3);
-        }
+        .status-badge.active { background: rgba(200, 168, 136, 0.2); color: var(--badge-active); border: 1px solid var(--badge-active); }
+        .status-badge.occupied { background: rgba(140, 90, 90, 0.2); color: #e88d8d; border: 1px solid #8c5a5a; }
+        .status-badge.free { background: rgba(90, 140, 106, 0.2); color: #8de8a8; border: 1px solid #5a8c6a; }
 
-        /* Evaluation Section Box */
-        .eval-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
+        /* Evaluation Section Card */
+        .eval-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             padding: 40px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            max-width: 900px;
-            margin: 0 auto;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
-        .eval-box h2 {
-            font-size: 24px;
-            font-family: serif;
+        .eval-header {
             text-align: center;
-            margin-bottom: 10px;
-            color: #ffffff;
+            margin-bottom: 30px;
+        }
+
+        .eval-header h2 {
+            font-size: 22px;
+            font-family: serif;
+            color: var(--cream);
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            font-weight: 400;
         }
 
-        .eval-box > p {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 30px;
+        .eval-header p {
+            color: var(--soft-gray);
+            font-size: 12px;
+        }
+
+        .eval-form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            letter-spacing: 1px;
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        label {
+            font-size: 11px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 8px;
+            color: var(--cream);
+            font-weight: 600;
         }
 
-        .form-control {
-            width: 100%;
-            background: rgba(11, 14, 20, 0.8);
-            border: 1px solid var(--border-gold);
-            color: #ffffff;
-            padding: 14px 18px;
-            font-size: 14px;
+        input, select, textarea {
+            background: var(--form-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 15px;
+            font-size: 13px;
+            border-radius: 2px;
             outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: border-color 0.3s;
+            width: 100%;
         }
 
-        .form-control:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--beige);
         }
 
-        select.form-control {
-            cursor: pointer;
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        select option {
+            background: #2b2b2b;
+            color: var(--text-main);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
         }
 
         .btn-submit {
-            background: var(--gold);
-            color: var(--bg-dark);
-            width: 100%;
-            padding: 16px;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            background: var(--beige);
+            color: var(--bg-color);
             border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: opacity 0.3s, transform 0.2s;
+            border-radius: 2px;
             margin-top: 10px;
         }
 
         .btn-submit:hover {
-            background: var(--gold-light);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
-        /* Scroll Reveal Animation Classes */
+        /* --- ANIMATION --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -414,12 +397,11 @@
         }
 
         @media (max-width: 768px) {
-            .eval-box {
-                padding: 20px;
-            }
-            .container {
-                padding: 15px 15px 80px 15px;
-            }
+            .teams-grid { grid-template-columns: 1fr; }
+            .eval-form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .eval-card { padding: 20px; }
+            .rep-hero h1 { font-size: 26px; }
         }
     </style>
 </head>
@@ -430,7 +412,7 @@
         <div class="nav-container">
             <a href="nakhil.html" class="logo">
                 Complexe Nakhil
-                <span>Restaurant & Complexe</span>
+                <span>RESTAURANT & COMPLEXE</span>
             </a>
             
             <div class="nav-links" id="navLinks">
@@ -443,143 +425,168 @@
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
-            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
-    <!-- Page Title -->
-    <section class="page-hero reveal">
-        <span>Organisation</span>
-        <h1>Répartition du Service</h1>
-        <p>Gestion des tables par serveur et espace d'évaluation client du Complexe Nakhil.</p>
-    </section>
-
     <!-- Main Container -->
-    <div class="container">
+    <div class="repartition-container">
+        
+        <!-- Hero Section -->
+        <section class="rep-hero reveal">
+            <span>Organisation</span>
+            <h1>Répartition du Service</h1>
+            <p>Gestion des tables par serveur et espace d'évaluation client du Complexe Nakhil.</p>
+        </section>
 
-        <!-- Section 1: Servers & Tables -->
+        <!-- Service Team Section -->
         <div class="reveal">
-            <div class="section-title">
+            <div class="section-title-sub">
                 <span>👤</span> Équipe de Service & Tables Attribuées
             </div>
 
-            <div class="servers-grid">
-                <!-- Server 1 -->
-                <div class="server-card">
-                    <div class="server-header">
+            <div class="teams-grid">
+                
+                <!-- Youssef -->
+                <div class="team-card">
+                    <div class="team-header">
                         <span>👤</span> Youssef (Serveur Principal)
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table VIP 01</span>
-                        <span class="status-badge status-active">Active</span>
+                        <span class="status-badge active">Active</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 02</span>
-                        <span class="status-badge status-occupied">Occupée</span>
+                        <span class="status-badge occupied">Occupée</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 03</span>
-                        <span class="status-badge status-free">Libre</span>
+                        <span class="status-badge free">Libre</span>
                     </div>
                 </div>
 
-                <!-- Server 2 -->
-                <div class="server-card">
-                    <div class="server-header">
+                <!-- Amine -->
+                <div class="team-card featured">
+                    <div class="team-header">
                         <span>👤</span> Amine (Serveur)
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 04</span>
-                        <span class="status-badge status-active">Active</span>
+                        <span class="status-badge active">Active</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 05</span>
-                        <span class="status-badge status-occupied">Occupée</span>
+                        <span class="status-badge occupied">Occupée</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 06</span>
-                        <span class="status-badge status-free">Libre</span>
+                        <span class="status-badge free">Libre</span>
                     </div>
                 </div>
 
-                <!-- Server 3 -->
-                <div class="server-card">
-                    <div class="server-header">
+                <!-- Mehdi -->
+                <div class="team-card">
+                    <div class="team-header">
                         <span>👤</span> Mehdi (Serveur)
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table Terrasse 01</span>
-                        <span class="status-badge status-active">Active</span>
+                        <span class="status-badge active">Active</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table Terrasse 02</span>
-                        <span class="status-badge status-occupied">Occupée</span>
+                        <span class="status-badge occupied">Occupée</span>
                     </div>
-                    <div class="table-row">
+                    <div class="table-row-item">
                         <span class="table-name">Table 09</span>
-                        <span class="status-badge status-free">Libre</span>
+                        <span class="status-badge free">Libre</span>
                     </div>
                 </div>
+
             </div>
         </div>
 
-        <!-- Section 2: Evaluation Form -->
-        <div class="eval-box reveal">
-            <h2><span>⭐</span> Évaluez votre Serveur & Service</h2>
-            <p>Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
-            
-            <form onsubmit="event.preventDefault(); alert('Merci pour votre évaluation !');">
-                <div class="form-group">
-                    <label>Numéro de votre Table :</label>
-                    <input type="text" class="form-control" placeholder="Ex: Table VIP 01 ou Table 04" required>
+        <!-- Evaluation Form Section -->
+        <div class="eval-card reveal">
+            <div class="eval-header">
+                <h2><span>⭐</span> Évaluez votre Serveur & Service</h2>
+                <p>Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
+            </div>
+
+            <form id="evalForm" onsubmit="handleEvaluation(event)">
+                <div class="eval-form-grid">
+                    
+                    <div class="form-group">
+                        <label for="tableNum">Numéro de Votre Table :</label>
+                        <input type="text" id="tableNum" placeholder="Ex: Table VIP 01 ou Table 04" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serverName">Nom du Serveur :</label>
+                        <input type="text" id="serverName" placeholder="Ex: Youssef" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rating">Note Générale :</label>
+                        <select id="rating" required>
+                            <option value="" disabled selected>Sélectionnez une note...</option>
+                            <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                            <option value="4">⭐⭐⭐⭐ (Très Bien)</option>
+                            <option value="3">⭐⭐⭐ (Bien)</option>
+                            <option value="2">⭐⭐ (Passable)</option>
+                            <option value="1">⭐ (À Améliorer)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="serviceType">Type de Service :</label>
+                        <select id="serviceType" required>
+                            <option value="" disabled selected>Choisissez...</option>
+                            <option value="restaurant">Restaurant</option>
+                            <option value="terrasse">Terrasse</option>
+                            <option value="evenementiel">Événementiel</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="comments">Commentaire ou Remarque (Optionnel) :</label>
+                        <textarea id="comments" placeholder="Partagez votre expérience avec nous..."></textarea>
+                    </div>
+
                 </div>
 
-                <div class="form-group">
-                    <label>Nom du Serveur :</label>
-                    <input type="text" class="form-control" placeholder="Ex: Youssef" required>
-                </div>
-
-                <div class="form-group">
-                    <label>Votre Note (Évaluation) :</label>
-                    <select class="form-control" required>
-                        <option value="" disabled selected>Sélectionnez une note...</option>
-                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
-                        <option value="4">⭐⭐⭐⭐ - Très Bien</option>
-                        <option value="3">⭐⭐⭐ - Satisfaisant</option>
-                        <option value="2">⭐⭐ - À améliorer</option>
-                        <option value="1">⭐ - Insuffisant</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn-submit">Envoyer l'évaluation</button>
+                <button type="submit" class="btn-submit">Envoyer l'Évaluation</button>
             </form>
         </div>
 
     </div>
 
-    <!-- Scripting -->
+    <!-- Script -->
     <script>
-        // Toggle mobile menu drawer
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('open');
         }
 
-        // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
 
-        // Scroll reveal animation
+        function handleEvaluation(e) {
+            e.preventDefault();
+            alert('Merci ! Votre évaluation a bien été enregistrée.');
+            document.getElementById('evalForm').reset();
+        }
+
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 80) {
                     reveals[i].classList.add('active');
                 }
             }
