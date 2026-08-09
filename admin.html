@@ -273,14 +273,15 @@
         }
 
         .badge {
-            padding: 4px 10px;
-            font-size: 10px;
+            padding: 6px 12px;
+            font-size: 11px;
             letter-spacing: 1px;
             text-transform: uppercase;
             border-radius: 2px;
-            background: rgba(212, 178, 140, 0.1);
+            background: var(--bg-dark);
             color: var(--wood-tone);
             border: 1px solid var(--border-gold);
+            outline: none;
         }
     </style>
 </head>
@@ -432,7 +433,13 @@
                             <td><span class="badge">${r.espace || 'Standard'}</span></td>
                             <td>${r.date || '-'} ${r.time || ''}</td>
                             <td>${r.persons || '-'} pers</td>
-                            <td><span class="badge" style="color: #72d982; border-color: rgba(114, 217, 130, 0.3);">Confirmé</span></td>
+                            <td>
+                                <select class="badge" style="cursor: pointer;" onchange="updateStatus('${r.id || r._id}', this.value)">
+                                    <option value="Confirmé" ${r.status === 'Confirmé' ? 'selected' : ''}>Confirmé</option>
+                                    <option value="En attente" ${r.status === 'En attente' || !r.status ? 'selected' : ''}>En attente</option>
+                                    <option value="Annulé" ${r.status === 'Annulé' ? 'selected' : ''}>Annulé</option>
+                                </select>
+                            </td>
                         </tr>
                     `).join('');
                 }
@@ -452,6 +459,25 @@
 
             } catch (err) {
                 console.error("Erreur lors du chargement des données admin", err);
+            }
+        }
+
+        async function updateStatus(id, newStatus) {
+            try {
+                const response = await fetch(`/api/admin/reservations/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                const result = await response.json();
+                if (!result.success) {
+                    alert('Erreur lors de la mise à jour du statut.');
+                }
+            } catch (err) {
+                console.error("Erreur:", err);
+                alert('Erreur de connexion au serveur.');
             }
         }
 
