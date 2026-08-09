@@ -31,7 +31,7 @@
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(11, 14, 20, 0.9);
+            background: rgba(11, 14, 20, 0.95);
             border-bottom: 1px solid var(--border-gold);
             position: sticky;
             top: 0;
@@ -71,18 +71,9 @@
         }
 
         .nav-links {
-            display: none;
+            display: flex;
             gap: 30px;
             align-items: center;
-        }
-
-        @media (min-width: 900px) {
-            .nav-links {
-                display: flex;
-            }
-            .mobile-menu-btn {
-                display: none !important;
-            }
         }
 
         .nav-links a {
@@ -142,10 +133,44 @@
             width: 40px;
             height: 40px;
             cursor: pointer;
-            display: flex;
+            display: none;
             align-items: center;
             justify-content: center;
             border-radius: 4px;
+        }
+
+        /* Responsive Mobile Menu Drawer Style */
+        @media (max-width: 900px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 73px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 14, 20, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-gold);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
+            }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .btn-reserve-top {
+                display: none; /* حيدناه الفوق باش يبان منظم فالقائمة المنسدلة */
+            }
         }
 
         /* --- HERO SECTION --- */
@@ -160,7 +185,6 @@
             overflow: hidden;
         }
 
-        /* Star Background Geometric watermark */
         .hero-bg-star {
             position: absolute;
             right: 5%;
@@ -253,7 +277,6 @@
             color: var(--gold);
         }
 
-        /* Hero Right Card Info */
         .hero-card-box {
             position: absolute;
             right: 40px;
@@ -377,7 +400,7 @@
             font-size: 15px;
         }
 
-        /* --- SECTION: AVIS (CE QU'ILS EN DISENT) --- */
+        /* --- SECTION: AVIS --- */
         .reviews-section {
             background-color: var(--bg-light);
             color: var(--text-dark);
@@ -445,7 +468,7 @@
             font-weight: 600;
         }
 
-        /* --- SECTION: CONTACT & MAP --- */
+        /* --- SECTION: CONTACT --- */
         .contact-section {
             background-color: var(--bg-dark);
             color: #ffffff;
@@ -545,7 +568,7 @@
             position: relative;
         }
 
-        /* Animation classes for scroll fade-in */
+        /* Animation classes */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -557,7 +580,6 @@
             transform: translateY(0);
         }
 
-        /* Mobile Responsive */
         @media (max-width: 900px) {
             .hero-card-box {
                 position: relative;
@@ -569,6 +591,7 @@
             .hero {
                 flex-direction: column;
                 align-items: flex-start;
+                padding: 40px 20px;
             }
             .history-container, .contact-container {
                 grid-template-columns: 1fr;
@@ -586,25 +609,22 @@
                 <span>Restaurant & Complexe</span>
             </a>
             
-            <div class="nav-links">
+            <div class="nav-links" id="navLinks">
                 <a href="nakhil.html" class="active">Accueil</a>
-                <a href="nakhil.html#histoire">L'Histoire</a>
+                <a href="#histoire">L'Histoire</a>
                 <a href="menu.html">Menu</a>
                 <a href="reservation.html">Réservation</a>
                 <a href="repartition.html">Service</a>
-                <a href="nakhil.html#contact">Contact</a>
+                <a href="#contact">Contact</a>
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">⋮</button>
+            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
-    <!-- Mobile Menu Overlay if needed or standard toggle -->
-
     <!-- Hero Section -->
     <section class="hero">
-        <!-- SVG Background Star Watermark -->
         <svg class="hero-bg-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
             <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#d4af37"/>
         </svg>
@@ -644,7 +664,6 @@
     <section id="histoire" class="history-section">
         <div class="history-container">
             <div class="history-image-box reveal">
-                <!-- Star Logo inside box -->
                 <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5">
                     <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
                 </svg>
@@ -725,8 +744,22 @@
         </div>
     </section>
 
-    <!-- Script for Scroll Reveal Animations -->
+    <!-- Scripting -->
     <script>
+        // Toggle mobile menu via 3 dots button
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
+
+        // Close menu when clicking any link on mobile
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // Scroll reveal animation
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
@@ -740,13 +773,7 @@
         }
 
         window.addEventListener('scroll', revealOnScroll);
-        // Trigger once on load
         window.addEventListener('load', revealOnScroll);
-
-        function toggleMenu() {
-            // Mobile menu logic if needed
-            alert('Menu mobile cliqué');
-        }
     </script>
 </body>
 </html>
