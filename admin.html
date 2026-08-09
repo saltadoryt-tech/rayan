@@ -142,7 +142,7 @@
             letter-spacing: 1.5px;
         }
 
-        /* Tables Container for Mobile Scrolling */
+        /* Tables Container */
         section.table-section {
             background: var(--bg-card);
             border: 1px solid var(--border-gold);
@@ -171,7 +171,7 @@
             border-collapse: collapse;
             text-align: left;
             font-size: 13px;
-            min-width: 500px;
+            min-width: 600px;
         }
 
         th, td {
@@ -203,7 +203,33 @@
         .badge.pending { background: rgba(217, 83, 79, 0.15); color: #f0ad4e; border: 1px solid rgba(240, 173, 78, 0.3); }
         .badge.confirmed { background: rgba(92, 184, 92, 0.15); color: var(--success); border: 1px solid rgba(92, 184, 92, 0.3); }
 
-        /* Mobile Responsive Breakpoint */
+        .btn-action {
+            padding: 6px 12px;
+            cursor: pointer;
+            border-radius: 2px;
+            font-size: 11px;
+            font-weight: 600;
+            transition: opacity 0.3s;
+        }
+
+        .btn-action:hover {
+            opacity: 0.8;
+        }
+
+        .btn-accept {
+            background: rgba(92, 184, 92, 0.2);
+            color: #5cb85c;
+            border: 1px solid #5cb85c;
+            margin-right: 5px;
+        }
+
+        .btn-reject {
+            background: rgba(217, 83, 79, 0.2);
+            color: #d9534f;
+            border: 1px solid #d9534f;
+        }
+
+        /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -279,7 +305,7 @@
 
         <!-- Reservations Table -->
         <section class="table-section" id="reservations">
-            <h2>Dernières Réservations</h2>
+            <h2>Gestion des Réservations</h2>
             <div class="table-responsive">
                 <table>
                     <thead>
@@ -289,6 +315,7 @@
                             <th>Date & Heure</th>
                             <th>Personnes</th>
                             <th>Statut</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -297,14 +324,22 @@
                             <td>+212 6 00 00 00 00</td>
                             <td>10/08/2026 — 20:30</td>
                             <td>4 Personnes</td>
-                            <td><span class="badge confirmed">Confirmé</span></td>
+                            <td><span class="badge confirmed" id="status-1">Confirmé</span></td>
+                            <td>
+                                <button class="btn-action btn-accept" onclick="updateStatus(1, 'confirmed')">Accepter</button>
+                                <button class="btn-action btn-reject" onclick="updateStatus(1, 'rejected')">Refuser</button>
+                            </td>
                         </tr>
                         <tr>
                             <td>Sara Benani</td>
                             <td>+212 6 11 22 33 44</td>
                             <td>11/08/2026 — 13:00</td>
                             <td>2 Personnes</td>
-                            <td><span class="badge pending">En attente</span></td>
+                            <td><span class="badge pending" id="status-2">En attente</span></td>
+                            <td>
+                                <button class="btn-action btn-accept" onclick="updateStatus(2, 'confirmed')">Accepter</button>
+                                <button class="btn-action btn-reject" onclick="updateStatus(2, 'rejected')">Refuser</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -340,5 +375,22 @@
         </section>
     </main>
 
+    <!-- Scripting for Actions -->
+    <script>
+        function updateStatus(id, action) {
+            const badge = document.getElementById('status-' + id);
+            if (action === 'confirmed') {
+                badge.className = 'badge confirmed';
+                badge.textContent = 'Confirmé';
+                alert('Réservation acceptée avec succès !');
+            } else if (action === 'rejected') {
+                badge.className = 'badge pending';
+                badge.style.background = 'rgba(217, 83, 79, 0.15)';
+                badge.style.color = '#d9534f';
+                badge.textContent = 'Refusé';
+                alert('Réservation refusée.');
+            }
+        }
+    </script>
 </body>
 </html>
