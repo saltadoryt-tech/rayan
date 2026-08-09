@@ -1,87 +1,468 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="fr" dir="ltr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>حجز طاولة أونلاين | Complexe Nakhil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>Réservation | Complexe Nakhil</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-        body { background-color: #090d16; color: #f3f4f6; direction: rtl; text-align: right; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
-        .back-btn { position: absolute; top: 20px; right: 30px; background: #d4af37; color: #090d16; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: 0.3s; }
-        .back-btn:hover { background: #f0c659; }
-        .form-container { width: 100%; max-width: 500px; background: #111827; padding: 30px; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        h1 { color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 28px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #d4af37; font-weight: bold; }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #374151; background: #1f2937; color: #fff; font-size: 16px; }
-        input:focus { outline: none; border-color: #d4af37; }
-        button { width: 100%; background: #d4af37; color: #090d16; padding: 14px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
-        button:hover { background: #f0c659; }
-        #responseMessage { text-align: center; margin-top: 15px; font-weight: bold; }
+        :root {
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --bg-dark: #0b0e14;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --text-dark: #111827;
+            --text-muted: #9ca3af;
+            --border-gold: rgba(212, 175, 55, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Background Watermark Star */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
+        header {
+            background: rgba(11, 14, 20, 0.95);
+            border-bottom: 1px solid var(--border-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(12px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: var(--gold);
+            font-weight: 700;
+            font-size: 18px;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            letter-spacing: 1px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-reserve-top {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 22px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .btn-reserve-top:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            font-size: 22px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+
+        /* Responsive Mobile Menu Drawer */
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 73px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 14, 20, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-gold);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
+            }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .btn-reserve-top {
+                display: none;
+            }
+        }
+
+        /* --- MAIN PAGE CONTENT --- */
+        .page-hero {
+            text-align: center;
+            padding: 60px 20px 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero span {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .page-hero h1 {
+            font-size: 38px;
+            font-family: serif;
+            font-weight: 400;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .page-hero p {
+            color: var(--text-muted);
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 30px 100px 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Reservation Box */
+        .reservation-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(11, 14, 20, 0.8);
+            border: 1px solid var(--border-gold);
+            color: #ffffff;
+            padding: 14px 18px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .btn-submit {
+            background: var(--gold);
+            color: var(--bg-dark);
+            width: 100%;
+            padding: 16px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold-light);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+            .reservation-box {
+                padding: 20px;
+            }
+            .container {
+                padding: 15px 15px 80px 15px;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <a href="nakhil.html" class="back-btn">← عودة للرئيسية</a>
+    <!-- Header -->
+    <header>
+        <div class="nav-container">
+            <a href="nakhil.html" class="logo">
+                Complexe Nakhil
+                <span>Restaurant & Complexe</span>
+            </a>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="nakhil.html">Accueil</a>
+                <a href="menu.html">Menu</a>
+                <a href="reservation.html" class="active">Réservation</a>
+                <a href="repartition.html">Service & Équipe</a>
+                <a href="nakhil.html#contact">Contact</a>
+                <a href="admin.html">Admin</a>
+            </div>
 
-    <div class="form-container">
-        <h1>حجز طاولة جديدة</h1>
-        <form id="reservationForm">
-            <div class="form-group">
-                <label for="name">الاسم الكامل:</label>
-                <input type="text" id="name" required placeholder="أدخل اسمك هنا">
-            </div>
-            <div class="form-group">
-                <label for="phone">رقم الهاتف:</label>
-                <input type="tel" id="phone" required placeholder="06XXXXXXXX">
-            </div>
-            <div class="form-group">
-                <label for="persons">عدد الأشخاص:</label>
-                <input type="number" id="persons" min="1" max="20" required value="2">
-            </div>
-            <div class="form-group">
-                <label for="dateTime">تاريخ ووقت الحجز:</label>
-                <input type="datetime-local" id="dateTime" required>
-            </div>
-            <button type="submit">تأكيد الحجز</button>
-        </form>
-        <p id="responseMessage"></p>
+            <a href="reservation.html" class="btn-reserve-top">Réserver</a>
+            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-hero reveal">
+        <span>Table & Espace</span>
+        <h1>Réservez Votre Table</h1>
+        <p>Vivez une expérience gastronomique unique au Complexe Nakhil. Réservez dès maintenant.</p>
+    </section>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="reservation-box reveal">
+            <form onsubmit="event.preventDefault(); alert('Votre demande de réservation a été envoyée avec succès !');">
+                <div class="form-grid">
+                    
+                    <!-- Nom complet -->
+                    <div class="form-group">
+                        <label>Nom Complet :</label>
+                        <input type="text" class="form-control" placeholder="Ex: Mohamed Alami" required>
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div class="form-group">
+                        <label>Numéro de Téléphone :</label>
+                        <input type="tel" class="form-control" placeholder="Ex: 06 00 00 00 00" required>
+                    </div>
+
+                    <!-- Date de réservation -->
+                    <div class="form-group">
+                        <label>Date :</label>
+                        <input type="date" class="form-control" required>
+                    </div>
+
+                    <!-- Heure -->
+                    <div class="form-group">
+                        <label>Heure :</label>
+                        <input type="time" class="form-control" required>
+                    </div>
+
+                    <!-- Nombre de personnes -->
+                    <div class="form-group">
+                        <label>Nombre de Personnes :</label>
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Sélectionnez...</option>
+                            <option value="1">1 Personne</option>
+                            <option value="2">2 Personnes</option>
+                            <option value="3">3 Personnes</option>
+                            <option value="4">4 Personnes</option>
+                            <option value="5">5 Personnes</option>
+                            <option value="6">6+ Personnes (Groupe)</option>
+                        </select>
+                    </div>
+
+                    <!-- Espace / Zone -->
+                    <div class="form-group">
+                        <label>Espace Souhaité :</label>
+                        <select class="form-control" required>
+                            <option value="" disabled selected>Choisissez un espace...</option>
+                            <option value="salle">Salle Principale</option>
+                            <option value="terrasse">Terrasse Extérieure</option>
+                            <option value="vip">Espace VIP</option>
+                        </select>
+                    </div>
+
+                    <!-- Remarques / Demandes spéciales -->
+                    <div class="form-group full-width">
+                        <label>Demandes Particulières (Optionnel) :</label>
+                        <textarea class="form-control" placeholder="Allergies, anniversaire, emplacement spécifique..."></textarea>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn-submit">Confirmer la Réservation</button>
+            </form>
+        </div>
     </div>
 
+    <!-- Scripting -->
     <script>
-        document.getElementById('reservationForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
+        // Toggle mobile menu drawer
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
+        }
 
-            const name = document.getElementById('name').value;
-            const phone = document.getElementById('phone').value;
-            const persons = document.getElementById('persons').value;
-            const dateTime = document.getElementById('dateTime').value;
-
-            const responseMessage = document.getElementById('responseMessage');
-
-            try {
-                const response = await fetch('http://localhost:3000/api/reservations', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, phone, persons, dateTime })
-                });
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    responseMessage.style.color = '#10b981';
-                    responseMessage.innerText = 'تم الحجز بنجاح! تم حفظ البيانات في السيرفر.';
-                    document.getElementById('reservationForm').reset();
-                } else {
-                    responseMessage.style.color = '#ef4444';
-                    responseMessage.innerText = 'حدث خطأ، يرجى المحاولة مرة أخرى.';
-                }
-            } catch (error) {
-                responseMessage.style.color = '#ef4444';
-                responseMessage.innerText = 'تعذر الاتصال بالسيرفر! تأكد أنه يعمل.';
-            }
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
         });
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
     </script>
 </body>
 </html>
