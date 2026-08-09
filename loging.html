@@ -1,51 +1,13 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>تسجيل دخول المدير | Complexe Nakhil</title>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
-        body { background-color: #090d16; color: #f3f4f6; direction: rtl; text-align: right; min-height: 100vh; display: flex; justify-content: center; align-items: center; }
-        .login-card { background: #111827; border: 2px solid #d4af37; padding: 40px; border-radius: 15px; width: 100%; max-width: 400px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
-        h1 { color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 24px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; color: #d4af37; font-weight: bold; }
-        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #374151; background: #1f2937; color: #fff; font-size: 16px; }
-        input:focus { outline: none; border-color: #d4af37; }
-        button { width: 100%; background: #d4af37; color: #090d16; padding: 12px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        button:hover { background: #f0c659; }
-        .error-msg { color: #ef4444; text-align: center; margin-top: 15px; font-weight: bold; }
-    </style>
-</head>
-<body>
-
-    <div class="login-card">
-        <h1>منطقة المدير (Manager)</h1>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="password">كلمة المرور السرية:</label>
-                <input type="password" id="password" required placeholder="أدخل كلمة السر هنا">
-            </div>
-            <button type="submit">دخول</button>
-        </form>
-        <p id="errorMsg" class="error-msg"></p>
-    </div>
-
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const pass = document.getElementById('password').value;
-            
-            // هنا تقدر تبدل كلمة السر كيما بغيتي (مثلاً درنا ليك هنا: nakhil2026)
-            if (pass === 'nakhil2026') {
-                localStorage.setItem('isManagerLoggedIn', 'true');
-                window.location.href = 'admin.html'; // إيلا كانت صحيحة يدخل للوحة التحكم
-            } else {
-                document.getElementById('errorMsginnerText = 'كلمة المرور خطأ! حاول مرة أخرى.';
-            }
-        });
-    </script>
-</body>
-</html>
+<script>
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const pass = document.getElementById('password').value;
+        
+        if (pass === 'nakhil2026') {
+            localStorage.setItem('isManagerLoggedIn', 'true');
+            window.location.href = 'admin.html';
+        } else {
+            document.getElementById('errorMsg').innerText = 'خطأ في كلمة المرور، أعد المحاولة';
+        }
+    });
+</script>
