@@ -3,128 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مطعم وكافيه النخيل | Complex Nakhil</title>
+    <title>مطعم وكافيه النخيل | تجربة الاستثنائية</title>
     <style>
-        /* التنسيقات الأساسية مع صورة الخلفية */
+        :root {
+            --primary-gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --dark-bg: #0b0f19;
+            --card-bg: rgba(30, 41, 59, 0.75);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
         body {
-            background-color: #0f172a;
-            color: #f8fafc;
-            font-family: Tahoma, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Tahoma', sans-serif;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            /* إضافة صورة الخلفية للمطعم مع طبقة تعتيم لكي يظهر الكلام بوضوح */
-            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop');
+            background-image: linear-gradient(rgba(11, 15, 25, 0.88), rgba(11, 15, 25, 0.92)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
             min-height: 100vh;
         }
 
-        header, nav {
+        /* شريط التنقل الفاخر */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 2px solid var(--primary-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            padding: 15px;
-            background: rgba(30, 41, 59, 0.95);
-            border-bottom: 2px solid #d4af37;
+            gap: 25px;
+            padding: 15px 20px;
             flex-wrap: wrap;
         }
 
         nav a {
-            color: #d4af37;
+            color: var(--primary-gold);
             text-decoration: none;
             font-weight: bold;
-            font-size: 16px;
+            font-size: 15px;
             transition: 0.3s;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary-gold);
+            transition: 0.3s;
+        }
+
+        nav a:hover::after {
+            width: 100%;
         }
 
         nav a:hover {
-            color: #f8fafc;
+            color: var(--text-main);
         }
 
-        .hero-section {
+        /* القسم الرئيسي (Hero) */
+        .hero {
             text-align: center;
-            padding: 70px 20px;
+            padding: 80px 20px 50px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--primary-gold);
+            padding: 8px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            display: inline-block;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         h1 {
-            color: #d4af37;
-            font-size: 32px;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+            color: var(--primary-gold);
+            font-size: 38px;
+            margin-bottom: 20px;
+            text-shadow: 0 3px 6px rgba(0,0,0,0.6);
+            line-height: 1.3;
         }
 
-        p {
-            color: #cbd5e1;
+        p.hero-desc {
+            color: var(--text-muted);
             font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 35px auto;
-            line-height: 1.6;
+            line-height: 1.7;
+            margin-bottom: 35px;
         }
 
-        .btn-container {
+        /* الأزرار العصرية */
+        .btn-group {
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             gap: 15px;
-            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
         }
 
         .btn {
-            background: #d4af37;
-            color: #0f172a;
-            padding: 14px 30px;
-            border-radius: 8px;
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: var(--dark-bg);
+            padding: 14px 32px;
+            border-radius: 12px;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
-            border: 2px solid #d4af37;
-            display: inline-block;
-            box-sizing: border-box;
-            text-align: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             transition: 0.3s;
-        }
-
-        .btn-outline {
-            background: rgba(15, 23, 42, 0.6);
-            color: #d4af37;
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.3);
+            display: inline-block;
+            border: none;
+            cursor: pointer;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            opacity: 0.95;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.5);
         }
 
-        /* تحسينات الهواتف المحمولة وتجنب تراكم العناصر */
+        .btn-outline {
+            background: rgba(30, 41, 59, 0.6);
+            color: var(--primary-gold);
+            border: 2px solid var(--primary-gold);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--text-main);
+        }
+
+        /* قسم المميزات (Features Grid) */
+        .features-container {
+            max-width: 1000px;
+            margin: 40px auto 70px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 16px;
+            padding: 30px 20px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            transition: 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .feature-icon {
+            font-size: 35px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .feature-title {
+            color: var(--primary-gold);
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* قسم معلومات إضافية وساعات العمل */
+        .info-section {
+            max-width: 900px;
+            margin: 0 auto 80px auto;
+            padding: 40px 30px;
+            background: var(--card-bg);
+            border-radius: 20px;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            text-align: center;
+            backdrop-filter: blur(15px);
+        }
+
+        .info-section h2 {
+            color: var(--primary-gold);
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .info-section p {
+            color: var(--text-muted);
+            font-size: 15px;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* التذييل (Footer) */
+        footer {
+            background: #080b12;
+            text-align: center;
+            padding: 25px;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        footer span {
+            color: var(--primary-gold);
+        }
+
+        /* تحسينات الهواتف الذكية (Responsive) */
         @media screen and (max-width: 768px) {
             nav {
                 flex-direction: column !important;
                 align-items: center !important;
-                gap: 10px !important;
+                gap: 12px !important;
                 padding: 15px 0 !important;
             }
 
-            nav a {
-                font-size: 15px !important;
-                margin: 3px 0 !important;
-            }
-
-            .hero-section {
-                padding: 40px 15px !important;
+            .hero {
+                padding: 40px 15px 30px 15px;
             }
 
             h1 {
-                font-size: 24px !important;
+                font-size: 28px !important;
             }
 
-            p {
+            p.hero-desc {
                 font-size: 15px !important;
             }
 
+            .btn-group {
+                flex-direction: column;
+                align-content: stretch;
+                padding: 0 20px;
+            }
+
             .btn {
-                width: 100% !important;
-                max-width: 280px !important;
+                width: 100%;
+                text-align: center;
+                box-sizing: border-box;
+            }
+
+            .features-container {
+                padding: 0 15px;
+            }
+
+            .info-section {
+                margin: 0 15px 50px 15px;
+                padding: 25px 15px;
             }
         }
     </style>
@@ -135,23 +286,60 @@
     <header>
         <nav>
             <a href="nakhil.html">الرئيسية</a>
-            <a href="menu.html">المنيو</a>
+            <a href="menu.html">المنيو الفاخر</a>
             <a href="reservation.html">حجز طاولة</a>
             <a href="avis.html">آراء الزبناء</a>
             <a href="loging.html">منطقة المدير</a>
         </nav>
     </header>
 
-    <!-- الواجهة الرئيسية مع الخلفية التصويرية الفاخرة -->
-    <main class="hero-section">
-        <h1>تجربة ذوقية في أبقى حلة</h1>
-        <p>نرحب بكم في مطعم وكافيه النخيل، حيث يلتقي التصميم الراقي بالأطباق الاستثنائية لخلق ذكريات لا تُنسى.</p>
+    <!-- الواجهة الرئيسية -->
+    <main class="hero">
+        <div class="badge">✨ أهلاً بكم في وجهتكم الراقيـة</div>
+        <h1>مطعم وكافيه النخيل.. حيث يصنع الذوق روعة المكان</h1>
+        <p class="hero-desc">
+            نقدم لكم تجربة استثنائية تمزج بين روعة التصميم المعماري الحديث، نكهات الأطباق العالمية والمشروبات المصنوعة بحرفية عالية لتخليد أجمل لحظاتكم.
+        </p>
         
-        <div class="btn-container">
-            <a href="menu.html" class="btn">استكشف المنيو الفاخر</a>
-            <a href="reservation.html" class="btn btn-outline">احجز طاولة الآن</a>
+        <div class="btn-group">
+            <a href="menu.html" class="btn">استكشف المنيو الفاخر 🍽️</a>
+            <a href="reservation.html" class="btn btn-outline">احجز طاولتك الآن 🪑</a>
         </div>
     </main>
+
+    <!-- أقسام المميزات الإبداعية -->
+    <div class="features-container">
+        <div class="feature-card">
+            <div class="feature-icon">🌿</div>
+            <div class="feature-title">أجواء هادئة وراقية</div>
+            <div class="feature-desc">تصميم داخلي ساحر يمنحكم الراحة التامة والاسترخاء رفقة العائلة والأصدقاء.</div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">☕</div>
+            <div class="feature-title">قهوة عالمية فاخرة</div>
+            <div class="feature-desc">نختار أجود حبوب البن لنقدم لكم أكواب قهوة بمذاق استثنائي لا يُنسى.</div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">👑</div>
+            <div class="feature-title">خدمة ممتازة 5 نجوم</div>
+            <div class="feature-desc">طاقم محترف يسهر على راحتكم وتلبية طلباتكم بكل حب واحترافية.</div>
+        </div>
+    </div>
+
+    <!-- قسم نبذة إضافية -->
+    <section class="info-section">
+        <h2>لماذا يختارنا الزبناء؟</h2>
+        <p>
+            نحن في مجمع النخيل لا نقتصر على تقديم الأطعمة فحسب، بل نصنع تجارب شعورية متكاملة تبدأ من حسن الاستقبال، مروراً بجودة المكونات الطازجة، وانتهاءً بالإضاءة الهادئة والموسيقا الراقية. زورونا لتكتشفوا بأنفسكم المعنى الحقيقي للضيافة الفاخرة.
+        </p>
+    </section>
+
+    <!-- التذييل -->
+    <footer>
+        <p>جميع الحقوق محفوظة &copy; 2026 <span>مطعم وكافيه النخيل (Complex Nakhil)</span></p>
+    </footer>
 
 </body>
 </html>
