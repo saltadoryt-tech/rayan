@@ -30,7 +30,11 @@ app.get('/admin', (req, res) => {
 
 // مسار استقبال الحجوزات من reservation.html
 app.post('/api/reservations', (req, res) => {
-    const newReservation = req.body;
+    const newReservation = {
+        id: Date.now().toString(), // إنشاء معرف فريد لكل حجز
+        status: 'En attente',     // الحالة الافتراضية عند الحجز
+        ...req.body
+    };
     reservationsList.push(newReservation); // حفظ الحجز في القائمة
     console.log("Nouvelle réservation reçue :", newReservation);
     res.json({ success: true, message: "Réservation enregistrée avec succès !" });
@@ -43,6 +47,21 @@ app.get('/api/admin/reservations', (req, res) => {
 
 app.get('/api/admin/reviews', (req, res) => {
     res.json(reviewsList);
+});
+
+// مسار تحديث حالة الحجز (تأكيد، انتظار، أو إلغاء)
+app.patch('/api/admin/reservations/:id', (req, res) => {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const reservation = reservationsList.find(r => r.id === id);
+    if (!reservation) {
+        return res.status(404).json({ success: false, message: 'Réservation non trouvée' });
+    }
+
+    reservation.status = status; // تحديث الحالة
+    console.log(`Réservation ${id} mise à jour au statut : ${status}`);
+    res.json({ success: true, data: reservation });
 });
 
 // تشغيل السيرفر محلياً أو على Railway على المنفذ المخصص
