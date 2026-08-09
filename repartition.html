@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Répartition & Service | Complexe Nakhil</title>
+    <style>
+        :root {
+            --primary-gold: #d4af37;
+            --dark-bg: #0b0f19;
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        body {
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            font-family: 'Tahoma', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background-image: linear-gradient(rgba(11, 15, 25, 0.9), rgba(11, 15, 25, 0.93)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+        }
+
+        /* شريط التنقل وزر 3 نقاط */
+        header {
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 2px solid var(--primary-gold);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            color: var(--primary-gold);
+            font-weight: bold;
+            font-size: 18px;
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            background: none;
+            border: 2px solid var(--primary-gold);
+            color: var(--primary-gold);
+            font-size: 20px;
+            padding: 5px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            display: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--primary-gold);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--text-main);
+        }
+
+        /* حاوية الصفحة */
+        .container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: var(--primary-gold);
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        p.subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            font-size: 16px;
+        }
+
+        .category-title {
+            color: var(--primary-gold);
+            font-size: 22px;
+            border-bottom: 2px solid var(--primary-gold);
+            padding-bottom: 8px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        /* شبكة السيرباوية والطوابل */
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 20px;
+        }
+
+        .staff-card {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .staff-name {
+            font-size: 18px;
+            font-weight: bold;
+            color: var(--primary-gold);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tables-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 15px 0;
+        }
+
+        .tables-list li {
+            background: rgba(15, 23, 42, 0.6);
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-bottom: 6px;
+            font-size: 14px;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .table-badge {
+            background: var(--primary-gold);
+            color: var(--dark-bg);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        /* قسم تقييم الزبناء */
+        .rating-section {
+            background: var(--card-bg);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin-top: 50px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        .rating-section h2 {
+            color: var(--primary-gold);
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-gold);
+            outline: none;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #d4af37, #aa8c2c);
+            color: var(--dark-bg);
+            padding: 12px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 15px;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .back-btn-container {
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        footer {
+            background: #080b12;
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 13px;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        footer span {
+            color: var(--primary-gold);
+        }
+
+        @media screen and (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            nav {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(15, 23, 42, 0.98);
+                border-bottom: 2px solid var(--primary-gold);
+                padding: 15px 0;
+                align-items: center;
+                gap: 15px;
+            }
+
+            nav.active {
+                display: flex;
+            }
+
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- شريط التنقل وزر 3 نقاط -->
+    <header>
+        <div class="nav-container">
+            <a href="nakhil.html" class="logo">🌿 Nakhil</a>
+            <button class="menu-toggle" onclick="toggleMenu()">⋮</button>
+            <nav id="navMenu">
+                <a href="nakhil.html">Accueil</a>
+                <a href="menu.html">Menu</a>
+                <a href="reservation.html">Réservation</a>
+                <a href="repartition.html">Service & Équipe</a>
+                <a href="avis.html">Avis</a>
+                <a href="loging.html">Admin</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>Répartition du Service</h1>
+        <p class="subtitle">Gestion des tables par serveur et espace d'évaluation client</p>
+
+        <!-- قسم السيرباوية والطوابل -->
+        <div class="category-title">👨‍🍳 Équipe de Service & Tables Attirées</div>
+        <div class="staff-grid">
+            <!-- سيرباي 1 -->
+            <div class="staff-card">
+                <div class="staff-name">👤 Youssef (Serveur Principal)</div>
+                <ul class="tables-list">
+                    <li><span>Table VIP 01</span> <span class="table-badge">Active</span></li>
+                    <li><span>Table 02</span> <span class="table-badge">Occupée</span></li>
+                    <li><span>Table 03</span> <span class="table-badge">Libre</span></li>
+                </ul>
+            </div>
+
+            <!-- سيرباي 2 -->
+            <div class="staff-card">
+                <div class="staff-name">👤 Amine (Serveur)</div>
+                <ul class="tables-list">
+                    <li><span>Table 04</span> <span class="table-badge">Active</span></li>
+                    <li><span>Table 05</span> <span class="table-badge">Occupée</span></li>
+                    <li><span>Table 06</span> <span class="table-badge">Libre</span></li>
+                </ul>
+            </div>
+
+            <!-- سيرباي 3 -->
+            <div class="staff-card">
+                <div class="staff-name">👤 Mehdi (Serveur)</div>
+                <ul class="tables-list">
+                    <li><span>Table Terrasse 01</span> <span class="table-badge">Active</span></li>
+                    <li><span>Table Terrasse 02</span> <span class="table-badge">Occupée</span></li>
+                    <li><span>Table 09</span> <span class="table-badge">Libre</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- قسم تقييم الزبناء حسب الطاولة -->
+        <div class="rating-section">
+            <h2>⭐ Évaluez votre Serveur & Service</h2>
+            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
+            
+            <form onsubmit="alert('Merci pour votre évaluation ! Votre avis a bien été envoyé.'); return false;">
+                <div class="form-group">
+                    <label>Numéro de votre Table :</label>
+                    <input type="text" class="form-control" placeholder="Ex: Table VIP 01 ou Table 04" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Nom du Serveur :</label>
+                    <input type="text" class="form-control" placeholder="Ex: Youssef" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre Note (Évaluation) :</label>
+                    <select class="form-control" required>
+                        <option value="">Sélectionnez une note...</option>
+                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
+                        <option value="4">⭐⭐⭐⭐ (Très Bien)</option>
+                        <option value="3">⭐⭐⭐ (Bien)</option>
+                        <option value="2">⭐⭐ (Moyen)</option>
+                        <option value="1">⭐ (À améliorer)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Votre Commentaire :</label>
+                    <textarea class="form-control" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Envoyer l'évaluation 🚀</button>
+            </form>
+        </div>
+
+        <div class="back-btn-container">
+            <a href="nakhil.html" class="btn">Retour à l'Accueil 🏠</a>
+        </div>
+    </div>
+
+    <footer>
+        <p>Tous droits réservés &copy; 2026 <span>Complexe Nakhil</span></p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('active');
+        }
+    </script>
+
+</body>
+</html>
