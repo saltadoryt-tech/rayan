@@ -1,97 +1,39 @@
 const express = require('express');
-const cors = require('cors');
-const path = require('path');
 const app = express();
+const path = require('path');
 
-const PORT = process.env.PORT || 3000;
-
+// Middleware باش نقراو البيانات اللي جاية من الـ Forms
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(cors());
 
-// قراءة الملفات الثابتة والصافحات
+// باش السيرفر يقرا كاع الملفات الثابتة (HTML, CSS, JS) الموجودة في نفس المجلد
 app.use(express.static(path.join(__dirname)));
 
-// مسارات صفحات الموقع (HTML)
+// مسار الصفحة الرئيسية
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'nakhil.html'));
 });
 
-app.get('/menu', (req, res) => {
-    res.sendFile(path.join(__dirname, 'menu.html'));
-});
-
-app.get('/reservation', (req, res) => {
-    res.sendFile(path.join(__dirname, 'reservation.html'));
-});
-
-app.get('/loging', (req, res) => {
+// مسار صفحة تسجيل الدخول (Login)
+app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'loging.html'));
 });
 
+// مسار لوحة التحكم (Admin Dashboard)
 app.get('/admin', (req, res) => {
     res.sendFile(path.join(__dirname, 'admin.html'));
 });
 
-app.get('/analytics', (req, res) => {
-    res.sendFile(path.join(__dirname, 'analytics.html'));
-});
-
-// الـ APIs ديال الحجوزات والإحصائيات
-let reservations = [];
-let reviews = [ 
-    { name: "أمير", rating: 5, comment: "!خدمة ممتازة وكلشي نقي", date: "2026-08-08" } 
-];
-
+// مسار استقبال الحجوزات (من reservation.html)
 app.post('/api/reservations', (req, res) => {
-    const { name, phone, persons, dateTime, items, totalPrice } = req.body;
-    const newOrder = {
-        name: name || "زبان غير محدد",
-        phone: phone || "لا يوجد",
-        persons: persons || 1,
-        dateTime: dateTime || new Date().toISOString(),
-        items: items || "حجز طاولة عادي",
-        totalPrice: Number(totalPrice) || 150,
-        status: 'قيد الانتظار'
-    };
-    reservations.push(newOrder);
-    res.status(201).json({ message: '!تمت الطلبية بنجاح', data: newOrder });
+    const newReservation = req.body;
+    console.log("Nouvelle réservation reçue :", newReservation);
+    // هنا تقدر تسجلها في Base de données أو تابلو فـ الذاكرة
+    res.json({ success: true, message: "Réservation enregistrée avec succès !" });
 });
 
-app.get('/api/reservations', (req, res) => {
-    res.json(reservations);
-});
-
-app.put('/api/reservations/:index', (req, res) => {
-    const index = req.params.index;
-    const { status } = req.body;
-    if (reservations[index]) {
-        reservations[index].status = status;
-        res.json({ message: 'تم التحديث بنجاح', data: reservations[index] });
-    } else {
-        res.status(404).json({ message: 'الطلب غير موجود' });
-    }
-});
-
-app.get('/api/stats', (req, res) => {
-    let totalRevenue = reservations
-        .filter(r => r.status === 'مقبول')
-        .reduce((sum, r) => sum + Number(r.totalPrice || 0), 0);
-
-    let totalReservations = reservations.length;
-    let acceptedReservations = reservations.filter(r => r.status === 'مقبول').length;
-
-    res.json({
-        totalRevenue,
-        totalReservations,
-        acceptedReservations,
-        orders: reservations
-    });
-});
-
-app.get('/api/reviews', (req, res) => {
-    res.json(reviews);
-});
-
+// تشغيل السيرفر على المنفذ المخصص من Railway أو 3000 محلياً
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
