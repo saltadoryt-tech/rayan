@@ -299,7 +299,7 @@
         </div>
     </div>
 
-    <!-- لوحة التحكم الحقيقية -->
+    <!-- لوحة التحكم -->
     <div id="adminDashboard">
         <header>
             <div class="nav-container">
@@ -322,7 +322,7 @@
                 <h1>Tableau de Bord & Activité</h1>
             </div>
 
-            <!-- بطاقات الإحصائيات (Chiffre d'affaires & Totaux) -->
+            <!-- بطاقات الإحصائيات -->
             <div class="stats-grid">
                 <div class="stat-box">
                     <span>Chiffre d'Affaires Estimé</span>
@@ -338,7 +338,7 @@
                 </div>
             </div>
 
-            <!-- جدول الحجوزات (Réservations) -->
+            <!-- جدول الحجوزات -->
             <div class="admin-section">
                 <h3>Gestion des Réservations</h3>
                 <table>
@@ -353,7 +353,6 @@
                         </tr>
                     </thead>
                     <tbody id="reservationsTableBody">
-                        <!-- غيتم تعبئة البيانات تلقائياً من الباك-إند -->
                         <tr>
                             <td colspan="6" style="text-align: center; padding: 20px;">Chargement des données...</td>
                         </tr>
@@ -361,7 +360,7 @@
                 </table>
             </div>
 
-            <!-- جدول آراء الزبناء (Avis) -->
+            <!-- جدول الآراء -->
             <div class="admin-section">
                 <h3>Avis & Retours des Clients</h3>
                 <table>
@@ -373,7 +372,6 @@
                         </tr>
                     </thead>
                     <tbody id="reviewsTableBody">
-                        <!-- غيتم تعبئة البيانات تلقائياً من الباك-إند -->
                         <tr>
                             <td colspan="3" style="text-align: center; padding: 20px;">Chargement des avis...</td>
                         </tr>
@@ -408,26 +406,50 @@
         function showDashboard() {
             document.getElementById('loginOverlay').style.display = 'none';
             document.getElementById('adminDashboard').style.display = 'block';
-            fetchAdminData(); // جلب البيانات الحقيقية فور الدخول
+            fetchAdminData();
         }
 
-        // دالة لجلب البيانات من سيرفر Node.js (تأكد من أن الـ Endpoints مقادين عندك في app.js أو server.js)
         async function fetchAdminData() {
             try {
-                // ملاحظة: إذا كنت عامل Endpoints محددين في Node.js، استبدل الرابط أدناه بالمسار الصحيح (مثلا /api/reservations)
-                // هنا درنا محاكاة لبيانات حية أو يمكنك ربطها بالروابط الخاصة بك
-                
-                // مثال لجلب الحجوزات والآراء (قم بتغيير الروابط حسب ما هو موجود في ملف الـ backend ديالك):
-                /*
-                const resResv = await fetch('/api/reservations');
+                const resResv = await fetch('/api/admin/reservations');
                 const reservations = await resResv.json();
-                
-                const resReviews = await fetch('/api/reviews');
-                const reviews = await resReviews.json();
-                */
 
-                // إذا بغيت نربط ليك الكود بدقة مع الـ Backend اللي صاوبتي بـ Node.js، عطيني غير الـ Routes اللي كاينين عندك في السيرفر (Express) وأنا نصاوب ليك جلب البيانات بالتمام!
-                
+                const resRev = await fetch('/api/admin/reviews');
+                const reviews = await resRev.json();
+
+                document.getElementById('statReservations').innerText = reservations.length;
+                document.getElementById('statReviews').innerText = reviews.length;
+                document.getElementById('statRevenue').innerText = (reservations.length * 150) + " MAD";
+
+                const resvBody = document.getElementById('reservationsTableBody');
+                if (reservations.length === 0) {
+                    resvBody.innerHTML = `<tr><td colspan="6" style="text-align: center; padding: 20px;">Aucune réservation pour le moment.</td></tr>`;
+                } else {
+                    resvBody.innerHTML = reservations.map(r => `
+                        <tr>
+                            <td><strong>${r.name || 'Client'}</strong></td>
+                            <td>${r.phone || '-'}</td>
+                            <td><span class="badge">${r.espace || 'Standard'}</span></td>
+                            <td>${r.date || '-'} ${r.time || ''}</td>
+                            <td>${r.persons || '-'} pers</td>
+                            <td><span class="badge" style="color: #72d982; border-color: rgba(114, 217, 130, 0.3);">Confirmé</span></td>
+                        </tr>
+                    `).join('');
+                }
+
+                const revBody = document.getElementById('reviewsTableBody');
+                if (reviews.length === 0) {
+                    revBody.innerHTML = `<tr><td colspan="3" style="text-align: center; padding: 20px;">Aucun avis reçu pour le moment.</td></tr>`;
+                } else {
+                    revBody.innerHTML = reviews.map(v => `
+                        <tr>
+                            <td><strong>${v.name || 'Anonyme'}</strong><br><span style="font-size:11px;">${v.ville || ''}</span></td>
+                            <td>${v.comment || ''}</td>
+                            <td>⭐ ${v.rating || '5'}/5</td>
+                        </tr>
+                    `).join('');
+                }
+
             } catch (err) {
                 console.error("Erreur lors du chargement des données admin", err);
             }
