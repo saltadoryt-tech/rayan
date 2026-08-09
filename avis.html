@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آراء الزبناء | Complexe Nakhil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { 
+            background-color: #090d16; 
+            color: #f3f4f6; 
+            direction: rtl; 
+            text-align: right; 
+            min-height: 100vh; 
+            padding: 80px 20px;
+        }
+
+        .back-btn { 
+            position: absolute; 
+            top: 20px; 
+            right: 30px; 
+            background: #d4af37; 
+            color: #090d16; 
+            padding: 10px 20px; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            font-weight: bold; 
+            transition: 0.3s; 
+        }
+        .back-btn:hover { background: #f0c659; }
+
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title span { color: #d4af37; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 14px; display: block; margin-bottom: 8px; }
+        .section-title h1 { font-size: 38px; font-weight: 900; color: #fff; }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .review-card {
+            background: #111827;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            transition: 0.3s;
+            position: relative;
+        }
+        .review-card:hover {
+            border-color: #d4af37;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .stars { color: #d4af37; margin-bottom: 15px; font-size: 18px; }
+        .review-text { color: #9ca3af; font-size: 15px; line-height: 1.6; margin-bottom: 20px; }
+        .client-info h3 { color: #fff; font-size: 18px; font-weight: 700; }
+        .client-info span { color: #6b7280; font-size: 13px; }
+    </style>
+</head>
+<body>
+
+    <a href="nakhil.html" class="back-btn">← عودة للرئيسية</a>
+
+    <div class="section-title">
+        <span>تجربتهم معنا</span>
+        <h2>آراء وشهادات زبنائنا الكرام</h2>
+    </div>
+
+    <div class="reviews-grid">
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"تجربة رائعة جداً! الطاجين كان في قمة اللذة والخدمة راقية بزاااف، الجو العام كيعطي راحة نفسية كبيرة."</p>
+            <div class="client-info">
+                <h3>عمر المنصوري</h3>
+                <span>زائر دائم</span>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"السرعة في تلبية الطلبات والتصميم ديال الكومبلكس فنان وخيالي. أحسن بلاصة ديزيت فيها العشية مع أصدقائي."</p>
+            <div class="client-info">
+                <h3>ياسين الإدريسي</h3>
+                <span>زائر جديد</span>
+            </div>
+        </div>
+
+        <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <p class="review-text">"الكوكتيلات والحلويات عندهم ما كايناش بحالها فالبلايص الأخرين، شكراً طاقم مطعم وكافيه النخيل على الاحترافية."</p>
+            <div class="client-info">
+                <h3>هند العمري</h3>
+                <span>زكاة التجربة</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة الأرباح وإدارة الطلبات | Complexe Nakhil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background-color: #090d16; color: #f3f4f6; direction: rtl; text-align: right; padding: 40px; min-height: 100vh; }
+        .top-nav { position: absolute; top: 20px; right: 30px; display: flex; gap: 10px; }
+        .nav-btn { background: #d4af37; color: #090d16; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .nav-btn:hover { background: #f0c659; }
+        h1 { color: #d4af37; text-align: center; margin-bottom: 30px; font-size: 30px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; max-width: 1100px; margin: 0 auto 30px auto; }
+        .stat-card { background: #111827; border: 2px solid #d4af37; padding: 25px; border-radius: 12px; text-align: center; }
+        .stat-card h3 { color: #9ca3af; font-size: 16px; margin-bottom: 10px; }
+        .stat-card p { color: #10b981; font-size: 28px; font-weight: bold; }
+        
+        .section-container { max-width: 1100px; margin: 0 auto 30px auto; background: #111827; border: 2px solid #d4af37; border-radius: 12px; padding: 25px; }
+        .section-container h2 { color: #d4af37; margin-bottom: 20px; font-size: 22px; border-bottom: 1px solid rgba(212,175,55,0.2); padding-bottom: 10px; }
+        
+        table { width: 100%; border-collapse: collapse; text-align: right; }
+        th, td { padding: 12px 15px; border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
+        th { background: #1f2937; color: #d4af37; }
+        td { color: #e5e7eb; }
+        .no-data { text-align: center; padding: 20px; color: #9ca3af; }
+        .badge-paid { background: #10b981; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 14px; }
+        .badge-pending { background: #f59e0b; color: #fff; padding: 4px 10px; border-radius: 6px; font-size: 14px; }
+        
+        .review-box { background: #1f2937; padding: 15px; border-radius: 8px; margin-bottom: 15px; border-right: 4px solid #d4af37; }
+        .review-header { display: flex; justify-content: space-between; margin-bottom: 5px; font-weight: bold; color: #d4af37; }
+    </style>
+</head>
+<body>
+
+    <!-- أزرار التنقل والحماية -->
+    <div class="top-nav">
+        <a href="admin.html" class="nav-btn">📋 لوحة الحجوزات</a>
+        <a href="nakhil.html" class="nav-btn">← عودة للرئيسية</a>
+    </div>
+
+    <h1>إحصائيات الأرباح، الطلبات (Commandes) والآراء</h1>
+
+    <!-- بطاقات الإحصائيات -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h3>إجمالي الأرباح المحصلة</h3>
+            <p id="totalRevenue">0 درهم</p>
+        </div>
+        <div class="stat-card">
+            <h3>الطلبات المقبولة</h3>
+            <p id="acceptedCount" style="color: #3b82f6;">0</p>
+        </div>
+        <div class="stat-card">
+            <h3>مجموع الطلبات الكلي</h3>
+            <p id="totalCount" style="color: #f59e0b;">0</p>
+        </div>
+    </div>
+
+    <!-- جدول الطلبات والمدفوعات -->
+    <div class="section-container">
+        <h2>سجل الطلبات والمدفوعات (شنو دار في الكوموند وشحال خلص)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم الزبون</th>
+                    <th>الطلبية (Commando)</th>
+                    <th>المبلغ المدفوع</th>
+                    <th>حالة الدفع / الطلب</th>
+                </tr>
+            </thead>
+            <tbody id="ordersTable">
+                <tr><td colspan="4" class="no-data">جاري تحميل الطلبات...</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- آراء الزبناء -->
+    <div class="section-container">
+        <h2>آراء الزبناء (Avis)</h2>
+        <div id="reviewsContainer">
+            <p class="no-data">جاري تحميل الآراء...</p>
+        </div>
+    </div>
+
+    <script>
+        // التحقق من الحماية
+        if (localStorage.getItem('isManagerLoggedIn') !== 'true') {
+            window.location.href = 'login.html';
+        }
+
+        async function fetchAnalytics() {
+            try {
+                const statsRes = await fetch('http://localhost:3000/api/stats');
+                const stats = await statsRes.json();
+
+                document.getElementById('totalRevenue').innerText = stats.totalRevenue + " درهم";
+                document.getElementById('acceptedCount').innerText = stats.acceptedReservations;
+                document.getElementById('totalCount').innerText = stats.totalReservations;
+
+                const ordersTable = document.getElementById('ordersTable');
+                
+                if (!stats.orders || stats.orders.length === 0) {
+                    ordersTable.innerHTML = `<tr><td colspan="4" class="no-data">لا توجد أي طلبات مسجلة حالياً.</td></tr>`;
+                } else {
+                    ordersTable.innerHTML = "";
+                    stats.orders.slice().reverse().forEach(order => {
+                        let statusBadge = order.status === 'مقبول' 
+                            ? `<span class="badge-paid">مقبول ✓</span>` 
+                            : `<span class="badge-pending">${order.status || 'قيد الانتظار'}</span>`;
+
+                        ordersTable.innerHTML += `
+                            <tr>
+                                <td><b>${order.name}</b><br><small style="color:#9ca3af;">${order.phone}</small></td>
+                                <td>${order.items || 'حجز عادي'} (أشخاص: ${order.persons})</td>
+                                <td style="color: #10b981; font-weight: bold;">${order.totalPrice || 150} درهم</td>
+                                <td>${statusBadge}</td>
+                            </tr>
+                        `;
+                    });
+                }
+
+                // جلب الآراء
+                const reviewsRes = await fetch('http://localhost:3000/api/reviews');
+                const reviews = await reviewsRes.json();
+                const reviewsContainer = document.getElementById('reviewsContainer');
+
+                if (!reviews || reviews.length === 0) {
+                    reviewsContainer.innerHTML = "<p class='no-data'>لا توجد أي آراء مسجلة حالياً.</p>";
+                } else {
+                    reviewsContainer.innerHTML = "";
+                    reviews.forEach(rev => {
+                        reviewsContainer.innerHTML += `
+                            <div class="review-box">
+                                <div class="review-header">
+                                    <span>${rev.name}</span>
+                                    <span>⭐ ${rev.rating}/5 (${rev.date || 'اليوم'})</span>
+                                </div>
+                                <p>${rev.comment}</p>
+                            </div>
+                        `;
+                    });
+                }
+
+            } catch (error) {
+                console.error("خطأ في جلب البيانات:", error);
+            }
+        }
+
+        fetchAnalytics();
+        setInterval(fetchAnalytics, 3000);
+    </script>
+</body>
+</html>

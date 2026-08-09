@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حجز طاولة أونلاين | Complexe Nakhil</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Tajawal', sans-serif; }
+        body { background-color: #090d16; color: #f3f4f6; direction: rtl; text-align: right; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; }
+        .back-btn { position: absolute; top: 20px; right: 30px; background: #d4af37; color: #090d16; padding: 10px 20px; border-radius: 30px; text-decoration: none; font-weight: bold; transition: 0.3s; }
+        .back-btn:hover { background: #f0c659; }
+        .form-container { width: 100%; max-width: 500px; background: #111827; padding: 30px; border-radius: 15px; border: 2px solid #d4af37; box-shadow: 0 10px 25px rgba(0,0,0,0.5); }
+        h1 { color: #d4af37; text-align: center; margin-bottom: 25px; font-size: 28px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #d4af37; font-weight: bold; }
+        input { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #374151; background: #1f2937; color: #fff; font-size: 16px; }
+        input:focus { outline: none; border-color: #d4af37; }
+        button { width: 100%; background: #d4af37; color: #090d16; padding: 14px; border: none; border-radius: 8px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        button:hover { background: #f0c659; }
+        #responseMessage { text-align: center; margin-top: 15px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <a href="nakhil.html" class="back-btn">← عودة للرئيسية</a>
+
+    <div class="form-container">
+        <h1>حجز طاولة جديدة</h1>
+        <form id="reservationForm">
+            <div class="form-group">
+                <label for="name">الاسم الكامل:</label>
+                <input type="text" id="name" required placeholder="أدخل اسمك هنا">
+            </div>
+            <div class="form-group">
+                <label for="phone">رقم الهاتف:</label>
+                <input type="tel" id="phone" required placeholder="06XXXXXXXX">
+            </div>
+            <div class="form-group">
+                <label for="persons">عدد الأشخاص:</label>
+                <input type="number" id="persons" min="1" max="20" required value="2">
+            </div>
+            <div class="form-group">
+                <label for="dateTime">تاريخ ووقت الحجز:</label>
+                <input type="datetime-local" id="dateTime" required>
+            </div>
+            <button type="submit">تأكيد الحجز</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        document.getElementById('reservationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const persons = document.getElementById('persons').value;
+            const dateTime = document.getElementById('dateTime').value;
+
+            const responseMessage = document.getElementById('responseMessage');
+
+            try {
+                const response = await fetch('http://localhost:3000/api/reservations', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, phone, persons, dateTime })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    responseMessage.style.color = '#10b981';
+                    responseMessage.innerText = 'تم الحجز بنجاح! تم حفظ البيانات في السيرفر.';
+                    document.getElementById('reservationForm').reset();
+                } else {
+                    responseMessage.style.color = '#ef4444';
+                    responseMessage.innerText = 'حدث خطأ، يرجى المحاولة مرة أخرى.';
+                }
+            } catch (error) {
+                responseMessage.style.color = '#ef4444';
+                responseMessage.innerText = 'تعذر الاتصال بالسيرفر! تأكد أنه يعمل.';
+            }
+        });
+    </script>
+</body>
+</html>
