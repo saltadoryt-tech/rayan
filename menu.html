@@ -6,13 +6,15 @@
     <title>Menu Gastronomique | Complexe Nakhil</title>
     <style>
         :root {
-            --bg-color: #2c3542;
-            --card-bg: rgba(35, 43, 54, 0.85);
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
+            /* New Color Palette based on your image */
+            --bg-color: #2b2b2b;          /* خلفية عامة فخمة وناعمة */
+            --card-bg: rgba(50, 50, 50, 0.85); /* لون البطاقات متناسق */
+            --beige: #c8a888;             /* البيج الدافئ من الصورة الأولى */
+            --cream: #f4dcc3;             /* الكريمي الفاتح من الصورة الثانية */
+            --soft-gray: #b8b3b6;         /* الرمادي الناعم من الصورة الثالثة */
             --text-main: #ffffff;
-            --text-muted: #a0aec0;
-            --border-color: rgba(212, 175, 55, 0.25);
+            --text-muted: #d1d1d1;
+            --border-color: rgba(200, 168, 136, 0.3);
         }
 
         * {
@@ -30,7 +32,7 @@
             position: relative;
         }
 
-        /* Watermark Star Background */
+        /* Watermark Background Glow */
         body::before {
             content: '';
             position: fixed;
@@ -39,14 +41,14 @@
             transform: translateY(-50%);
             width: 550px;
             height: 550px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(200, 168, 136, 0.05) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(44, 53, 66, 0.95);
+            background: rgba(35, 35, 35, 0.95);
             border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
@@ -64,7 +66,7 @@
         }
 
         .logo {
-            color: #ffffff;
+            color: var(--cream);
             font-weight: 700;
             font-size: 16px;
             text-decoration: none;
@@ -75,7 +77,7 @@
 
         .logo span {
             font-size: 9px;
-            color: var(--text-muted);
+            color: var(--soft-gray);
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
@@ -87,7 +89,7 @@
         }
 
         .nav-links a {
-            color: var(--text-muted);
+            color: var(--soft-gray);
             text-decoration: none;
             font-size: 12px;
             letter-spacing: 1.5px;
@@ -98,7 +100,7 @@
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: #ffffff;
+            color: var(--cream);
         }
 
         .nav-links a.active::after {
@@ -108,13 +110,13 @@
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--gold);
+            background-color: var(--beige);
         }
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
+            border: 1px solid var(--beige);
+            color: var(--cream);
             padding: 8px 20px;
             font-size: 11px;
             letter-spacing: 1.5px;
@@ -125,15 +127,15 @@
         }
 
         .btn-reserve-top:hover {
-            background: var(--gold);
-            border-color: var(--gold);
+            background: var(--beige);
+            border-color: var(--beige);
             color: var(--bg-color);
         }
 
         .mobile-menu-btn {
             background: none;
             border: 1px solid var(--border-color);
-            color: var(--gold);
+            color: var(--cream);
             font-size: 20px;
             width: 38px;
             height: 38px;
@@ -149,7 +151,7 @@
             .nav-links {
                 position: absolute;
                 top: 71px; left: 0; width: 100%;
-                background: rgba(44, 53, 66, 0.98);
+                background: rgba(35, 35, 35, 0.98);
                 flex-direction: column;
                 align-items: center;
                 padding: 25px 0; gap: 18px;
@@ -170,7 +172,7 @@
         }
 
         .menu-hero span {
-            color: var(--gold);
+            color: var(--beige);
             font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
@@ -182,12 +184,12 @@
             font-size: 36px;
             font-family: serif;
             font-weight: 400;
-            color: #ffffff;
+            color: var(--cream);
             margin-bottom: 12px;
         }
 
         .menu-hero p {
-            color: var(--text-muted);
+            color: var(--soft-gray);
             font-size: 13px;
             max-width: 600px;
             margin: 0 auto;
@@ -213,7 +215,7 @@
             gap: 10px;
             font-size: 16px;
             font-family: serif;
-            color: var(--gold);
+            color: var(--cream);
             margin-bottom: 20px;
             border-bottom: 1px solid var(--border-color);
             padding-bottom: 10px;
@@ -237,7 +239,7 @@
 
         .menu-item:hover {
             transform: translateY(-5px);
-            border-color: var(--gold);
+            border-color: var(--beige);
         }
 
         .item-header {
@@ -251,14 +253,14 @@
         .item-title {
             font-size: 16px;
             font-family: serif;
-            color: #ffffff;
+            color: var(--cream);
             font-weight: 500;
         }
 
         .item-price {
-            background: rgba(212, 175, 55, 0.12);
-            color: var(--gold);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: rgba(200, 168, 136, 0.15);
+            color: var(--cream);
+            border: 1px solid var(--border-color);
             padding: 4px 10px;
             font-size: 12px;
             font-weight: 700;
@@ -268,12 +270,12 @@
         }
 
         .item-desc {
-            color: var(--text-muted);
+            color: var(--soft-gray);
             font-size: 12px;
             line-height: 1.5;
         }
 
-        /* --- ANIMATIONS (Smooth Reveal) --- */
+        /* --- ANIMATIONS --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
