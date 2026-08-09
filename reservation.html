@@ -6,13 +6,16 @@
     <title>Réservation | Complexe Nakhil</title>
     <style>
         :root {
-            --gold: #d4af37;
-            --gold-light: #f3e5ab;
-            --bg-dark: #0b0e14;
-            --bg-card: rgba(17, 24, 39, 0.75);
-            --text-dark: #111827;
-            --text-muted: #9ca3af;
-            --border-gold: rgba(212, 175, 55, 0.3);
+            /* Color Palette */
+            --bg-color: #2b2b2b;
+            --card-bg: rgba(50, 50, 50, 0.85);
+            --form-bg: rgba(40, 40, 40, 0.95);
+            --beige: #c8a888;
+            --cream: #f4dcc3;
+            --soft-gray: #b8b3b6;
+            --text-main: #ffffff;
+            --text-muted: #d1d1d1;
+            --border-color: rgba(200, 168, 136, 0.3);
         }
 
         * {
@@ -23,35 +26,35 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: #ffffff;
+            background-color: var(--bg-color);
+            color: var(--text-main);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* Background Watermark Star */
+        /* Watermark Background Glow */
         body::before {
             content: '';
             position: fixed;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            right: 5%;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            background: radial-gradient(circle, rgba(200, 168, 136, 0.05) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(11, 14, 20, 0.95);
-            border-bottom: 1px solid var(--border-gold);
+            background: rgba(35, 35, 35, 0.95);
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
         }
 
         .nav-container {
@@ -64,69 +67,59 @@
         }
 
         .logo {
-            color: var(--gold);
+            color: var(--cream);
             font-weight: 700;
-            font-size: 18px;
+            font-size: 16px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            letter-spacing: 1px;
-            transition: transform 0.3s;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
+            letter-spacing: 0.5px;
         }
 
         .logo span {
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 2px;
+            font-size: 9px;
+            color: var(--soft-gray);
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 25px;
+            gap: 22px;
             align-items: center;
         }
 
         .nav-links a {
-            color: #d1d5db;
+            color: var(--soft-gray);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
-            padding-bottom: 4px;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: 0;
-            left: 0;
-            background-color: var(--gold);
-            transition: width 0.3s;
+            padding-bottom: 3px;
         }
 
         .nav-links a:hover, .nav-links a.active {
-            color: var(--gold);
+            color: var(--cream);
         }
 
-        .nav-links a:hover::after, .nav-links a.active::after {
+        .nav-links a.active::after {
+            content: '';
+            position: absolute;
             width: 100%;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--beige);
         }
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--gold);
-            color: var(--gold);
-            padding: 10px 22px;
-            font-size: 12px;
+            border: 1px solid var(--beige);
+            color: var(--cream);
+            padding: 8px 20px;
+            font-size: 11px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
@@ -135,182 +128,170 @@
         }
 
         .btn-reserve-top:hover {
-            background: var(--gold);
-            color: var(--bg-dark);
-            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            background: var(--beige);
+            border-color: var(--beige);
+            color: var(--bg-color);
         }
 
         .mobile-menu-btn {
             background: none;
-            border: 1px solid var(--border-gold);
-            color: var(--gold);
-            font-size: 22px;
-            width: 40px;
-            height: 40px;
+            border: 1px solid var(--border-color);
+            color: var(--cream);
+            font-size: 20px;
+            width: 38px;
+            height: 38px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
-            border-radius: 4px;
         }
 
-        /* Responsive Mobile Menu Drawer */
         @media (max-width: 992px) {
-            .nav-container {
-                padding: 15px 20px;
-            }
-            .mobile-menu-btn {
-                display: flex;
-            }
+            .nav-container { padding: 15px 20px; }
+            .mobile-menu-btn { display: flex; }
             .nav-links {
                 position: absolute;
-                top: 73px;
-                left: 0;
-                width: 100%;
-                background: rgba(11, 14, 20, 0.98);
+                top: 71px; left: 0; width: 100%;
+                background: rgba(35, 35, 35, 0.98);
                 flex-direction: column;
                 align-items: center;
-                padding: 30px 0;
-                gap: 20px;
-                border-bottom: 1px solid var(--border-gold);
-                transform: translateY(-150%);
-                opacity: 0;
-                transition: all 0.4s ease-in-out;
-                pointer-events: none;
+                padding: 25px 0; gap: 18px;
+                border-bottom: 1px solid var(--border-color);
+                transform: translateY(-150%); opacity: 0;
+                transition: all 0.4s ease-in-out; pointer-events: none;
             }
-            .nav-links.open {
-                transform: translateY(0);
-                opacity: 1;
-                pointer-events: auto;
-            }
-            .btn-reserve-top {
-                display: none;
-            }
+            .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+            .btn-reserve-top { display: none; }
         }
 
-        /* --- MAIN PAGE CONTENT --- */
-        .page-hero {
-            text-align: center;
-            padding: 60px 20px 30px 20px;
+        /* --- RESERVATION HERO & FORM --- */
+        .reservation-section {
+            max-width: 900px;
+            margin: 40px auto 80px auto;
+            padding: 0 20px;
             position: relative;
             z-index: 1;
         }
 
-        .page-hero span {
-            color: var(--gold);
-            font-size: 12px;
+        .res-hero {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .res-hero span {
+            color: var(--beige);
+            font-size: 10px;
             letter-spacing: 3px;
             text-transform: uppercase;
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
 
-        .page-hero h1 {
-            font-size: 38px;
+        .res-hero h1 {
+            font-size: 34px;
             font-family: serif;
             font-weight: 400;
+            color: var(--cream);
             margin-bottom: 10px;
-            color: #ffffff;
         }
 
-        .page-hero p {
-            color: var(--text-muted);
-            font-size: 14px;
-            letter-spacing: 0.5px;
-            max-width: 600px;
+        .res-hero p {
+            color: var(--soft-gray);
+            font-size: 13px;
+            max-width: 550px;
             margin: 0 auto;
+            line-height: 1.5;
         }
 
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 30px 100px 30px;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Reservation Box */
-        .reservation-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-gold);
+        /* Form Wrapper Card */
+        .res-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
             padding: 40px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
         }
 
         .form-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
 
         .form-group.full-width {
             grid-column: span 2;
         }
 
-        .form-group label {
-            display: block;
-            font-size: 12px;
-            letter-spacing: 1px;
+        label {
+            font-size: 11px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
-            color: var(--gold);
-            margin-bottom: 8px;
+            color: var(--cream);
+            font-weight: 600;
         }
 
-        .form-control {
-            width: 100%;
-            background: rgba(11, 14, 20, 0.8);
-            border: 1px solid var(--border-gold);
-            color: #ffffff;
-            padding: 14px 18px;
-            font-size: 14px;
+        input, select, textarea {
+            background: var(--form-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 12px 15px;
+            font-size: 13px;
+            border-radius: 2px;
             outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
+            transition: border-color 0.3s;
+            width: 100%;
         }
 
-        .form-control:focus {
-            border-color: var(--gold);
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--beige);
         }
 
-        select.form-control {
-            cursor: pointer;
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.3);
         }
 
-        textarea.form-control {
+        select option {
+            background: #2b2b2b;
+            color: var(--text-main);
+        }
+
+        textarea {
             resize: vertical;
-            min-height: 100px;
+            min-height: 110px;
         }
 
         .btn-submit {
-            background: var(--gold);
-            color: var(--bg-dark);
-            width: 100%;
-            padding: 16px;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            background: var(--beige);
+            color: var(--bg-color);
             border: none;
+            width: 100%;
+            padding: 15px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: opacity 0.3s, transform 0.2s;
+            border-radius: 2px;
             margin-top: 10px;
         }
 
         .btn-submit:hover {
-            background: var(--gold-light);
-            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
+            opacity: 0.9;
+            transform: translateY(-2px);
         }
 
-        /* Scroll Reveal Animation Classes */
+        /* --- ANIMATION --- */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -319,18 +300,10 @@
         }
 
         @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .form-group.full-width {
-                grid-column: span 1;
-            }
-            .reservation-box {
-                padding: 20px;
-            }
-            .container {
-                padding: 15px 15px 80px 15px;
-            }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .res-card { padding: 20px; }
+            .res-hero h1 { font-size: 26px; }
         }
     </style>
 </head>
@@ -341,7 +314,7 @@
         <div class="nav-container">
             <a href="nakhil.html" class="logo">
                 Complexe Nakhil
-                <span>Restaurant & Complexe</span>
+                <span>RESTAURANT & COMPLEXE</span>
             </a>
             
             <div class="nav-links" id="navLinks">
@@ -354,76 +327,66 @@
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
-            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
+            <button class="mobile-menu-btn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
-    <!-- Page Title -->
-    <section class="page-hero reveal">
-        <span>Table & Espace</span>
-        <h1>Réservez Votre Table</h1>
-        <p>Vivez une expérience gastronomique unique au Complexe Nakhil. Réservez dès maintenant.</p>
-    </section>
+    <!-- Reservation Section -->
+    <section class="reservation-section reveal">
+        <div class="res-hero">
+            <span>Table & Espace</span>
+            <h1>Réservez Votre Table</h1>
+            <p>Vivez une expérience gastronomique unique au Complexe Nakhil. Réservez dès maintenant.</p>
+        </div>
 
-    <!-- Main Container -->
-    <div class="container">
-        <div class="reservation-box reveal">
-            <form onsubmit="event.preventDefault(); alert('Votre demande de réservation a été envoyée avec succès !');">
+        <div class="res-card">
+            <form id="reservationForm" onsubmit="handleReservation(event)">
                 <div class="form-grid">
                     
-                    <!-- Nom complet -->
                     <div class="form-group">
-                        <label>Nom Complet :</label>
-                        <input type="text" class="form-control" placeholder="Ex: Mohamed Alami" required>
+                        <label for="fullName">Nom Complet :</label>
+                        <input type="text" id="fullName" placeholder="Ex: Mohamed Alami" required>
                     </div>
 
-                    <!-- Téléphone -->
                     <div class="form-group">
-                        <label>Numéro de Téléphone :</label>
-                        <input type="tel" class="form-control" placeholder="Ex: 06 00 00 00 00" required>
+                        <label for="phone">Numéro de Téléphone :</label>
+                        <input type="tel" id="phone" placeholder="Ex: 06 00 00 00 00" required>
                     </div>
 
-                    <!-- Date de réservation -->
                     <div class="form-group">
-                        <label>Date :</label>
-                        <input type="date" class="form-control" required>
+                        <label for="date">Date :</label>
+                        <input type="date" id="date" required>
                     </div>
 
-                    <!-- Heure -->
                     <div class="form-group">
-                        <label>Heure :</label>
-                        <input type="time" class="form-control" required>
+                        <label for="time">Heure :</label>
+                        <input type="time" id="time" required>
                     </div>
 
-                    <!-- Nombre de personnes -->
                     <div class="form-group">
-                        <label>Nombre de Personnes :</label>
-                        <select class="form-control" required>
+                        <label for="guests">Nombre de Personnes :</label>
+                        <select id="guests" required>
                             <option value="" disabled selected>Sélectionnez...</option>
                             <option value="1">1 Personne</option>
                             <option value="2">2 Personnes</option>
-                            <option value="3">3 Personnes</option>
                             <option value="4">4 Personnes</option>
-                            <option value="5">5 Personnes</option>
-                            <option value="6">6+ Personnes (Groupe)</option>
+                            <option value="6">6 Personnes ou plus</option>
                         </select>
                     </div>
 
-                    <!-- Espace / Zone -->
                     <div class="form-group">
-                        <label>Espace Souhaité :</label>
-                        <select class="form-control" required>
+                        <label for="space">Espace Souhaité :</label>
+                        <select id="space" required>
                             <option value="" disabled selected>Choisissez un espace...</option>
-                            <option value="salle">Salle Principale</option>
-                            <option value="terrasse">Terrasse Extérieure</option>
-                            <option value="vip">Espace VIP</option>
+                            <option value="principale">Salle Principale</option>
+                            <option value="terrasse">Terrasse Ombragée</option>
+                            <option value="evenementiel">Espace Événementiel</option>
                         </select>
                     </div>
 
-                    <!-- Remarques / Demandes spéciales -->
                     <div class="form-group full-width">
-                        <label>Demandes Particulières (Optionnel) :</label>
-                        <textarea class="form-control" placeholder="Allergies, anniversaire, emplacement spécifique..."></textarea>
+                        <label for="notes">Demandes Particulières (Optionnel) :</label>
+                        <textarea id="notes" placeholder="Allergies, anniversaire, emplacement spécifique..."></textarea>
                     </div>
 
                 </div>
@@ -431,31 +394,33 @@
                 <button type="submit" class="btn-submit">Confirmer la Réservation</button>
             </form>
         </div>
-    </div>
+    </section>
 
-    <!-- Scripting -->
+    <!-- Script -->
     <script>
-        // Toggle mobile menu drawer
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
             navLinks.classList.toggle('open');
         }
 
-        // Close menu on link click
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 document.getElementById('navLinks').classList.remove('open');
             });
         });
 
-        // Scroll reveal animation
+        function handleReservation(e) {
+            e.preventDefault();
+            alert('Votre demande de réservation a bien été envoyée avec succès !');
+            document.getElementById('reservationForm').reset();
+        }
+
         function revealOnScroll() {
             const reveals = document.querySelectorAll('.reveal');
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
+                if (elementTop < windowHeight - 80) {
                     reveals[i].classList.add('active');
                 }
             }
