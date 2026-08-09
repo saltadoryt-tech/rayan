@@ -3,343 +3,516 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Répartition & Service | Complexe Nakhil</title>
+    <title>Répartition du Service | Complexe Nakhil</title>
     <style>
         :root {
-            --primary-gold: #d4af37;
-            --dark-bg: #0b0f19;
-            --card-bg: rgba(30, 41, 59, 0.85);
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --gold: #d4af37;
+            --gold-light: #f3e5ab;
+            --bg-dark: #0b0e14;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --text-dark: #111827;
+            --text-muted: #9ca3af;
+            --border-gold: rgba(212, 175, 55, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
         }
 
         body {
-            background-color: var(--dark-bg);
-            color: var(--text-main);
-            font-family: 'Tahoma', sans-serif;
-            margin: 0;
-            padding: 0;
+            background-color: var(--bg-dark);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            background-image: linear-gradient(rgba(11, 15, 25, 0.9), rgba(11, 15, 25, 0.93)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1200&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
+            position: relative;
         }
 
-        /* شريط التنقل وزر 3 نقاط */
+        /* Background Watermark Star */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 2px solid var(--primary-gold);
+            background: rgba(11, 14, 20, 0.95);
+            border-bottom: 1px solid var(--border-gold);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 25px;
-            max-width: 1100px;
+            padding: 18px 40px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
         .logo {
-            color: var(--primary-gold);
-            font-weight: bold;
+            color: var(--gold);
+            font-weight: 700;
             font-size: 18px;
             text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            letter-spacing: 1px;
+            transition: transform 0.3s;
         }
 
-        .menu-toggle {
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo span {
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: color 0.3s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--gold);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .btn-reserve-top {
+            background: transparent;
+            border: 1px solid var(--gold);
+            color: var(--gold);
+            padding: 10px 22px;
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .btn-reserve-top:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .mobile-menu-btn {
             background: none;
-            border: 2px solid var(--primary-gold);
-            color: var(--primary-gold);
-            font-size: 20px;
-            padding: 5px 12px;
-            border-radius: 8px;
+            border: 1px solid var(--border-gold);
+            color: var(--gold);
+            font-size: 22px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             display: none;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
         }
 
-        nav {
-            display: flex;
-            gap: 20px;
+        /* Responsive Mobile Menu Drawer */
+        @media (max-width: 992px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
+            .nav-links {
+                position: absolute;
+                top: 73px;
+                left: 0;
+                width: 100%;
+                background: rgba(11, 14, 20, 0.98);
+                flex-direction: column;
+                align-items: center;
+                padding: 30px 0;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-gold);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
+            }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .btn-reserve-top {
+                display: none;
+            }
         }
 
-        nav a {
-            color: var(--primary-gold);
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 14px;
-            transition: 0.3s;
-        }
-
-        nav a:hover {
-            color: var(--text-main);
-        }
-
-        /* حاوية الصفحة */
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        h1 {
-            color: var(--primary-gold);
+        /* --- MAIN PAGE CONTENT --- */
+        .page-hero {
             text-align: center;
-            font-size: 32px;
+            padding: 60px 20px 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-hero h1 {
+            font-size: 38px;
+            font-family: serif;
+            font-weight: 400;
             margin-bottom: 10px;
+            color: #ffffff;
         }
 
-        p.subtitle {
-            text-align: center;
+        .page-hero p {
             color: var(--text-muted);
-            margin-bottom: 40px;
-            font-size: 16px;
+            font-size: 14px;
+            letter-spacing: 0.5px;
         }
 
-        .category-title {
-            color: var(--primary-gold);
-            font-size: 22px;
-            border-bottom: 2px solid var(--primary-gold);
-            padding-bottom: 8px;
-            margin-top: 40px;
-            margin-bottom: 20px;
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 30px 100px 30px;
+            position: relative;
+            z-index: 1;
         }
 
-        /* شبكة السيرباوية والطوابل */
-        .staff-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
-            gap: 20px;
-        }
-
-        .staff-card {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 14px;
-            padding: 20px;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .staff-name {
-            font-size: 18px;
-            font-weight: bold;
-            color: var(--primary-gold);
-            margin-bottom: 10px;
+        /* Section Title */
+        .section-title {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
+            font-size: 18px;
+            font-family: serif;
+            color: var(--gold);
+            margin-bottom: 25px;
         }
 
-        .tables-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 15px 0;
+        /* Servers Grid */
+        .servers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
 
-        .tables-list li {
-            background: rgba(15, 23, 42, 0.6);
-            padding: 8px 12px;
-            border-radius: 6px;
-            margin-bottom: 6px;
-            font-size: 14px;
-            color: var(--text-main);
+        .server-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .server-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--gold);
+        }
+
+        .server-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            padding-bottom: 12px;
+        }
+
+        .table-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            background: rgba(11, 14, 20, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            font-size: 13px;
         }
 
-        .table-badge {
-            background: var(--primary-gold);
-            color: var(--dark-bg);
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 12px;
+        .table-name {
+            color: #e5e7eb;
         }
 
-        /* قسم تقييم الزبناء */
-        .rating-section {
-            background: var(--card-bg);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            margin-top: 50px;
-            backdrop-filter: blur(10px);
-            text-align: center;
+        .status-badge {
+            padding: 4px 10px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-radius: 2px;
         }
 
-        .rating-section h2 {
-            color: var(--primary-gold);
+        .status-active {
+            background: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .status-occupied {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .status-free {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        /* Evaluation Section Box */
+        .eval-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .eval-box h2 {
             font-size: 24px;
-            margin-bottom: 15px;
+            font-family: serif;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .eval-box > p {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 13px;
+            margin-bottom: 30px;
         }
 
         .form-group {
             margin-bottom: 20px;
-            text-align: right;
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .form-group label {
             display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
             margin-bottom: 8px;
-            color: var(--text-muted);
-            font-size: 14px;
+            text-align: right;
         }
 
         .form-control {
             width: 100%;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 8px;
-            color: var(--text-main);
+            background: rgba(11, 14, 20, 0.8);
+            border: 1px solid var(--border-gold);
+            color: #ffffff;
+            padding: 14px 18px;
             font-size: 14px;
-            box-sizing: border-box;
+            outline: none;
+            transition: border-color 0.3s;
         }
 
         .form-control:focus {
-            border-color: var(--primary-gold);
-            outline: none;
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
         }
 
-        .btn {
-            background: linear-gradient(135deg, #d4af37, #aa8c2c);
-            color: var(--dark-bg);
-            padding: 12px 30px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: bold;
-            font-size: 15px;
+        select.form-control {
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: var(--gold);
+            color: var(--bg-dark);
+            width: 100%;
+            padding: 14px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             border: none;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
-            transition: 0.3s;
+            transition: all 0.3s;
+            margin-top: 10px;
         }
 
-        .btn:hover {
-            transform: translateY(-2px);
+        .btn-submit:hover {
+            background: var(--gold-light);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
         }
 
-        .back-btn-container {
-            text-align: center;
-            margin: 40px 0;
+        /* Scroll Reveal Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        footer {
-            background: #080b12;
-            text-align: center;
-            padding: 20px;
-            color: var(--text-muted);
-            font-size: 13px;
-            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        footer span {
-            color: var(--primary-gold);
-        }
-
-        @media screen and (max-width: 768px) {
-            .menu-toggle {
-                display: block;
+        @media (max-width: 768px) {
+            .eval-box {
+                padding: 20px;
             }
-
-            nav {
-                display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background: rgba(15, 23, 42, 0.98);
-                border-bottom: 2px solid var(--primary-gold);
-                padding: 15px 0;
-                align-items: center;
-                gap: 15px;
-            }
-
-            nav.active {
-                display: flex;
-            }
-
             .container {
-                padding: 0 15px;
+                padding: 15px 15px 80px 15px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- شريط التنقل وزر 3 نقاط -->
+    <!-- Header -->
     <header>
         <div class="nav-container">
-            <a href="nakhil.html" class="logo">🌿 Nakhil</a>
-            <button class="menu-toggle" onclick="toggleMenu()">⋮</button>
-            <nav id="navMenu">
+            <a href="nakhil.html" class="logo">
+                Complexe Nakhil
+                <span>Restaurant & Complexe</span>
+            </a>
+            
+            <div class="nav-links" id="navLinks">
                 <a href="nakhil.html">Accueil</a>
                 <a href="menu.html">Menu</a>
                 <a href="reservation.html">Réservation</a>
-                <a href="repartition.html">Service & Équipe</a>
-                <a href="avis.html">Avis</a>
-                <a href="loging.html">Admin</a>
-            </nav>
+                <a href="repartition.html" class="active">Service & Équipe</a>
+                <a href="nakhil.html#contact">Contact</a>
+                <a href="admin.html">Admin</a>
+            </div>
+
+            <a href="reservation.html" class="btn-reserve-top">Réserver</a>
+            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
-    <div class="container">
+    <!-- Page Title -->
+    <section class="page-hero reveal">
         <h1>Répartition du Service</h1>
-        <p class="subtitle">Gestion des tables par serveur et espace d'évaluation client</p>
+        <p>Gestion des tables par serveur et espace d'évaluation client</p>
+    </section>
 
-        <!-- قسم السيرباوية والطوابل -->
-        <div class="category-title">👨‍🍳 Équipe de Service & Tables Attirées</div>
-        <div class="staff-grid">
-            <!-- سيرباي 1 -->
-            <div class="staff-card">
-                <div class="staff-name">👤 Youssef (Serveur Principal)</div>
-                <ul class="tables-list">
-                    <li><span>Table VIP 01</span> <span class="table-badge">Active</span></li>
-                    <li><span>Table 02</span> <span class="table-badge">Occupée</span></li>
-                    <li><span>Table 03</span> <span class="table-badge">Libre</span></li>
-                </ul>
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- Section 1: Servers & Tables -->
+        <div class="reveal">
+            <div class="section-title">
+                <span>👤</span> Équipe de Service & Tables Attirées
             </div>
 
-            <!-- سيرباي 2 -->
-            <div class="staff-card">
-                <div class="staff-name">👤 Amine (Serveur)</div>
-                <ul class="tables-list">
-                    <li><span>Table 04</span> <span class="table-badge">Active</span></li>
-                    <li><span>Table 05</span> <span class="table-badge">Occupée</span></li>
-                    <li><span>Table 06</span> <span class="table-badge">Libre</span></li>
-                </ul>
-            </div>
+            <div class="servers-grid">
+                <!-- Server 1 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Youssef (Serveur Principal)
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table VIP 01</span>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 02</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 03</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
+                </div>
 
-            <!-- سيرباي 3 -->
-            <div class="staff-card">
-                <div class="staff-name">👤 Mehdi (Serveur)</div>
-                <ul class="tables-list">
-                    <li><span>Table Terrasse 01</span> <span class="table-badge">Active</span></li>
-                    <li><span>Table Terrasse 02</span> <span class="table-badge">Occupée</span></li>
-                    <li><span>Table 09</span> <span class="table-badge">Libre</span></li>
-                </ul>
+                <!-- Server 2 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Amine (Serveur)
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 04</span>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 05</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 06</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
+                </div>
+
+                <!-- Server 3 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Mehdi (Serveur)
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table Terrasse 01</span>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table Terrasse 02</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 09</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- قسم تقييم الزبناء حسب الطاولة -->
-        <div class="rating-section">
-            <h2>⭐ Évaluez votre Serveur & Service</h2>
-            <p style="color: var(--text-muted); font-size: 14px; margin-bottom: 25px;">Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
+        <!-- Section 2: Evaluation Form -->
+        <div class="eval-box reveal">
+            <h2><span>⭐</span> Évaluez votre Serveur & Service</h2>
+            <p>Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
             
-            <form onsubmit="alert('Merci pour votre évaluation ! Votre avis a bien été envoyé.'); return false;">
+            <form onsubmit="event.preventDefault(); alert('Merci pour votre évaluation !');">
                 <div class="form-group">
                     <label>Numéro de votre Table :</label>
                     <input type="text" class="form-control" placeholder="Ex: Table VIP 01 ou Table 04" required>
@@ -353,39 +526,51 @@
                 <div class="form-group">
                     <label>Votre Note (Évaluation) :</label>
                     <select class="form-control" required>
-                        <option value="">Sélectionnez une note...</option>
-                        <option value="5">⭐⭐⭐⭐⭐ (Excellent)</option>
-                        <option value="4">⭐⭐⭐⭐ (Très Bien)</option>
-                        <option value="3">⭐⭐⭐ (Bien)</option>
-                        <option value="2">⭐⭐ (Moyen)</option>
-                        <option value="1">⭐ (À améliorer)</option>
+                        <option value="" disabled selected>Sélectionnez une note...</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ - Très Bien</option>
+                        <option value="3">⭐⭐⭐ - Satisfaisant</option>
+                        <option value="2">⭐⭐ - À améliorer</option>
+                        <option value="1">⭐ - Insuffisant</option>
                     </select>
                 </div>
 
-                <div class="form-group">
-                    <label>Votre Commentaire :</label>
-                    <textarea class="form-control" rows="3" placeholder="Écrivez votre commentaire ici..."></textarea>
-                </div>
-
-                <button type="submit" class="btn">Envoyer l'évaluation 🚀</button>
+                <button type="submit" class="btn-submit">Envoyer l'évaluation</button>
             </form>
         </div>
 
-        <div class="back-btn-container">
-            <a href="nakhil.html" class="btn">Retour à l'Accueil 🏠</a>
-        </div>
     </div>
 
-    <footer>
-        <p>Tous droits réservés &copy; 2026 <span>Complexe Nakhil</span></p>
-    </footer>
-
+    <!-- Scripting -->
     <script>
+        // Toggle mobile menu drawer
         function toggleMenu() {
-            const nav = document.getElementById('navMenu');
-            nav.classList.toggle('active');
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('open');
         }
-    </script>
 
+        // Close menu on link click
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('navLinks').classList.remove('open');
+            });
+        });
+
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+    </script>
 </body>
 </html>
