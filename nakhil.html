@@ -6,15 +6,14 @@
     <title>Complexe Nakhil | Restaurant & Complexe</title>
     <style>
         :root {
-            /* Color Palette */
-            --bg-color: #2b2b2b;
-            --card-bg: rgba(50, 50, 50, 0.85);
-            --beige: #c8a888;
-            --cream: #f4dcc3;
-            --soft-gray: #b8b3b6;
-            --text-main: #ffffff;
-            --text-muted: #d1d1d1;
-            --border-color: rgba(200, 168, 136, 0.3);
+            /* Palette sombre et reposante pour les yeux (Dark Mode فخم) */
+            --bg-dark: #121413;
+            --bg-card: #1A1D1C;
+            --wood-tone: #D4B28C;
+            --gold-accent: #C5A059;
+            --text-light: #EAE5DE;
+            --text-muted: #9C948B;
+            --border-gold: rgba(197, 160, 89, 0.25);
         }
 
         * {
@@ -25,35 +24,20 @@
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: var(--text-light);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             overflow-x: hidden;
-            position: relative;
-        }
-
-        /* Watermark Background Glow */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 50%;
-            right: 5%;
-            transform: translateY(-50%);
-            width: 550px;
-            height: 550px;
-            background: radial-gradient(circle, rgba(200, 168, 136, 0.05) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
         }
 
         /* --- HEADER & NAVIGATION --- */
         header {
-            background: rgba(35, 35, 35, 0.95);
-            border-bottom: 1px solid var(--border-color);
+            background: rgba(18, 20, 19, 0.95);
+            border-bottom: 1px solid var(--border-gold);
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
         }
 
         .nav-container {
@@ -66,59 +50,69 @@
         }
 
         .logo {
-            color: var(--cream);
+            color: var(--wood-tone);
             font-weight: 700;
-            font-size: 16px;
+            font-size: 18px;
             text-decoration: none;
             display: flex;
             flex-direction: column;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            transition: transform 0.3s;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
         }
 
         .logo span {
-            font-size: 9px;
-            color: var(--soft-gray);
-            letter-spacing: 1.5px;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 2px;
             text-transform: uppercase;
         }
 
         .nav-links {
             display: flex;
-            gap: 22px;
+            gap: 25px;
             align-items: center;
         }
 
         .nav-links a {
-            color: var(--soft-gray);
+            color: var(--text-muted);
             text-decoration: none;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             transition: color 0.3s;
             position: relative;
-            padding-bottom: 3px;
+            padding-bottom: 4px;
         }
 
-        .nav-links a:hover, .nav-links a.active {
-            color: var(--cream);
-        }
-
-        .nav-links a.active::after {
+        .nav-links a::after {
             content: '';
             position: absolute;
-            width: 100%;
+            width: 0;
             height: 1px;
             bottom: 0;
             left: 0;
-            background-color: var(--beige);
+            background-color: var(--wood-tone);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--wood-tone);
+        }
+
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
         }
 
         .btn-reserve-top {
             background: transparent;
-            border: 1px solid var(--beige);
-            color: var(--cream);
-            padding: 8px 20px;
-            font-size: 11px;
+            border: 1px solid var(--wood-tone);
+            color: var(--wood-tone);
+            padding: 10px 22px;
+            font-size: 12px;
             letter-spacing: 1.5px;
             text-transform: uppercase;
             text-decoration: none;
@@ -127,180 +121,460 @@
         }
 
         .btn-reserve-top:hover {
-            background: var(--beige);
-            border-color: var(--beige);
-            color: var(--bg-color);
+            background: var(--wood-tone);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px rgba(212, 178, 140, 0.3);
         }
 
         .mobile-menu-btn {
             background: none;
-            border: 1px solid var(--border-color);
-            color: var(--cream);
-            font-size: 20px;
-            width: 38px;
-            height: 38px;
+            border: 1px solid var(--border-gold);
+            color: var(--wood-tone);
+            font-size: 22px;
+            width: 40px;
+            height: 40px;
             cursor: pointer;
             display: none;
             align-items: center;
             justify-content: center;
+            border-radius: 4px;
         }
 
-        @media (max-width: 992px) {
-            .nav-container { padding: 15px 20px; }
-            .mobile-menu-btn { display: flex; }
+        @media (max-width: 900px) {
+            .nav-container {
+                padding: 15px 20px;
+            }
+            .mobile-menu-btn {
+                display: flex;
+            }
             .nav-links {
                 position: absolute;
-                top: 71px; left: 0; width: 100%;
-                background: rgba(35, 35, 35, 0.98);
+                top: 73px;
+                left: 0;
+                width: 100%;
+                background: rgba(18, 20, 19, 0.98);
                 flex-direction: column;
                 align-items: center;
-                padding: 25px 0; gap: 18px;
-                border-bottom: 1px solid var(--border-color);
-                transform: translateY(-150%); opacity: 0;
-                transition: all 0.4s ease-in-out; pointer-events: none;
+                padding: 30px 0;
+                gap: 20px;
+                border-bottom: 1px solid var(--border-gold);
+                transform: translateY(-150%);
+                opacity: 0;
+                transition: all 0.4s ease-in-out;
+                pointer-events: none;
             }
-            .nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
-            .btn-reserve-top { display: none; }
+            .nav-links.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            .btn-reserve-top {
+                display: none;
+            }
         }
 
         /* --- HERO SECTION --- */
-        .hero-section {
-            max-width: 1300px;
-            margin: 60px auto;
-            padding: 0 40px;
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 50px;
-            align-items: center;
+        .hero {
             position: relative;
-            z-index: 1;
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            padding: 60px 40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            overflow: hidden;
         }
 
-        .hero-content span.sub-title {
-            color: var(--beige);
-            font-size: 10px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            display: block;
-            margin-bottom: 12px;
+        .hero-bg-star {
+            position: absolute;
+            right: 5%;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 550px;
+            height: 550px;
+            opacity: 0.05;
+            pointer-events: none;
+            animation: rotateStar 40s linear infinite;
         }
 
-        .hero-content h1 {
-            font-size: 48px;
-            font-family: serif;
-            font-weight: 400;
-            color: var(--cream);
-            line-height: 1.15;
-            margin-bottom: 20px;
+        @keyframes rotateStar {
+            from { transform: translateY(-50%) rotate(0deg); }
+            to { transform: translateY(-50%) rotate(360deg); }
         }
 
-        .hero-content h1 em {
-            font-style: italic;
-            color: var(--beige);
+        .hero-content {
+            max-width: 600px;
+            z-index: 2;
         }
 
-        .hero-content p {
-            color: var(--soft-gray);
+        .arabic-subtitle {
+            color: var(--wood-tone);
             font-size: 14px;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 25px;
+            font-family: serif;
+        }
+
+        .hero h1 em {
+            color: var(--wood-tone);
+            font-style: italic;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 15px;
             line-height: 1.6;
-            margin-bottom: 30px;
-            max-width: 550px;
+            margin-bottom: 40px;
         }
 
         .hero-buttons {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
         }
 
         .btn-primary {
-            background: var(--beige);
-            color: var(--bg-color);
-            border: 1px solid var(--beige);
-            padding: 12px 25px;
-            font-size: 11px;
-            font-weight: 700;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            background: var(--wood-tone);
+            color: var(--bg-dark);
+            padding: 14px 28px;
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 1px;
             text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s;
             border-radius: 2px;
-            transition: opacity 0.3s;
         }
 
         .btn-primary:hover {
-            opacity: 0.9;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(212, 178, 140, 0.3);
         }
 
-        .btn-secondary {
+        .btn-outline {
             background: transparent;
-            color: var(--cream);
-            border: 1px solid var(--border-color);
-            padding: 12px 25px;
-            font-size: 11px;
+            border: 1px solid rgba(212, 178, 140, 0.4);
+            color: var(--text-light);
+            padding: 14px 28px;
             font-weight: 600;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
             text-decoration: none;
+            text-transform: uppercase;
+            transition: all 0.3s;
             border-radius: 2px;
-            transition: border-color 0.3s;
         }
 
-        .btn-secondary:hover {
-            border-color: var(--beige);
+        .btn-outline:hover {
+            border-color: var(--wood-tone);
+            color: var(--wood-tone);
+            background: rgba(212, 178, 140, 0.05);
         }
 
-        /* Hero Right Card (Info Card with Star Background Effect) */
-        .hero-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            padding: 35px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
-            position: relative;
+        .hero-card-box {
+            position: absolute;
+            right: 40px;
+            bottom: 60px;
+            width: 360px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 30px;
+            backdrop-filter: blur(15px);
+            z-index: 3;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            transition: transform 0.4s;
         }
 
-        .hero-card h3 {
-            font-size: 16px;
+        .hero-card-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--wood-tone);
+        }
+
+        .hero-card-box h3 {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 15px;
             font-family: serif;
-            color: var(--cream);
-            margin-bottom: 12px;
         }
 
-        .hero-card p {
-            color: var(--soft-gray);
-            font-size: 12px;
-            line-height: 1.6;
+        .hero-card-box p {
+            color: var(--text-muted);
+            font-size: 13px;
+            line-height: 1.5;
             margin-bottom: 25px;
         }
 
-        .card-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            border-top: 1px solid var(--border-color);
+        .hero-stats {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
             padding-top: 20px;
-            text-align: center;
         }
 
-        .stat-box .num {
-            font-size: 18px;
+        .stat-item h4 {
+            color: var(--wood-tone);
+            font-size: 20px;
             font-family: serif;
-            color: var(--cream);
-            font-weight: 600;
             margin-bottom: 4px;
         }
 
-        .stat-box .label {
-            font-size: 9px;
+        .stat-item span {
+            font-size: 10px;
+            color: var(--text-muted);
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--soft-gray);
         }
 
-        /* --- ANIMATION --- */
+        /* --- SECTION: NOTRE HISTOIRE --- */
+        .history-section {
+            background-color: #171A19;
+            color: var(--text-light);
+            padding: 100px 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-top: 1px solid var(--border-gold);
+        }
+
+        .history-container {
+            max-width: 1200px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .history-image-box {
+            background: var(--bg-card);
+            height: 450px;
+            border: 1px solid var(--border-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .history-image-box::before {
+            content: '';
+            position: absolute;
+            inset: 15px;
+            border: 1px solid rgba(212, 178, 140, 0.15);
+        }
+
+        .history-content span {
+            color: var(--wood-tone);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .history-content h2 {
+            font-size: 38px;
+            font-family: serif;
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .history-content p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .history-signature {
+            font-family: serif;
+            font-style: italic;
+            color: var(--wood-tone);
+            margin-top: 30px;
+            font-size: 15px;
+        }
+
+        /* --- SECTION: AVIS --- */
+        .reviews-section {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            padding: 80px 40px 120px 40px;
+            text-align: center;
+            border-top: 1px solid var(--border-gold);
+        }
+
+        .reviews-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .reviews-container > span {
+            color: var(--wood-tone);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .reviews-container h2 {
+            font-size: 36px;
+            font-family: serif;
+            margin-bottom: 60px;
+            font-weight: 400;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .review-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border: 1px solid var(--border-gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .review-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            border-color: var(--wood-tone);
+        }
+
+        .review-card p {
+            font-style: italic;
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .review-author {
+            font-size: 12px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--wood-tone);
+            font-weight: 600;
+        }
+
+        /* --- SECTION: CONTACT --- */
+        .contact-section {
+            background-color: #171A19;
+            color: var(--text-light);
+            padding: 100px 40px;
+            border-top: 1px solid var(--border-gold);
+        }
+
+        .contact-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .contact-info span {
+            color: var(--wood-tone);
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .contact-info h2 {
+            font-size: 38px;
+            font-family: serif;
+            font-weight: 400;
+            margin-bottom: 20px;
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+        }
+
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .contact-row {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .contact-row strong {
+            color: var(--wood-tone);
+            min-width: 100px;
+        }
+
+        .contact-row span {
+            color: var(--text-muted);
+            margin: 0;
+            letter-spacing: 0;
+            text-transform: none;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border: 1px solid var(--border-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--wood-tone);
+            text-decoration: none;
+            font-size: 12px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: var(--wood-tone);
+            color: var(--bg-dark);
+        }
+
+        .contact-map-box {
+            background: var(--bg-card);
+            height: 420px;
+            border: 1px solid var(--border-gold);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Animation classes */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.active {
@@ -308,9 +582,22 @@
             transform: translateY(0);
         }
 
-        @media (max-width: 992px) {
-            .hero-section { grid-template-columns: 1fr; padding: 0 20px; margin: 40px auto; }
-            .hero-content h1 { font-size: 36px; }
+        @media (max-width: 900px) {
+            .hero-card-box {
+                position: relative;
+                right: auto;
+                bottom: auto;
+                width: 100%;
+                margin-top: 40px;
+            }
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px 20px;
+            }
+            .history-container, .contact-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -321,59 +608,146 @@
         <div class="nav-container">
             <a href="nakhil.html" class="logo">
                 Complexe Nakhil
-                <span>RESTAURANT & COMPLEXE</span>
+                <span>Restaurant & Complexe</span>
             </a>
             
             <div class="nav-links" id="navLinks">
                 <a href="nakhil.html" class="active">Accueil</a>
-                <a href="nakhil.html#histoire">L'Histoire</a>
+                <a href="#histoire">L'Histoire</a>
                 <a href="menu.html">Menu</a>
                 <a href="reservation.html">Réservation</a>
                 <a href="repartition.html">Service</a>
-                <a href="nakhil.html#contact">Contact</a>
-                <a href="admin.html" style="color: var(--beige);">Admin</a>
+                <a href="#contact">Contact</a>
+                <a href="admin.html" style="color: var(--wood-tone);">Admin</a>
             </div>
 
             <a href="reservation.html" class="btn-reserve-top">Réserver</a>
-            <button class="mobile-menu-btn" onclick="toggleMenu()">⋮</button>
+            <button class="mobile-menu-btn" id="menuBtn" onclick="toggleMenu()">⋮</button>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero-section reveal">
-        <div class="hero-content">
-            <span class="sub-title">مجمع النخيل</span>
+    <section class="hero">
+        <svg class="hero-bg-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="0.5">
+            <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" fill="#D4B28C"/>
+        </svg>
+
+        <div class="hero-content reveal">
+            <div class="arabic-subtitle">مجمع النخيل</div>
             <h1>La gastronomie se vit <em>en grand.</em></h1>
             <p>Un complexe où restaurant, terrasse et salle de fêtes se rencontrent — cuisine marocaine et internationale, palmiers, lumière dorée et soirées animées.</p>
             
             <div class="hero-buttons">
                 <a href="reservation.html" class="btn-primary">Réserver une table</a>
-                <a href="menu.html" class="btn-secondary">Découvrir le menu</a>
+                <a href="menu.html" class="btn-outline">Découvrir le menu</a>
             </div>
         </div>
 
-        <div class="hero-card">
+        <div class="hero-card-box reveal">
             <h3>Un lieu, tout un art de recevoir</h3>
             <p>Salle principale, terrasse ombragée de palmiers et espace événementiel avec orchestre live — Complexe Nakhil réunit gastronomie et convivialité sous un même toit doré.</p>
-            
-            <div class="card-stats">
-                <div class="stat-box">
-                    <div class="num">3</div>
-                    <div class="label">Espaces Uniques</div>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <h4>3</h4>
+                    <span>Espaces uniques</span>
                 </div>
-                <div class="stat-box">
-                    <div class="num">4.8</div>
-                    <div class="label">Note Moyenne</div>
+                <div class="stat-item">
+                    <h4>4.8</h4>
+                    <span>Note moyenne</span>
                 </div>
-                <div class="stat-box">
-                    <div class="num">300</div>
-                    <div class="label">Places Assises</div>
+                <div class="stat-item">
+                    <h4>300</h4>
+                    <span>Places assises</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Script -->
+    <!-- Histoire Section -->
+    <section id="histoire" class="history-section">
+        <div class="history-container">
+            <div class="history-image-box reveal">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#D4B28C" stroke-width="1.5">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+            </div>
+            <div class="history-content reveal">
+                <span>Notre Histoire</span>
+                <h2>Un complexe pensé pour rassembler.</h2>
+                <p>Complexe Nakhil est né d'une idée simple : offrir un lieu où l'on peut déjeuner en famille, dîner entre amis sur la terrasse aux palmiers, ou célébrer une occasion avec orchestre live et salle décorée.</p>
+                <p>Cuisine marocaine généreuse, service attentif, marbre et dorures — chaque détail du complexe est pensé pour que chaque visite ait sa propre ambiance.</p>
+                <div class="history-signature">— L'équipe Complexe Nakhil</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section class="reviews-section">
+        <div class="reviews-container">
+            <span class="reveal">Nos Hôtes</span>
+            <h2 class="reveal">Ce qu'ils en disent</h2>
+            
+            <div class="reviews-grid">
+                <div class="review-card reveal">
+                    <p>"La pastilla à elle seule vaut le détour. La terrasse aux palmiers, le service, tout est pensé avec soin."</p>
+                    <div class="review-author">Nadia — Casablanca</div>
+                </div>
+                <div class="review-card reveal">
+                    <p>"On sent le soin apporté à chaque plat. Le tajine aux pruneaux et l'ambiance de la terrasse, un souvenir impérissable."</p>
+                    <div class="review-author">Karim — Rabat</div>
+                </div>
+                <div class="review-card reveal">
+                    <p>"Un accueil chaleureux et une salle superbe pour les grandes occasions. Nous y avons fêté un anniversaire inoubliable."</p>
+                    <div class="review-author">Sophie — Marrakech</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section">
+        <div class="contact-container">
+            <div class="contact-info reveal">
+                <span>Contact</span>
+                <h2>Venez nous voir</h2>
+                <p>Le complexe se trouve aux portes de la ville, entouré de palmiers et facilement accessible en voiture.</p>
+                
+                <div class="contact-details">
+                    <div class="contact-row">
+                        <strong>Adresse</strong>
+                        <span>Route principale, Maroc</span>
+                    </div>
+                    <div class="contact-row">
+                        <strong>Téléphone</strong>
+                        <span>+212 5 35 00 00 00</span>
+                    </div>
+                    <div class="contact-row">
+                        <strong>E-mail</strong>
+                        <span>contact@complexenakhil.ma</span>
+                    </div>
+                    <div class="contact-row">
+                        <strong>Horaires</strong>
+                        <span>Mardi — Dimanche, 12h30 à 23h30<br>Fermé le lundi</span>
+                    </div>
+                </div>
+
+                <div class="social-icons">
+                    <a href="#" class="social-btn">IG</a>
+                    <a href="#" class="social-btn">FB</a>
+                    <a href="#" class="social-btn">WA</a>
+                </div>
+            </div>
+
+            <div class="contact-map-box reveal">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#D4B28C" stroke-width="1.5" style="margin-bottom: 15px;">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/>
+                </svg>
+                <span style="font-size: 13px; color: var(--text-muted); letter-spacing: 1px;">Carte interactive disponible sur demande</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripting -->
     <script>
         function toggleMenu() {
             const navLinks = document.getElementById('navLinks');
@@ -391,7 +765,8 @@
             for (let i = 0; i < reveals.length; i++) {
                 const windowHeight = window.innerHeight;
                 const elementTop = reveals[i].getBoundingClientRect().top;
-                if (elementTop < windowHeight - 80) {
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
                     reveals[i].classList.add('active');
                 }
             }
