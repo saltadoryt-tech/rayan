@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Menu Gastronomique | Complexe Nakhil</title>
+    <title>Répartition du Service | Complexe Nakhil</title>
     <style>
         :root {
             --gold: #d4af37;
@@ -188,24 +188,24 @@
             }
         }
 
-        /* --- MAIN MENU CONTENT --- */
-        .menu-hero {
+        /* --- MAIN PAGE CONTENT --- */
+        .page-hero {
             text-align: center;
             padding: 60px 20px 30px 20px;
             position: relative;
             z-index: 1;
         }
 
-        .menu-hero span {
+        .page-hero span {
             color: var(--gold);
-            font-size: 12px;
+            font-size: 11px;
             letter-spacing: 3px;
             text-transform: uppercase;
             display: block;
             margin-bottom: 10px;
         }
 
-        .menu-hero h1 {
+        .page-hero h1 {
             font-size: 38px;
             font-family: serif;
             font-weight: 400;
@@ -213,7 +213,7 @@
             color: #ffffff;
         }
 
-        .menu-hero p {
+        .page-hero p {
             color: var(--text-muted);
             font-size: 14px;
             letter-spacing: 0.5px;
@@ -221,7 +221,7 @@
             margin: 0 auto;
         }
 
-        .menu-container {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 20px 30px 100px 30px;
@@ -229,77 +229,176 @@
             z-index: 1;
         }
 
-        .menu-category {
-            margin-bottom: 50px;
-        }
-
-        .category-title {
+        /* Section Title */
+        .section-title {
             display: flex;
             align-items: center;
-            gap: 15px;
-            font-size: 20px;
+            gap: 12px;
+            font-size: 18px;
             font-family: serif;
             color: var(--gold);
             margin-bottom: 25px;
-            border-bottom: 1px solid var(--border-gold);
-            padding-bottom: 10px;
         }
 
-        .menu-grid {
+        /* Servers Grid */
+        .servers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
         }
 
-        .menu-item-card {
+        .server-card {
             background: var(--bg-card);
             border: 1px solid var(--border-gold);
             padding: 25px;
             backdrop-filter: blur(12px);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
         }
 
-        .menu-item-card:hover {
+        .server-card:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
             box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
         }
 
-        .item-header {
+        .server-header {
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 12px;
-            gap: 15px;
-        }
-
-        .item-header h3 {
-            font-size: 17px;
+            align-items: center;
+            gap: 10px;
+            font-size: 16px;
             font-weight: 500;
             font-family: serif;
-            color: #ffffff;
+            color: var(--gold);
+            margin-bottom: 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
         }
 
-        .item-price {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--gold);
+        .table-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(11, 14, 20, 0.8);
             border: 1px solid var(--border-gold);
-            padding: 6px 12px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
             font-size: 13px;
+        }
+
+        .table-name {
+            color: #e5e7eb;
+        }
+
+        .status-badge {
+            padding: 4px 10px;
+            font-size: 11px;
             font-weight: 700;
-            letter-spacing: 1px;
-            white-space: nowrap;
+            letter-spacing: 0.5px;
             border-radius: 2px;
         }
 
-        .item-desc {
+        .status-active {
+            background: rgba(234, 179, 8, 0.15);
+            color: #facc15;
+            border: 1px solid rgba(234, 179, 8, 0.3);
+        }
+
+        .status-occupied {
+            background: rgba(239, 68, 68, 0.15);
+            color: #f87171;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        .status-free {
+            background: rgba(34, 197, 94, 0.15);
+            color: #4ade80;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        /* Evaluation Section Box */
+        .eval-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            padding: 40px;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .eval-box h2 {
+            font-size: 24px;
+            font-family: serif;
+            text-align: center;
+            margin-bottom: 10px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 400;
+        }
+
+        .eval-box > p {
+            text-align: center;
             color: var(--text-muted);
             font-size: 13px;
-            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 8px;
+        }
+
+        .form-control {
+            width: 100%;
+            background: rgba(11, 14, 20, 0.8);
+            border: 1px solid var(--border-gold);
+            color: #ffffff;
+            padding: 14px 18px;
+            font-size: 14px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+        }
+
+        select.form-control {
+            cursor: pointer;
+        }
+
+        .btn-submit {
+            background: var(--gold);
+            color: var(--bg-dark);
+            width: 100%;
+            padding: 16px;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: var(--gold-light);
+            box-shadow: 0 5px 20px rgba(212, 175, 55, 0.4);
         }
 
         /* Scroll Reveal Animation Classes */
@@ -315,11 +414,11 @@
         }
 
         @media (max-width: 768px) {
-            .menu-container {
-                padding: 15px 15px 80px 15px;
+            .eval-box {
+                padding: 20px;
             }
-            .menu-grid {
-                grid-template-columns: 1fr;
+            .container {
+                padding: 15px 15px 80px 15px;
             }
         }
     </style>
@@ -336,9 +435,9 @@
             
             <div class="nav-links" id="navLinks">
                 <a href="nakhil.html">Accueil</a>
-                <a href="menu.html" class="active">Menu</a>
+                <a href="menu.html">Menu</a>
                 <a href="reservation.html">Réservation</a>
-                <a href="repartition.html">Service & Équipe</a>
+                <a href="repartition.html" class="active">Service & Équipe</a>
                 <a href="nakhil.html#contact">Contact</a>
                 <a href="admin.html">Admin</a>
             </div>
@@ -348,94 +447,112 @@
         </div>
     </header>
 
-    <!-- Hero Title -->
-    <section class="menu-hero reveal">
-        <span>La Carte</span>
-        <h1>Notre Menu Gastronomique</h1>
-        <p>Découvrez notre sélection raffinée de Tacos, Pizzas Artisanales, Burgers et Spécialités du Complexe Nakhil.</p>
+    <!-- Page Title -->
+    <section class="page-hero reveal">
+        <span>Organisation</span>
+        <h1>Répartition du Service</h1>
+        <p>Gestion des tables par serveur et espace d'évaluation client du Complexe Nakhil.</p>
     </section>
 
-    <!-- Menu Content -->
-    <div class="menu-container">
+    <!-- Main Container -->
+    <div class="container">
 
-        <!-- Category 1: Tacos & Fast-Food -->
-        <div class="menu-category reveal">
-            <div class="category-title">
-                <span>🍽️</span> Tacos & Fast-Food
+        <!-- Section 1: Servers & Tables -->
+        <div class="reveal">
+            <div class="section-title">
+                <span>👤</span> Équipe de Service & Tables Attribuées
             </div>
-            <div class="menu-grid">
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Tacos Dinde</h3>
-                        <span class="item-price">45 DH</span>
+
+            <div class="servers-grid">
+                <!-- Server 1 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Youssef (Serveur Principal)
                     </div>
-                    <p class="item-desc">Émincé de dinde tendre, sauce andalouse maison, frites croustillantes et gratin de fromage fondu.</p>
+                    <div class="table-row">
+                        <span class="table-name">Table VIP 01</span>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 02</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 03</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
                 </div>
 
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Tacos Mixte (Dinde & Viande)</h3>
-                        <span class="item-price">55 DH</span>
+                <!-- Server 2 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Amine (Serveur)
                     </div>
-                    <p class="item-desc">Le meilleur des deux mondes : dinde marinée et viande hachée, sauce algérienne et cheddar.</p>
+                    <div class="table-row">
+                        <span class="table-name">Table 04</span>
+                        <span class="status-badge status-active">Active</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 05</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 06</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
                 </div>
 
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Burger Gourmet Nakhil</h3>
-                        <span class="item-price">60 DH</span>
+                <!-- Server 3 -->
+                <div class="server-card">
+                    <div class="server-header">
+                        <span>👤</span> Mehdi (Serveur)
                     </div>
-                    <p class="item-desc">Steak pur bœuf juteux, pain brioché artisanal, oignons caramélisés et double cheddar.</p>
-                </div>
-
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Panini Poulet Fromage</h3>
-                        <span class="item-price">35 DH</span>
+                    <div class="table-row">
+                        <span class="table-name">Table Terrasse 01</span>
+                        <span class="status-badge status-active">Active</span>
                     </div>
-                    <p class="item-desc">Pain panini croustillant, poulet aux épices douces, mozzarella fondante et sauce spéciale.</p>
+                    <div class="table-row">
+                        <span class="table-name">Table Terrasse 02</span>
+                        <span class="status-badge status-occupied">Occupée</span>
+                    </div>
+                    <div class="table-row">
+                        <span class="table-name">Table 09</span>
+                        <span class="status-badge status-free">Libre</span>
+                    </div>
                 </div>
             </div>
         </div>
 
-        <!-- Category 2: Pizzas Artisanales -->
-        <div class="menu-category reveal">
-            <div class="category-title">
-                <span>🍕</span> Pizzas Artisanales
-            </div>
-            <div class="menu-grid">
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Pizza Dinde Fumée</h3>
-                        <span class="item-price">65 DH</span>
-                    </div>
-                    <p class="item-desc">Base sauce tomate italienne, mozzarella fraîche, morceaux de dinde fumée et origan.</p>
+        <!-- Section 2: Evaluation Form -->
+        <div class="eval-box reveal">
+            <h2><span>⭐</span> Évaluez votre Serveur & Service</h2>
+            <p>Chers clients, votre avis compte énormément pour améliorer notre qualité de service.</p>
+            
+            <form onsubmit="event.preventDefault(); alert('Merci pour votre évaluation !');">
+                <div class="form-group">
+                    <label>Numéro de votre Table :</label>
+                    <input type="text" class="form-control" placeholder="Ex: Table VIP 01 ou Table 04" required>
                 </div>
 
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Pizza 4 Saisons</h3>
-                        <span class="item-price">70 DH</span>
-                    </div>
-                    <p class="item-desc">Divisée en quatre saveurs : champignons, artichauts, olives, dinde et poivrons grillés.</p>
+                <div class="form-group">
+                    <label>Nom du Serveur :</label>
+                    <input type="text" class="form-control" placeholder="Ex: Youssef" required>
                 </div>
 
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Pizza Fruits de Mer</h3>
-                        <span class="item-price">85 DH</span>
-                    </div>
-                    <p class="item-desc">Crevettes généreuses, calamars frais, moules, persillade à l'ail et fromage fondant.</p>
+                <div class="form-group">
+                    <label>Votre Note (Évaluation) :</label>
+                    <select class="form-control" required>
+                        <option value="" disabled selected>Sélectionnez une note...</option>
+                        <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                        <option value="4">⭐⭐⭐⭐ - Très Bien</option>
+                        <option value="3">⭐⭐⭐ - Satisfaisant</option>
+                        <option value="2">⭐⭐ - À améliorer</option>
+                        <option value="1">⭐ - Insuffisant</option>
+                    </select>
                 </div>
 
-                <div class="menu-item-card">
-                    <div class="item-header">
-                        <h3>Pizza Margherita Royale</h3>
-                        <span class="item-price">50 DH</span>
-                    </div>
-                    <p class="item-desc">La classique indémodable : sauce tomate maison, mozzarella de bufflonne et basilic frais.</p>
-                </div>
-            </div>
+                <button type="submit" class="btn-submit">Envoyer l'évaluation</button>
+            </form>
         </div>
 
     </div>
