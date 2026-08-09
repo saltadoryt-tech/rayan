@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مطعم وكافيه النخيل | Complex Nakhil</title>
     <style>
-        /* التنسيقات الأساسية */
+        /* التنسيقات الأساسية مع صورة الخلفية */
         body {
             background-color: #0f172a;
             color: #f8fafc;
@@ -13,6 +13,12 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            /* إضافة صورة الخلفية للمطعم مع طبقة تعتيم لكي يظهر الكلام بوضوح */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
         }
 
         header, nav {
@@ -20,7 +26,7 @@
             justify-content: center;
             gap: 20px;
             padding: 15px;
-            background: #1e293b;
+            background: rgba(30, 41, 59, 0.95);
             border-bottom: 2px solid #d4af37;
             flex-wrap: wrap;
         }
@@ -30,6 +36,7 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
+            transition: 0.3s;
         }
 
         nav a:hover {
@@ -38,19 +45,22 @@
 
         .hero-section {
             text-align: center;
-            padding: 50px 20px;
+            padding: 70px 20px;
         }
 
         h1 {
             color: #d4af37;
             font-size: 32px;
+            margin-bottom: 15px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         p {
             color: #cbd5e1;
             font-size: 18px;
             max-width: 600px;
-            margin: 0 auto 30px auto;
+            margin: 0 auto 35px auto;
+            line-height: 1.6;
         }
 
         .btn-container {
@@ -63,7 +73,7 @@
         .btn {
             background: #d4af37;
             color: #0f172a;
-            padding: 12px 30px;
+            padding: 14px 30px;
             border-radius: 8px;
             text-decoration: none;
             font-weight: bold;
@@ -72,18 +82,21 @@
             display: inline-block;
             box-sizing: border-box;
             text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
 
         .btn-outline {
-            background: transparent;
+            background: rgba(15, 23, 42, 0.6);
             color: #d4af37;
         }
 
         .btn:hover {
-            opacity: 0.9;
+            transform: translateY(-2px);
+            opacity: 0.95;
         }
 
-        /* تحسينات الهواتف المحمولة وتجنب تراكم الكلمات أو العناصر */
+        /* تحسينات الهواتف المحمولة وتجنب تراكم العناصر */
         @media screen and (max-width: 768px) {
             nav {
                 flex-direction: column !important;
@@ -98,7 +111,7 @@
             }
 
             .hero-section {
-                padding: 30px 15px !important;
+                padding: 40px 15px !important;
             }
 
             h1 {
@@ -112,11 +125,6 @@
             .btn {
                 width: 100% !important;
                 max-width: 280px !important;
-            }
-
-            .container, header, main, footer {
-                width: 100% !important;
-                box-sizing: border-box;
             }
         }
     </style>
@@ -134,7 +142,7 @@
         </nav>
     </header>
 
-    <!-- الواجهة الرئيسية -->
+    <!-- الواجهة الرئيسية مع الخلفية التصويرية الفاخرة -->
     <main class="hero-section">
         <h1>تجربة ذوقية في أبقى حلة</h1>
         <p>نرحب بكم في مطعم وكافيه النخيل، حيث يلتقي التصميم الراقي بالأطباق الاستثنائية لخلق ذكريات لا تُنسى.</p>
