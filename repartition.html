@@ -196,6 +196,15 @@
             z-index: 1;
         }
 
+        .page-hero span {
+            color: var(--gold);
+            font-size: 12px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 10px;
+        }
+
         .page-hero h1 {
             font-size: 38px;
             font-family: serif;
@@ -208,6 +217,8 @@
             color: var(--text-muted);
             font-size: 14px;
             letter-spacing: 0.5px;
+            max-width: 600px;
+            margin: 0 auto;
         }
 
         .container {
@@ -241,13 +252,15 @@
             background: var(--bg-card);
             border: 1px solid var(--border-gold);
             padding: 25px;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s, border-color 0.3s;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s ease;
         }
 
         .server-card:hover {
             transform: translateY(-5px);
             border-color: var(--gold);
+            box-shadow: 0 15px 35px rgba(212, 175, 55, 0.15);
         }
 
         .server-header {
@@ -255,10 +268,11 @@
             align-items: center;
             gap: 10px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 500;
+            font-family: serif;
             color: var(--gold);
             margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding-bottom: 12px;
         }
 
@@ -266,8 +280,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(11, 14, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(11, 14, 20, 0.8);
+            border: 1px solid var(--border-gold);
             padding: 12px 15px;
             margin-bottom: 10px;
             font-size: 13px;
@@ -309,6 +323,7 @@
             border: 1px solid var(--border-gold);
             padding: 40px;
             backdrop-filter: blur(12px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             max-width: 900px;
             margin: 0 auto;
         }
@@ -323,6 +338,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
+            font-weight: 400;
         }
 
         .eval-box > p {
@@ -343,7 +359,6 @@
             text-transform: uppercase;
             color: var(--gold);
             margin-bottom: 8px;
-            text-align: right;
         }
 
         .form-control {
@@ -354,7 +369,7 @@
             padding: 14px 18px;
             font-size: 14px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .form-control:focus {
@@ -370,7 +385,7 @@
             background: var(--gold);
             color: var(--bg-dark);
             width: 100%;
-            padding: 14px;
+            padding: 16px;
             font-weight: 700;
             font-size: 13px;
             letter-spacing: 1.5px;
@@ -434,8 +449,9 @@
 
     <!-- Page Title -->
     <section class="page-hero reveal">
+        <span>Organisation</span>
         <h1>Répartition du Service</h1>
-        <p>Gestion des tables par serveur et espace d'évaluation client</p>
+        <p>Gestion des tables par serveur et espace d'évaluation client du Complexe Nakhil.</p>
     </section>
 
     <!-- Main Container -->
@@ -444,7 +460,7 @@
         <!-- Section 1: Servers & Tables -->
         <div class="reveal">
             <div class="section-title">
-                <span>👤</span> Équipe de Service & Tables Attirées
+                <span>👤</span> Équipe de Service & Tables Attribuées
             </div>
 
             <div class="servers-grid">
